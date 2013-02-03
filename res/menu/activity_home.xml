@@ -1,0 +1,37 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/menu_search"
+        android:enabled="true"
+        android:orderInCategory="50"
+        android:showAsAction="always"
+        android:title="@string/menu_search"
+        android:visible="true" android:icon="@drawable/ic_menu_search">
+    </item>
+    <item
+        android:id="@+id/menu_dropdown"
+        android:icon="@drawable/ic_menu_moreoverflow_normal_holo_dark"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/menu_settings">
+        <menu>
+            <item
+                android:id="@+id/menu_drop_account"
+                android:orderInCategory="1"
+                android:title="Account"/>
+            <item
+                android:id="@+id/menu_drop_menu"
+                android:orderInCategory="2"
+                android:title="MenUs"/>
+            <item
+                android:id="@+id/menu_drop_settings"
+                android:orderInCategory="3"
+                android:title="Settings"/>
+            <item
+                android:id="@+id/menu_drop_about"
+                android:orderInCategory="4"
+                android:title="About"/>
+        </menu>
+    </item>
+
+</menu>
