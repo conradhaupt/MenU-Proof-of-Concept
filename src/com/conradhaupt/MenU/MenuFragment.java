@@ -16,8 +16,7 @@ public class MenuFragment extends Fragment
 			Bundle savedInstanceState)
 	{
 		// Inflate the layout for this fragment
-		setHasOptionsMenu(true);
-		super.getActivity().getActionBar().setHomeButtonEnabled(true);
+		setHasOptionsMenu(true);		
 		return inflater.inflate(R.layout.fragment_menu, container, false);
 	}
 
