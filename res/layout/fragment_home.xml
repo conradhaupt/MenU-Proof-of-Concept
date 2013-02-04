@@ -4,21 +4,13 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment" >
 
-    <Button
-        android:id="@+id/button1"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="20dp"
-        android:text="Button" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button1"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_menu_search" />
+        android:text="Home"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
