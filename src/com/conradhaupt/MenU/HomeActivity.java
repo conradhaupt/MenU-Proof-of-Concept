@@ -16,7 +16,7 @@ public class HomeActivity extends FragmentActivity
 	private static final int NUM_PAGES = 2;
 	private ViewPager viewPage;
 	private PagerAdapter pagerAdap;
-	private Fragment[] fragments = new Fragment[2];
+	private Fragment[] fragments;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -26,6 +26,7 @@ public class HomeActivity extends FragmentActivity
 		getActionBar().setHomeButtonEnabled(true);
 		setContentView(R.layout.activity_home);
 
+		fragments = new Fragment[NUM_PAGES];
 		fragments[0] = new MenuFragment();
 		fragments[1] = new HomeFragment();
 
@@ -65,6 +66,8 @@ public class HomeActivity extends FragmentActivity
 		{
 		case R.id.menu_search:
 			System.out.println("Search button has been pressed!");
+			fragments[1] = new RestaurantFragment();
+			pagerAdap.setItem(1, Re);
 			// MenuItem searchBar = (MenuItem)
 			// menu.findItem(R.id.menu_search_editText);
 			// try
@@ -78,7 +81,6 @@ public class HomeActivity extends FragmentActivity
 			return true;
 		case android.R.id.home:
 			System.out.println("The icon has been pressed!");
-			pagerAdap.
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -87,9 +89,12 @@ public class HomeActivity extends FragmentActivity
 	public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter
 	{
 
+		FragmentManager fm;
+
 		public ScreenSlidePagerAdapter(FragmentManager fm)
 		{
 			super(fm);
+			this.fm = fm;
 		}
 
 		@Override
@@ -102,6 +107,13 @@ public class HomeActivity extends FragmentActivity
 			{
 				return null;
 			}
+		}
+
+		public void setItem(int position, Fragment newFragment)
+		{
+			this.fm.beginTransaction().remove(fragments[position]).commit();
+			fragments[position] = newFragment.newInstance();
+			notifyDataSetChanged();
 		}
 
 		@Override
