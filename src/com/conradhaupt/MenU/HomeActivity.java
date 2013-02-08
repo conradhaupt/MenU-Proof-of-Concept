@@ -17,6 +17,7 @@ public class HomeActivity extends FragmentActivity
 	private ViewPager viewPage;
 	private PagerAdapter pagerAdap;
 	private Fragment[] fragments;
+	private boolean temp = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -28,7 +29,7 @@ public class HomeActivity extends FragmentActivity
 
 		fragments = new Fragment[NUM_PAGES];
 		fragments[0] = new MenuFragment();
-		fragments[1] = new HomeFragment();
+		fragments[1] = new RestaurantFragment();
 
 		// Instantiate a ViewPager and a PagerAdapter.
 		viewPage = (ViewPager) findViewById(R.id.pager);
@@ -65,14 +66,16 @@ public class HomeActivity extends FragmentActivity
 		switch (item.getItemId())
 		{
 		case R.id.menu_search:
-			System.out.println("Search button has been pressed!");
-			fragments[1] = new RestaurantFragment();
-			FragmentTransaction ft = getSupportFragmentManager()
-					.beginTransaction();
-			ft.remove(fragments[1]);
-			fragments[1] = new RestaurantFragment();
-			ft.add(1, fragments[1]);
-			ft.commit();
+			temp = true;
+			// System.out.println("Search button has been pressed!");
+			// FragmentTransaction ft = getSupportFragmentManager()
+			// .beginTransaction();
+			// ft.remove(fragments[1]);
+			// fragments[1] = new RestaurantFragment();
+			// R.id.RestaurantFragment;
+			// ft.add(1, fragments[1]);
+			// ft.commit();
+			// System.out.println(fragments[1]);
 			// MenuItem searchBar = (MenuItem)
 			// menu.findItem(R.id.menu_search_editText);
 			// try
@@ -107,6 +110,10 @@ public class HomeActivity extends FragmentActivity
 		{
 			try
 			{
+				if (temp)
+				{
+					return new RestaurantFragment();
+				}
 				return fragments[arg0];
 			} catch (NullPointerException e)
 			{
