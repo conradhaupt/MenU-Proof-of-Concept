@@ -17,7 +17,6 @@ public class HomeActivity extends FragmentActivity
 	private ViewPager viewPage;
 	private PagerAdapter pagerAdap;
 	private Fragment[] fragments;
-	private boolean temp = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -66,28 +65,14 @@ public class HomeActivity extends FragmentActivity
 		switch (item.getItemId())
 		{
 		case R.id.menu_search:
-			temp = true;
-			// System.out.println("Search button has been pressed!");
-			// FragmentTransaction ft = getSupportFragmentManager()
-			// .beginTransaction();
-			// ft.remove(fragments[1]);
-			// fragments[1] = new RestaurantFragment();
-			// R.id.RestaurantFragment;
-			// ft.add(1, fragments[1]);
-			// ft.commit();
-			// System.out.println(fragments[1]);
-			// MenuItem searchBar = (MenuItem)
-			// menu.findItem(R.id.menu_search_editText);
-			// try
-			// {
-			// searchBar.setVisible(!searchBar.isVisible());
-			// } catch (Exception e)
-			// {
-			// System.out.println(e);
-			// }
-			// break;
+			pagerAdap.notifyDataSetChanged();
+			System.out.println("Fragment change completed!");
 			return true;
 		case android.R.id.home:
+			FragmentTransaction transaction = getSupportFragmentManager()
+					.beginTransaction();
+			transaction.show(fragments[0]);
+			transaction.commit();
 			System.out.println("The icon has been pressed!");
 		default:
 			return super.onOptionsItemSelected(item);
@@ -110,10 +95,7 @@ public class HomeActivity extends FragmentActivity
 		{
 			try
 			{
-				if (temp)
-				{
-					return new RestaurantFragment();
-				}
+				System.out.println("getItem run!");
 				return fragments[arg0];
 			} catch (NullPointerException e)
 			{
