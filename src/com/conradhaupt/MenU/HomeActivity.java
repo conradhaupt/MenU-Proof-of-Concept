@@ -5,11 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 public class HomeActivity extends FragmentActivity
 {
@@ -67,7 +67,12 @@ public class HomeActivity extends FragmentActivity
 		case R.id.menu_search:
 			System.out.println("Search button has been pressed!");
 			fragments[1] = new RestaurantFragment();
-			pagerAdap.setItem(1, Re);
+			FragmentTransaction ft = getSupportFragmentManager()
+					.beginTransaction();
+			ft.remove(fragments[1]);
+			fragments[1] = new RestaurantFragment();
+			ft.add(1, fragments[1]);
+			ft.commit();
 			// MenuItem searchBar = (MenuItem)
 			// menu.findItem(R.id.menu_search_editText);
 			// try
@@ -89,7 +94,7 @@ public class HomeActivity extends FragmentActivity
 	public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter
 	{
 
-		FragmentManager fm;
+		public FragmentManager fm;
 
 		public ScreenSlidePagerAdapter(FragmentManager fm)
 		{
@@ -109,18 +114,10 @@ public class HomeActivity extends FragmentActivity
 			}
 		}
 
-		public void setItem(int position, Fragment newFragment)
-		{
-			this.fm.beginTransaction().remove(fragments[position]).commit();
-			fragments[position] = newFragment.newInstance();
-			notifyDataSetChanged();
-		}
-
 		@Override
 		public int getCount()
 		{
 			return fragments.length;
 		}
-
 	}
 }
