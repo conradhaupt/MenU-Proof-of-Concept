@@ -4,8 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -65,6 +64,8 @@ public class HomeActivity extends FragmentActivity
 		switch (item.getItemId())
 		{
 		case R.id.menu_search:
+			fragments[1] = new HomeFragment();
+			pagerAdap.notifyDataSetChanged();
 			System.out.println("Fragment change completed!");
 			break;
 		case android.R.id.home:
@@ -82,7 +83,7 @@ public class HomeActivity extends FragmentActivity
 		return true;
 	}
 
-	public class ScreenSlidePagerAdapter extends FragmentPagerAdapter
+	public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter
 	{
 
 		public FragmentManager fm;
@@ -110,6 +111,13 @@ public class HomeActivity extends FragmentActivity
 		public int getCount()
 		{
 			return fragments.length;
+		}
+
+		@Override
+		public int getItemPosition(Object object)
+		{
+			return -2;
+
 		}
 	}
 }
