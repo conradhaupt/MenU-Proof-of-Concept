@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -65,21 +65,24 @@ public class HomeActivity extends FragmentActivity
 		switch (item.getItemId())
 		{
 		case R.id.menu_search:
-			pagerAdap.notifyDataSetChanged();
 			System.out.println("Fragment change completed!");
-			return true;
+			break;
 		case android.R.id.home:
-			FragmentTransaction transaction = getSupportFragmentManager()
-					.beginTransaction();
-			transaction.show(fragments[0]);
-			transaction.commit();
-			System.out.println("The icon has been pressed!");
+			if (viewPage.getCurrentItem() != 0)
+			{
+				viewPage.setCurrentItem(0);
+			} else
+			{
+				viewPage.setCurrentItem(1);
+			}
+			break;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+		return true;
 	}
 
-	public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter
+	public class ScreenSlidePagerAdapter extends FragmentPagerAdapter
 	{
 
 		public FragmentManager fm;
