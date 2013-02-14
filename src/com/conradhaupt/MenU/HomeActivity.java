@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -27,7 +28,7 @@ public class HomeActivity extends FragmentActivity
 
 		fragments = new Fragment[NUM_PAGES];
 		fragments[0] = new MenuFragment();
-		fragments[1] = new RestaurantFragment();
+		fragments[1] = new HomeContainerFragment();
 
 		// Instantiate a ViewPager and a PagerAdapter.
 		viewPage = (ViewPager) findViewById(R.id.pager);
@@ -64,8 +65,12 @@ public class HomeActivity extends FragmentActivity
 		switch (item.getItemId())
 		{
 		case R.id.menu_search:
-			fragments[1] = new HomeFragment();
-			pagerAdap.notifyDataSetChanged();
+			FragmentTransaction ft = getSupportFragmentManager()
+					.beginTransaction();
+			ft.add(new HomeFragment(), "HomeFragment");
+			ft.commit();
+			// fragments[1] = new HomeFragment();
+			 pagerAdap.notifyDataSetChanged();
 			System.out.println("Fragment change completed!");
 			break;
 		case android.R.id.home:
