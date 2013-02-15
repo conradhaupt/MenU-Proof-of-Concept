@@ -2,6 +2,7 @@ package com.conradhaupt.MenU;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,9 +33,14 @@ public class HomeContainerFragment extends Fragment
 	{
 		switch (item.getItemId())
 		{
+		case R.id.menu_search:
+			FragmentTransaction ft = getActivity().getSupportFragmentManager()
+					.beginTransaction();
+			ft.add(R.id.home_container_fragment, new RestaurantFragment());
+			ft.commit();
+			break;
 		default:
 		}
 		return true;
 	}
-
 }

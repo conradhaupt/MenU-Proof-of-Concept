@@ -65,14 +65,11 @@ public class HomeActivity extends FragmentActivity
 		switch (item.getItemId())
 		{
 		case R.id.menu_search:
-			FragmentTransaction ft = getSupportFragmentManager()
-					.beginTransaction();
-			ft.add(new HomeFragment(), "HomeFragment");
-			ft.commit();
 			// fragments[1] = new HomeFragment();
-			 pagerAdap.notifyDataSetChanged();
+			// pagerAdap.notifyDataSetChanged();
 			System.out.println("Fragment change completed!");
-			break;
+			return super.onOptionsItemSelected(item);
+//			break;
 		case android.R.id.home:
 			if (viewPage.getCurrentItem() != 0)
 			{
