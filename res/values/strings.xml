@@ -7,5 +7,9 @@
     <string name="menu_search">Search</string>
     <string name="title_activity_home_fragment">Home</string>
     <string name="menu_fragment_menu_add">Add</string>
+    <string name="account_id_textview">Account ID</string>
+    <string name="account_contact_image_description">Profile image</string>
+    <string name="account_email_textview">Email</string>
+    <string name="account_doc_textview">Date of creation</string>
 
 </resources>
