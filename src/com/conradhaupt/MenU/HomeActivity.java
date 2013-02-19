@@ -22,7 +22,7 @@ public class HomeActivity extends FragmentActivity
 		getActionBar().setHomeButtonEnabled(true);
 		setContentView(R.layout.activity_home);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.add(R.id.framelayout, new HomeFragment());
+		ft.add(R.id.fragment_frame, new HomeFragment());
 		ft.commit();
 	}
 
@@ -34,10 +34,6 @@ public class HomeActivity extends FragmentActivity
 		return true;
 	}
 
-	public void onBackPressed()
-	{
-	}
-
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
 		System.out.println("Action bar button was pressed!");
@@ -45,6 +41,13 @@ public class HomeActivity extends FragmentActivity
 		switch (item.getItemId())
 		{
 		case R.id.menu_search:
+			FragmentTransaction ft = this.getSupportFragmentManager()
+					.beginTransaction();
+			ft.replace(R.id.fragment_frame, new RestaurantFragment());
+			ft.setCustomAnimations(R.anim.fragment_change_enter,
+					R.anim.fragment_change_exit);
+			ft.addToBackStack(null);
+			ft.commit();
 			break;
 		case android.R.id.home:
 			break;
@@ -61,40 +64,4 @@ public class HomeActivity extends FragmentActivity
 		}
 		return true;
 	}
-
-	// public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter
-	// {
-	//
-	// public FragmentManager fm;
-	//
-	// public ScreenSlidePagerAdapter(FragmentManager fm)
-	// {
-	// super(fm);
-	// this.fm = fm;
-	// }
-	//
-	// @Override
-	// public Fragment getItem(int arg0)
-	// {
-	// try
-	// {
-	// System.out.println("getItem run!");
-	// } catch (NullPointerException e)
-	// {
-	// return null;
-	// }
-	// }
-	//
-	// @Override
-	// public int getCount()
-	// {
-	// }
-	//
-	// @Override
-	// public int getItemPosition(Object object)
-	// {
-	// return -2;
-	//
-	// }
-	// }
 }
