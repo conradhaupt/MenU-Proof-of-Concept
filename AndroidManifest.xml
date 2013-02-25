@@ -16,7 +16,8 @@
         android:theme="@style/MenUOriginal" >
         <activity
             android:name="com.conradhaupt.MenU.HomeActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

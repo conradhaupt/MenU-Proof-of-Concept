@@ -43,15 +43,29 @@ public class HomeActivity extends FragmentActivity
 		case R.id.menu_search:
 			FragmentTransaction ft = this.getSupportFragmentManager()
 					.beginTransaction();
-			ft.replace(R.id.fragment_frame, new RestaurantFragment());
 			ft.setCustomAnimations(R.anim.fragment_change_enter,
 					R.anim.fragment_change_exit);
+			ft.replace(R.id.fragment_frame, new RestaurantFragment());
 			ft.addToBackStack(null);
 			ft.commit();
 			break;
 		case android.R.id.home:
+			FragmentTransaction ft1 = this.getSupportFragmentManager()
+					.beginTransaction();
+			ft1.setCustomAnimations(R.anim.fragment_change_enter,
+					R.anim.fragment_change_exit);
+			ft1.replace(R.id.fragment_frame, new HomeFragment());
+			ft1.addToBackStack(null);
+			ft1.commit();
 			break;
 		case R.id.menu_drop_about:
+			FragmentTransaction ft11 = this.getSupportFragmentManager()
+					.beginTransaction();
+			ft11.setCustomAnimations(R.anim.fragment_change_enter,
+					R.anim.fragment_change_exit);
+			ft11.replace(R.id.fragment_frame, new AboutFragment());
+			ft11.addToBackStack(null);
+			ft11.commit();
 			break;
 		case R.id.menu_drop_account:
 			break;
