@@ -1,26 +1,51 @@
 package com.conradhaupt.MenU;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.animation.Animation;
 
-public class HomeActivity extends FragmentActivity
+import com.slidingmenu.lib.SlidingMenu;
+import com.slidingmenu.lib.app.SlidingFragmentActivity;
+
+public class HomeActivity extends SlidingFragmentActivity
 {
+	private OnClickListener clickListen = new OnClickListener()
+	{
+
+		@Override
+		public void onClick(View v)
+		{
+			switch (v.getId())
+			{
+			default:
+				return;
+			}
+		}
+
+	};
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
+	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setHomeButtonEnabled(true);
 		setContentView(R.layout.activity_home);
+		setBehindContentView(R.layout.sliding_menu);
+
+		// This code assigns the sliding menu parameters
+		SlidingMenu slide = this.getSlidingMenu();
+		slide.setMode(SlidingMenu.LEFT);
+		slide.setBehindOffsetRes(R.dimen.menu_ic_logomenusize);
+		slide.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		slide.setShadowDrawable(R.drawable.menusliding_shadow);
+		slide.setShadowWidthRes(R.dimen.menusliding_shadow_width);
+
+		// This code assigns the current fragment
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.add(R.id.fragment_frame, new HomeFragment());
 		ft.commit();
@@ -50,13 +75,14 @@ public class HomeActivity extends FragmentActivity
 			ft.commit();
 			break;
 		case android.R.id.home:
-			FragmentTransaction ft1 = this.getSupportFragmentManager()
-					.beginTransaction();
-			ft1.setCustomAnimations(R.anim.fragment_change_enter,
-					R.anim.fragment_change_exit);
-			ft1.replace(R.id.fragment_frame, new HomeFragment());
-			ft1.addToBackStack(null);
-			ft1.commit();
+			getSlidingMenu().showMenu();
+			// FragmentTransaction ft1 = this.getSupportFragmentManager()
+			// .beginTransaction();
+			// ft1.setCustomAnimations(R.anim.fragment_change_enter,
+			// R.anim.fragment_change_exit);
+			// ft1.replace(R.id.fragment_frame, new HomeFragment());
+			// ft1.addToBackStack(null);
+			// ft1.commit();
 			break;
 		case R.id.menu_drop_about:
 			FragmentTransaction ft11 = this.getSupportFragmentManager()
