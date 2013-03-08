@@ -2,5 +2,8 @@
 <resources>
 <color name="pressed_menuoriginal">#CCd14334</color>
 <color name="menu_text_menuoriginal">#ffffff</color>
+<color name="slidingmenu_textColor">#ffffff</color>
+<color name="slidingmenu_textBackground">#0f0f0f</color>
+<color name="slidingmenu_actionbar">#1C2130</color>
     
 </resources>

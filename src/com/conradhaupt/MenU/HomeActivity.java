@@ -15,7 +15,6 @@ public class HomeActivity extends SlidingFragmentActivity
 {
 	private OnClickListener clickListen = new OnClickListener()
 	{
-
 		@Override
 		public void onClick(View v)
 		{
@@ -25,7 +24,6 @@ public class HomeActivity extends SlidingFragmentActivity
 				return;
 			}
 		}
-
 	};
 
 	@Override
