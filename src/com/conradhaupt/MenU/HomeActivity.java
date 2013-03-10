@@ -1,7 +1,8 @@
 package com.conradhaupt.MenU;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class HomeActivity extends SlidingFragmentActivity
 {
+	protected Fragment currentFragment = null;
 	private OnClickListener clickListen = new OnClickListener()
 	{
 		@Override
@@ -44,7 +46,7 @@ public class HomeActivity extends SlidingFragmentActivity
 		slide.setShadowWidthRes(R.dimen.menusliding_shadow_width);
 
 		// This code assigns the current fragment
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.add(R.id.fragment_frame, new HomeFragment());
 		ft.commit();
 	}
@@ -64,10 +66,10 @@ public class HomeActivity extends SlidingFragmentActivity
 		switch (item.getItemId())
 		{
 		case R.id.menu_search:
-			FragmentTransaction ft = this.getSupportFragmentManager()
+			FragmentTransaction ft = this.getFragmentManager()
 					.beginTransaction();
-			ft.setCustomAnimations(R.anim.fragment_change_enter,
-					R.anim.fragment_change_exit);
+			ft.setCustomAnimations(android.R.animator.fade_in,
+					android.R.animator.fade_out);
 			ft.replace(R.id.fragment_frame, new RestaurantFragment());
 			ft.addToBackStack(null);
 			ft.commit();
@@ -83,10 +85,10 @@ public class HomeActivity extends SlidingFragmentActivity
 			// ft1.commit();
 			break;
 		case R.id.menu_drop_about:
-			FragmentTransaction ft11 = this.getSupportFragmentManager()
+			FragmentTransaction ft11 = this.getFragmentManager()
 					.beginTransaction();
-			ft11.setCustomAnimations(R.anim.fragment_change_enter,
-					R.anim.fragment_change_exit);
+			ft11.setCustomAnimations(android.R.animator.fade_in,
+					android.R.animator.fade_out);
 			ft11.replace(R.id.fragment_frame, new AboutFragment());
 			ft11.addToBackStack(null);
 			ft11.commit();
@@ -96,6 +98,13 @@ public class HomeActivity extends SlidingFragmentActivity
 		case R.id.menu_drop_menu:
 			break;
 		case R.id.menu_drop_settings:
+			FragmentTransaction ft3 = this.getFragmentManager()
+					.beginTransaction();
+			ft3.setCustomAnimations(android.R.animator.fade_in,
+					android.R.animator.fade_out);
+			ft3.replace(R.id.fragment_frame, new SettingsFragment());
+			ft3.addToBackStack(null);
+			ft3.commit();
 			break;
 		default:
 			return super.onOptionsItemSelected(item);

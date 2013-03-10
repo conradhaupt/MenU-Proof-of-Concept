@@ -5,8 +5,7 @@
         android:duration="@android:integer/config_mediumAnimTime"
         android:fromAlpha="0"
         android:toAlpha="1" />
-
-    <translate
+    <translate
         android:duration="@android:integer/config_mediumAnimTime"
         android:fromXDelta="0%"
         android:toXDelta="0%"

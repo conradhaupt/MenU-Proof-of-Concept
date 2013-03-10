@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="first_preferencescreen"
+    android:orderingFromXml="true"
+    android:title="Settings" >
+
+    <PreferenceScreen
+        android:key="general_preferencescreen"
+        android:title="General" >
+        <PreferenceCategory android:key="general_preferencecategory" android:title="General">
+            <CheckBoxPreference android:title="Save menus locally" android:key="savemenus_checkbox"/>
+        </PreferenceCategory>
+        <PreferenceCategory android:key="storage_preferencecategory" android:title="Storage">
+            <CheckBoxPreference android:title="Store menus externally" android:key="storeexternal_checkbox"/>
+        </PreferenceCategory>
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:key="lookandfeel_preferencescreen"
+        android:title="Look and feel" >
+        <ListPreference android:entries="@array/theme_preference_array" android:dialogTitle="Theme" android:key="theme_listpreference" android:title="Theme" android:entryValues="@array/theme_int_preference_array" android:positiveButtonText="Change" android:negativeButtonText="Cancel"/>
+    </PreferenceScreen>
+
+</PreferenceScreen>

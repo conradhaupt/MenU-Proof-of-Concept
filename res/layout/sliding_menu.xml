@@ -18,33 +18,7 @@
             android:layout_height="48dp"
             android:background="@color/slidingmenu_actionbar" >
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="false"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentRight="false"
-                android:layout_alignParentTop="false"
-                android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
-                android:text="@string/slidingmenu_heading"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/slidingmenu_textColor" />
-
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:background="@color/slidingmenu_textBackground"
-            android:padding="1dp"
-            android:text="Account"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/slidingmenu_textColor" />
 
     </LinearLayout>
 
