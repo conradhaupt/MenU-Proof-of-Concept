@@ -2,19 +2,20 @@ package com.conradhaupt.MenU;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
 
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class HomeActivity extends SlidingFragmentActivity
+public class HomeActivity extends FragmentActivity
 {
-	protected Fragment currentFragment = null;
 	private OnClickListener clickListen = new OnClickListener()
 	{
 		@Override
@@ -32,18 +33,45 @@ public class HomeActivity extends SlidingFragmentActivity
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		// This code sets the App theme
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		int themeValue = Integer.parseInt(pref.getString(
+				"theme_listpreference", "-1"));
+		switch (themeValue)
+		{
+		case 0:
+			this.setTheme(R.style.MenUOriginal);
+			break;
+		case 1:
+			this.setTheme(R.style.MenURed);
+			break;
+		case 2:
+			this.setTheme(android.R.style.Theme_Holo_Light);
+			break;
+		case 3:
+			this.setTheme(android.R.style.Theme_Holo);
+			break;
+		case 4:
+			this.setTheme(android.R.style.Theme_Holo_Light_DarkActionBar);
+			break;
+		default:
+			System.out.println("Preference value is not assigned to a theme.");
+			break;
+		}
+
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setHomeButtonEnabled(true);
 		setContentView(R.layout.activity_home);
-		setBehindContentView(R.layout.sliding_menu);
+		// setBehindContentView(R.layout.sliding_menu);
 
 		// This code assigns the sliding menu parameters
-		SlidingMenu slide = this.getSlidingMenu();
-		slide.setMode(SlidingMenu.LEFT);
-		slide.setBehindOffsetRes(R.dimen.menu_ic_logomenusize);
-		slide.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		slide.setShadowDrawable(R.drawable.menusliding_shadow);
-		slide.setShadowWidthRes(R.dimen.menusliding_shadow_width);
+		// SlidingMenu slide = this.getSlidingMenu();
+		// slide.setMode(SlidingMenu.LEFT);
+		// slide.setBehindOffsetRes(R.dimen.menu_ic_logomenusize);
+		// slide.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		// slide.setShadowDrawable(R.drawable.menusliding_shadow);
+		// slide.setShadowWidthRes(R.dimen.menusliding_shadow_width);
 
 		// This code assigns the current fragment
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -63,11 +91,10 @@ public class HomeActivity extends SlidingFragmentActivity
 	{
 		System.out.println("Action bar button was pressed!");
 		System.out.println(item.getItemId());
+		FragmentTransaction ft = this.getFragmentManager().beginTransaction();
 		switch (item.getItemId())
 		{
 		case R.id.menu_search:
-			FragmentTransaction ft = this.getFragmentManager()
-					.beginTransaction();
 			ft.setCustomAnimations(android.R.animator.fade_in,
 					android.R.animator.fade_out);
 			ft.replace(R.id.fragment_frame, new RestaurantFragment());
@@ -75,36 +102,30 @@ public class HomeActivity extends SlidingFragmentActivity
 			ft.commit();
 			break;
 		case android.R.id.home:
-			getSlidingMenu().showMenu();
-			// FragmentTransaction ft1 = this.getSupportFragmentManager()
-			// .beginTransaction();
-			// ft1.setCustomAnimations(R.anim.fragment_change_enter,
-			// R.anim.fragment_change_exit);
-			// ft1.replace(R.id.fragment_frame, new HomeFragment());
-			// ft1.addToBackStack(null);
-			// ft1.commit();
+			// getSlidingMenu().showMenu();
 			break;
 		case R.id.menu_drop_about:
-			FragmentTransaction ft11 = this.getFragmentManager()
-					.beginTransaction();
-			ft11.setCustomAnimations(android.R.animator.fade_in,
+			ft.setCustomAnimations(android.R.animator.fade_in,
 					android.R.animator.fade_out);
-			ft11.replace(R.id.fragment_frame, new AboutFragment());
-			ft11.addToBackStack(null);
-			ft11.commit();
+			ft.replace(R.id.fragment_frame, new AboutFragment());
+			ft.addToBackStack(null);
+			ft.commit();
 			break;
 		case R.id.menu_drop_account:
+			ft.setCustomAnimations(android.R.animator.fade_in,
+					android.R.animator.fade_out);
+			ft.replace(R.id.fragment_frame, new AccountFragment());
+			ft.addToBackStack(null);
+			ft.commit();
 			break;
 		case R.id.menu_drop_menu:
 			break;
 		case R.id.menu_drop_settings:
-			FragmentTransaction ft3 = this.getFragmentManager()
-					.beginTransaction();
-			ft3.setCustomAnimations(android.R.animator.fade_in,
+			ft.setCustomAnimations(android.R.animator.fade_in,
 					android.R.animator.fade_out);
-			ft3.replace(R.id.fragment_frame, new SettingsFragment());
-			ft3.addToBackStack(null);
-			ft3.commit();
+			ft.replace(R.id.fragment_frame, new SettingsFragment());
+			ft.addToBackStack(null);
+			ft.commit();
 			break;
 		default:
 			return super.onOptionsItemSelected(item);
