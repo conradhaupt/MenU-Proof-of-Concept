@@ -14,7 +14,7 @@ import android.view.View.OnClickListener;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class HomeActivity extends FragmentActivity
+public class HomeActivity extends SlidingFragmentActivity
 {
 	private OnClickListener clickListen = new OnClickListener()
 	{
@@ -44,16 +44,16 @@ public class HomeActivity extends FragmentActivity
 			this.setTheme(R.style.MenUOriginal);
 			break;
 		case 1:
-			this.setTheme(R.style.MenURed);
+			System.out.println("That theme doesn't exist anymore!");
 			break;
 		case 2:
-			this.setTheme(android.R.style.Theme_Holo_Light);
+			this.setTheme(R.style.holo_light);
 			break;
 		case 3:
-			this.setTheme(android.R.style.Theme_Holo);
+			this.setTheme(R.style.holo);
 			break;
 		case 4:
-			this.setTheme(android.R.style.Theme_Holo_Light_DarkActionBar);
+			this.setTheme(R.style.holo_light_darkactionbar);
 			break;
 		default:
 			System.out.println("Preference value is not assigned to a theme.");
@@ -63,20 +63,33 @@ public class HomeActivity extends FragmentActivity
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setHomeButtonEnabled(true);
 		setContentView(R.layout.activity_home);
-		// setBehindContentView(R.layout.sliding_menu);
+		setBehindContentView(R.layout.sliding_menu);
 
 		// This code assigns the sliding menu parameters
-		// SlidingMenu slide = this.getSlidingMenu();
-		// slide.setMode(SlidingMenu.LEFT);
-		// slide.setBehindOffsetRes(R.dimen.menu_ic_logomenusize);
-		// slide.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		// slide.setShadowDrawable(R.drawable.menusliding_shadow);
-		// slide.setShadowWidthRes(R.dimen.menusliding_shadow_width);
+		SlidingMenu slide = this.getSlidingMenu();
+		slide.setMode(SlidingMenu.LEFT);
+		slide.setBehindOffsetRes(R.dimen.menu_ic_logomenusize);
+		slide.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		slide.setShadowDrawable(R.drawable.menusliding_shadow);
+		slide.setShadowWidthRes(R.dimen.menusliding_shadow_width);
 
 		// This code assigns the current fragment
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		ft.add(R.id.fragment_frame, new HomeFragment());
 		ft.commit();
+	}
+
+	@Override
+	public void onBackPressed()
+	{
+		System.out.println("Back pressed!");
+		if (this.getFragmentManager().getBackStackEntryCount() == 0)
+		{
+			super.onBackPressed();
+		} else
+		{
+			this.getFragmentManager().popBackStack();
+		}
 	}
 
 	@Override

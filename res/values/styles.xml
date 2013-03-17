@@ -2,7 +2,7 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="MenUOriginal" parent="android:Theme.Holo.Light.DarkActionBar">
         <item name="android:actionBarItemBackground">@drawable/selectable_background_menuoriginal</item>
@@ -14,6 +14,7 @@
         <item name="android:panelBackground">@drawable/menu_hardkey_panel_menuoriginal</item>
         <!-- Light.DarkActionBar specific -->
         <item name="android:actionBarWidgetTheme">@style/Theme.menuoriginal.widget</item>
+        <item name="ic_menu_moreoverflow">@drawable/ic_menu_moreoverflow_normal_holo_dark</item>
     </style>
 
     <style name="menuoriginal_solid_ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
@@ -57,6 +58,16 @@
         <item name="android:textColor">@color/menu_text_menuoriginal</item>
     </style>
 
-    <style name="MenURed" parent="@style/MenUOriginal"></style>
+    <style name="holo_light_darkactionbar" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="ic_menu_moreoverflow">@drawable/ic_menu_moreoverflow_normal_holo_light</item>
+    </style>
+
+    <style name="holo" parent="@android:style/Theme.Holo">
+        <item name="ic_menu_moreoverflow">@drawable/ic_menu_moreoverflow_normal_holo_dark</item>
+    </style>
+
+    <style name="holo_light" parent="@android:style/Theme.Holo.Light">
+        <item name="ic_menu_moreoverflow">@drawable/ic_menu_moreoverflow_normal_holo_light</item>
+    </style>
 
 </resources>

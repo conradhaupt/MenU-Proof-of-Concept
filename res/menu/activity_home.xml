@@ -3,17 +3,17 @@
     <item
         android:id="@+id/menu_search"
         android:enabled="true"
+        android:icon="@drawable/ic_menu_search"
         android:orderInCategory="50"
         android:showAsAction="always"
         android:title="@string/menu_search"
-        android:visible="true" android:icon="@drawable/ic_menu_search">
+        android:visible="true">
     </item>
     <item
         android:id="@+id/menu_dropdown"
-        android:icon="@drawable/ic_menu_moreoverflow_normal_holo_dark"
+        android:icon="?ic_menu_moreoverflow"
         android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/menu_settings">
+        android:showAsAction="always" android:title="@string/menu_settings">
         <menu>
             <item
                 android:id="@+id/menu_drop_account"
