@@ -41,19 +41,13 @@ public class HomeActivity extends SlidingFragmentActivity
 		switch (themeValue)
 		{
 		case 0:
-			this.setTheme(R.style.MenUOriginal);
+			this.setTheme(R.style.holo_light_darkactionbar);
 			break;
 		case 1:
-			System.out.println("That theme doesn't exist anymore!");
-			break;
-		case 2:
 			this.setTheme(R.style.holo_light);
 			break;
-		case 3:
+		case 2:
 			this.setTheme(R.style.holo);
-			break;
-		case 4:
-			this.setTheme(R.style.holo_light_darkactionbar);
 			break;
 		default:
 			System.out.println("Preference value is not assigned to a theme.");

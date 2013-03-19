@@ -13,7 +13,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:logo="@drawable/ic_logo"
-        android:theme="@style/MenUOriginal" >
+        android:theme="@style/holo_light_darkactionbar" >
         <activity
             android:name="com.conradhaupt.MenU.HomeActivity"
             android:label="@string/app_name"

@@ -4,7 +4,7 @@
     android:dither="false"
     android:filter="false"
     android:gravity="center|center_vertical"
-    android:src="@drawable/slidingmenu_background"
+    android:src="?attr/slidingmenu_background"
     android:tileMode="repeat" >
 
 </bitmap>

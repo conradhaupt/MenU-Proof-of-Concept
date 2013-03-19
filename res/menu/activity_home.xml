@@ -3,7 +3,7 @@
     <item
         android:id="@+id/menu_search"
         android:enabled="true"
-        android:icon="@drawable/ic_menu_search"
+        android:icon="?attr/ic_menu_search_holo"
         android:orderInCategory="50"
         android:showAsAction="always"
         android:title="@string/menu_search"
@@ -11,7 +11,7 @@
     </item>
     <item
         android:id="@+id/menu_dropdown"
-        android:icon="?ic_menu_moreoverflow"
+        android:icon="?attr/ic_menu_moreoverflow"
         android:orderInCategory="100"
         android:showAsAction="always" android:title="@string/menu_settings">
         <menu>
