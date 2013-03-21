@@ -26,7 +26,7 @@
             android:src="@drawable/ic_logo" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,18 +38,25 @@
         android:layout_below="@+id/relativeLayout1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="#cccccc" >
+        android:background="#cccccc"
+        android:orientation="vertical" >
 
         <Button
             android:id="@+id/btnMenUWebsite"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:layout_margin="5dp"
+            android:layout_weight="1.00"
             android:text="@string/MenUWebsiteButton" />
-    </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnMenULicense"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="0.38"
+            android:text="@string/MenULicenseButton" />
+
+    </LinearLayout>
 
 </RelativeLayout>

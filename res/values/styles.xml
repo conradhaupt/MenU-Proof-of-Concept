@@ -11,19 +11,25 @@
     <style name="holo_light_darkactionbar" parent="@android:style/Theme.Holo.Light.DarkActionBar">
         <item name="ic_menu_moreoverflow">@drawable/ic_menu_moreoverflow_normal_holo_dark</item>
         <item name="ic_menu_search_holo">@drawable/ic_menu_search_holo_dark</item>
-        <item name="slidingmenu_background">@drawable/slidingmenu_holo_light_darkactionbar_background</item>
+        <item name="slidingmenu_background">@drawable/slidingmenu_background_repeat_holo_light_darkactionbar</item>
+        <item name="slidingmenu_textColor">@color/slidingmenu_textColor_holo_light_darkactionbar</item>
+        <item name="slidingmenu_actionbarBackground">@color/slidingmenu_actionbarBackground_holo_light_darkactionbar</item>
     </style>
 
     <style name="holo" parent="@android:style/Theme.Holo">
         <item name="ic_menu_moreoverflow">@drawable/ic_menu_moreoverflow_normal_holo_dark</item>
         <item name="ic_menu_search_holo">@drawable/ic_menu_search_holo_dark</item>
-        <item name="slidingmenu_background">@drawable/slidingmenu_holo_light_darkactionbar_background</item>
+        <item name="slidingmenu_background">@drawable/slidingmenu_background_repeat_holo</item>
+        <item name="slidingmenu_textColor">@color/slidingmenu_textColor_holo</item>
+        <item name="slidingmenu_actionbarBackground">@color/slidingmenu_actionbarBackground_holo</item>
     </style>
 
     <style name="holo_light" parent="@android:style/Theme.Holo.Light">
         <item name="ic_menu_moreoverflow">@drawable/ic_menu_moreoverflow_normal_holo_light</item>
         <item name="ic_menu_search_holo">@drawable/ic_menu_search_holo_light</item>
-        <item name="slidingmenu_background">@drawable/slidingmenu_holo_light_background</item>
+        <item name="slidingmenu_background">@drawable/slidingmenu_background_repeat_holo_light</item>
+        <item name="slidingmenu_textColor">@color/slidingmenu_textColor_holo_light</item>
+        <item name="slidingmenu_actionbarBackground">@color/slidingmenu_actionbarBackground_holo_light</item>
     </style>
 
 </resources>

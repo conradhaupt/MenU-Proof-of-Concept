@@ -16,5 +16,6 @@
     <string name="MenUWebsiteButton">Website</string>
     <string name="MenUURLToast">Opening official website...</string>
     <string name="slidingmenu_heading">General</string>
+    <string name="MenULicenseButton">Licenses</string>
 
 </resources>

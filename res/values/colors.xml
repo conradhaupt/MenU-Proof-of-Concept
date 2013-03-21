@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<color name="pressed_menuoriginal">#CCd14334</color>
-<color name="menu_text_menuoriginal">#ffffff</color>
-<color name="slidingmenu_textColor">#ffffff</color>
-<color name="slidingmenu_textBackground">#0f0f0f</color>
-<color name="slidingmenu_actionbar">#1C2130</color>
-    
+
+    <color name="slidingmenu_actionbarBackground_holo_light_darkactionbar">#222222</color>
+    <color name="slidingmenu_actionbarBackground_holo">#020202</color>
+    <color name="slidingmenu_actionbarBackground_holo_light">#dddddd</color>
+    <color name="slidingmenu_textColor_holo_light_darkactionbar">#000000</color>
+    <color name="slidingmenu_textColor_holo">#000000</color>
+    <color name="slidingmenu_textColor_holo_light">#ffffff</color>
+
 </resources>
