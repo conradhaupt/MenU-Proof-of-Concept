@@ -2,7 +2,7 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
 
 
@@ -14,14 +14,13 @@
         <item name="slidingmenu_background">@drawable/slidingmenu_background_repeat_holo_light_darkactionbar</item>
         <item name="slidingmenu_textColor">@color/slidingmenu_textColor_holo_light_darkactionbar</item>
         <item name="slidingmenu_actionbarBackground">@color/slidingmenu_actionbarBackground_holo_light_darkactionbar</item>
-    </style>
-
-    <style name="holo" parent="@android:style/Theme.Holo">
-        <item name="ic_menu_moreoverflow">@drawable/ic_menu_moreoverflow_normal_holo_dark</item>
-        <item name="ic_menu_search_holo">@drawable/ic_menu_search_holo_dark</item>
-        <item name="slidingmenu_background">@drawable/slidingmenu_background_repeat_holo</item>
-        <item name="slidingmenu_textColor">@color/slidingmenu_textColor_holo</item>
-        <item name="slidingmenu_actionbarBackground">@color/slidingmenu_actionbarBackground_holo</item>
+        <item name="slidingmenu_ic_action_about">@drawable/ic_action_about_holo_dark</item>
+        <item name="slidingmenu_ic_action_settings">@drawable/ic_action_settings_holo_dark</item>
+        <item name="slidingmenu_ic_collection_labels">@drawable/ic_collection_labels_holo_dark</item>
+        <item name="slidingmenu_ic_collection_sort_by_size">@drawable/ic_collection_sort_by_size_holo_dark</item>
+        <item name="slidingmenu_ic_collection_view_as_grid">@drawable/ic_collection_view_as_grid_holo_dark</item>
+        <item name="slidingmenu_ic_social_person">@drawable/ic_social_person_holo_dark</item>
+        <item name="slidingmenu_textColor_secondary">@color/slidingmenu_textColor_secondary_holo_light_darkactionbar</item>
     </style>
 
     <style name="holo_light" parent="@android:style/Theme.Holo.Light">
@@ -30,6 +29,13 @@
         <item name="slidingmenu_background">@drawable/slidingmenu_background_repeat_holo_light</item>
         <item name="slidingmenu_textColor">@color/slidingmenu_textColor_holo_light</item>
         <item name="slidingmenu_actionbarBackground">@color/slidingmenu_actionbarBackground_holo_light</item>
+        <item name="slidingmenu_ic_action_about">@drawable/ic_action_about_holo_light</item>
+        <item name="slidingmenu_ic_action_settings">@drawable/ic_action_settings_holo_light</item>
+        <item name="slidingmenu_ic_collection_labels">@drawable/ic_collection_labels_holo_light</item>
+        <item name="slidingmenu_ic_collection_sort_by_size">@drawable/ic_collection_sort_by_size_holo_light</item>
+        <item name="slidingmenu_ic_collection_view_as_grid">@drawable/ic_collection_view_as_grid_holo_light</item>
+        <item name="slidingmenu_ic_social_person">@drawable/ic_social_person_holo_light</item>
+        <item name="slidingmenu_textColor_secondary">@color/slidingmenu_textColor_secondary_holo_light</item>
     </style>
 
 </resources>

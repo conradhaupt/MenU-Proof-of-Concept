@@ -46,9 +46,6 @@ public class HomeActivity extends SlidingFragmentActivity
 		case 1:
 			this.setTheme(R.style.holo_light);
 			break;
-		case 2:
-			this.setTheme(R.style.holo);
-			break;
 		default:
 			System.out.println("Preference value is not assigned to a theme.");
 			break;
@@ -109,31 +106,34 @@ public class HomeActivity extends SlidingFragmentActivity
 			ft.commit();
 			break;
 		case android.R.id.home:
-			// getSlidingMenu().showMenu();
+			getSlidingMenu().showMenu();
 			break;
-		case R.id.menu_drop_about:
-			ft.setCustomAnimations(android.R.animator.fade_in,
-					android.R.animator.fade_out);
-			ft.replace(R.id.fragment_frame, new AboutFragment());
-			ft.addToBackStack(null);
-			ft.commit();
+		case R.id.menu_dropdown:
+			getSlidingMenu().showMenu();
 			break;
-		case R.id.menu_drop_account:
-			ft.setCustomAnimations(android.R.animator.fade_in,
-					android.R.animator.fade_out);
-			ft.replace(R.id.fragment_frame, new AccountFragment());
-			ft.addToBackStack(null);
-			ft.commit();
-			break;
-		case R.id.menu_drop_menu:
-			break;
-		case R.id.menu_drop_settings:
-			ft.setCustomAnimations(android.R.animator.fade_in,
-					android.R.animator.fade_out);
-			ft.replace(R.id.fragment_frame, new SettingsFragment());
-			ft.addToBackStack(null);
-			ft.commit();
-			break;
+		// case R.id.menu_drop_about:
+		// ft.setCustomAnimations(android.R.animator.fade_in,
+		// android.R.animator.fade_out);
+		// ft.replace(R.id.fragment_frame, new AboutFragment());
+		// ft.addToBackStack(null);
+		// ft.commit();
+		// break;
+		// case R.id.menu_drop_account:
+		// ft.setCustomAnimations(android.R.animator.fade_in,
+		// android.R.animator.fade_out);
+		// ft.replace(R.id.fragment_frame, new AccountFragment());
+		// ft.addToBackStack(null);
+		// ft.commit();
+		// break;
+		// case R.id.menu_drop_menu:
+		// break;
+		// case R.id.menu_drop_settings:
+		// ft.setCustomAnimations(android.R.animator.fade_in,
+		// android.R.animator.fade_out);
+		// ft.replace(R.id.fragment_frame, new SettingsFragment());
+		// ft.addToBackStack(null);
+		// ft.commit();
+		// break;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

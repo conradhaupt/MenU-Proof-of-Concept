@@ -2,14 +2,12 @@
 <resources>
 
     <string-array name="theme_preference_array">
-        <item>Default</item>
+        <item>Holo Light with Dark Actionbar</item>
         <item>Holo Light</item>
-        <item>Holo Dark</item>
     </string-array>
     <string-array name="theme_int_preference_array">
         <item>0</item>
         <item>1</item>
-        <item>2</item>        
     </string-array>
 
 </resources>

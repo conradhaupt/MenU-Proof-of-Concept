@@ -14,24 +14,6 @@
         android:icon="?attr/ic_menu_moreoverflow"
         android:orderInCategory="100"
         android:showAsAction="always" android:title="@string/menu_settings">
-        <menu>
-            <item
-                android:id="@+id/menu_drop_account"
-                android:orderInCategory="1"
-                android:title="Account"/>
-            <item
-                android:id="@+id/menu_drop_menu"
-                android:orderInCategory="2"
-                android:title="MenUs"/>
-            <item
-                android:id="@+id/menu_drop_settings"
-                android:orderInCategory="3"
-                android:title="Settings"/>
-            <item
-                android:id="@+id/menu_drop_about"
-                android:orderInCategory="4"
-                android:title="About"/>
-        </menu>
     </item>
 
 </menu>

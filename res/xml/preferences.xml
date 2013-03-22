@@ -7,17 +7,36 @@
     <PreferenceScreen
         android:key="general_preferencescreen"
         android:title="General" >
-        <PreferenceCategory android:key="general_preferencecategory" android:title="General">
-            <CheckBoxPreference android:title="Save menus locally" android:key="savemenus_checkbox"/>
+        <PreferenceCategory
+            android:key="general_preferencecategory"
+            android:title="General" >
+            <CheckBoxPreference
+                android:key="savemenus_checkbox"
+                android:title="Save menus locally" />
         </PreferenceCategory>
-        <PreferenceCategory android:key="storage_preferencecategory" android:title="Storage">
-            <CheckBoxPreference android:title="Store menus externally" android:key="storeexternal_checkbox"/>
+        <PreferenceCategory
+            android:key="storage_preferencecategory"
+            android:title="Storage" >
+            <CheckBoxPreference
+                android:key="storeexternal_checkbox"
+                android:title="Store menus externally" />
         </PreferenceCategory>
     </PreferenceScreen>
     <PreferenceScreen
         android:key="lookandfeel_preferencescreen"
         android:title="Look and feel" >
-        <ListPreference android:entries="@array/theme_preference_array" android:dialogTitle="Theme" android:key="theme_listpreference" android:title="Theme" android:entryValues="@array/theme_int_preference_array" android:positiveButtonText="Change" android:negativeButtonText="Cancel"/>
+        <ListPreference
+            android:dialogTitle="Theme"
+            android:entries="@array/theme_preference_array"
+            android:entryValues="@array/theme_int_preference_array"
+            android:key="theme_listpreference"
+            android:negativeButtonText="Cancel"
+            android:positiveButtonText="Change"
+            android:title="Theme" />
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:fragment="RestaurantFragment"
+        android:key="account_preferencescreen" android:title="Accounts">
     </PreferenceScreen>
 
 </PreferenceScreen>

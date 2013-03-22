@@ -5,6 +5,13 @@
     <attr name="ic_menu_search_holo" format="reference" />
     <attr name="slidingmenu_background" format="reference" />
     <attr name="slidingmenu_textColor" format="reference" />
+    <attr name="slidingmenu_textColor_secondary" format="reference" />
     <attr name="slidingmenu_actionbarBackground" format="reference" />
+    <attr name="slidingmenu_ic_action_about" format="reference" />
+    <attr name="slidingmenu_ic_action_settings" format="reference" />
+    <attr name="slidingmenu_ic_collection_labels" format="reference" />
+    <attr name="slidingmenu_ic_collection_sort_by_size" format="reference" />
+    <attr name="slidingmenu_ic_collection_view_as_grid" format="reference" />
+    <attr name="slidingmenu_ic_social_person" format="reference" />
 
 </resources>

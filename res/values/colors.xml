@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="slidingmenu_actionbarBackground_holo_light_darkactionbar">#222222</color>
-    <color name="slidingmenu_actionbarBackground_holo">#020202</color>
+    <color name="slidingmenu_actionbarBackground_holo_light_darkactionbar">#222222</color>    
     <color name="slidingmenu_actionbarBackground_holo_light">#dddddd</color>
-    <color name="slidingmenu_textColor_holo_light_darkactionbar">#000000</color>
-    <color name="slidingmenu_textColor_holo">#000000</color>
-    <color name="slidingmenu_textColor_holo_light">#ffffff</color>
+    <color name="slidingmenu_textColor_holo_light_darkactionbar">#ffffff</color>    
+    <color name="slidingmenu_textColor_holo_light">#000000</color>
+    <color name="slidingmenu_textColor_secondary_holo_light_darkactionbar">#cccccc</color>
+    <color name="slidingmenu_textColor_secondary_holo_light">#333333</color>    
+    <color name="MenU_Blue_Light">#1c2130</color>
+    <color name="MenU_Blue_Dark">#151926</color>
+    <color name="MenU_Turquoise_light">#028f76</color>
+    <color name="MenU_Turquoise_Dark">#00735e</color>
+    <color name="MenU_Green_Light">#b3e099</color>
+    <color name="MenU_Green_Dark">#8db277</color>
+    <color name="MenU_Red_Light">#d14334</color>
+    <color name="MenU_Red_Dark">#aa3125</color>
+    <color name="MenU_Peach_Dark">#ccba87</color>
+    <color name="MenU_Peach_Light">#ffeaad</color>
 
 </resources>
