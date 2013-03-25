@@ -9,13 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.conradhaupt.MenU.cards.FeaturedCard;
-import com.fima.cardsui.objects.Card;
-import com.fima.cardsui.views.CardUI;
-
-public class HomeFragment extends Fragment
+public class RestaurantBrowerFragment extends Fragment
 {
-	CardUI card;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,15 +20,6 @@ public class HomeFragment extends Fragment
 		// Inflate the layout for this fragment
 		setHasOptionsMenu(true);
 		return inflater.inflate(R.layout.fragment_home, container, false);
-	}
-
-	public void onResume()
-	{
-		card = (CardUI) this.getActivity().findViewById(R.id.cardsView);
-		card.setSwipeable(true);
-		card.addCard(new FeaturedCard("Featured"));
-		card.refresh();
-		super.onResume();
 	}
 
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
@@ -50,5 +36,4 @@ public class HomeFragment extends Fragment
 		}
 		return true;
 	}
-
 }

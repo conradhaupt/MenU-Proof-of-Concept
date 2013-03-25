@@ -1,6 +1,7 @@
 package com.conradhaupt.MenU;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -111,32 +112,64 @@ public class HomeActivity extends SlidingFragmentActivity
 		case R.id.menu_dropdown:
 			getSlidingMenu().showMenu();
 			break;
-		// case R.id.menu_drop_about:
-		// ft.setCustomAnimations(android.R.animator.fade_in,
-		// android.R.animator.fade_out);
-		// ft.replace(R.id.fragment_frame, new AboutFragment());
-		// ft.addToBackStack(null);
-		// ft.commit();
-		// break;
-		// case R.id.menu_drop_account:
-		// ft.setCustomAnimations(android.R.animator.fade_in,
-		// android.R.animator.fade_out);
-		// ft.replace(R.id.fragment_frame, new AccountFragment());
-		// ft.addToBackStack(null);
-		// ft.commit();
-		// break;
-		// case R.id.menu_drop_menu:
-		// break;
-		// case R.id.menu_drop_settings:
-		// ft.setCustomAnimations(android.R.animator.fade_in,
-		// android.R.animator.fade_out);
-		// ft.replace(R.id.fragment_frame, new SettingsFragment());
-		// ft.addToBackStack(null);
-		// ft.commit();
-		// break;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 		return true;
+	}
+
+	public void onHomeMenuClicked(View v)
+	{
+		System.out.println("Home");
+		this.getFragmentManager().popBackStack(
+				this.getFragmentManager().getBackStackEntryAt(0).getName()
+						.toString(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		getSlidingMenu().showMenu();
+	}
+
+	public void onFeaturedMenuClicked(View v)
+	{
+		System.out.println("Featured");
+	}
+
+	public void onRestaurantsMenuClicked(View v)
+	{
+		System.out.println("Restaurants");
+	}
+
+	public void onAccountsMenuClicked(View v)
+	{
+		System.out.println("Account has been pressed");
+		FragmentTransaction ft = this.getFragmentManager().beginTransaction();
+		ft.setCustomAnimations(android.R.animator.fade_in,
+				android.R.animator.fade_out);
+		ft.replace(R.id.fragment_frame, new AccountFragment());
+		ft.addToBackStack("Account fragment");
+		ft.commit();
+		getSlidingMenu().showContent();
+	}
+
+	public void onSettingsMenuClicked(View v)
+	{
+		System.out.println("Settings has been pressed");
+		FragmentTransaction ft = this.getFragmentManager().beginTransaction();
+		ft.setCustomAnimations(android.R.animator.fade_in,
+				android.R.animator.fade_out);
+		ft.replace(R.id.fragment_frame, new SettingsFragment());
+		ft.addToBackStack("Setting fragment");
+		ft.commit();
+		getSlidingMenu().showContent();
+	}
+
+	public void onAboutMenuClicked(View v)
+	{
+		System.out.println("About has been pressed");
+		FragmentTransaction ft = this.getFragmentManager().beginTransaction();
+		ft.setCustomAnimations(android.R.animator.fade_in,
+				android.R.animator.fade_out);
+		ft.replace(R.id.fragment_frame, new AboutFragment());
+		ft.addToBackStack("About Fragment");
+		ft.commit();
+		getSlidingMenu().showContent();
 	}
 }

@@ -9,15 +9,14 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_margin="10dp"
         android:text="@string/home_featured_title"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <RelativeLayout
+    <com.fima.cardsui.views.CardUI
+        android:id="@+id/cardsView"
         android:layout_width="match_parent"
-        android:layout_height="192dp" >
-    </RelativeLayout>
+        android:layout_height="match_parent" >
+    </com.fima.cardsui.views.CardUI>
 
 </LinearLayout>

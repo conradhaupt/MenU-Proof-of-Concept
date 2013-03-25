@@ -15,6 +15,7 @@ public class RestaurantFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
+		System.out.println("Restaurant fragment created!");
 		// Inflate the layout for this fragment
 		setHasOptionsMenu(true);
 		System.out.println("Fragment created!");

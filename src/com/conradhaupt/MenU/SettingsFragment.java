@@ -10,6 +10,7 @@ public class SettingsFragment extends PreferenceFragment
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
+		System.out.println("Settings fragment created!");
 		super.onCreate(savedInstanceState);
 		this.addPreferencesFromResource(R.xml.preferences);
 	}

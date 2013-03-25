@@ -15,7 +15,7 @@ public class AccountFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
-		System.out.println("Home fragment created!");
+		System.out.println("Account fragment created!");
 		// Inflate the layout for this fragment
 		setHasOptionsMenu(true);
 		return inflater.inflate(R.layout.fragment_account, container, false);
