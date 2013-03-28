@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="slidingmenu_actionbarBackground_holo_light_darkactionbar">#222222</color>    
+    <color name="slidingmenu_actionbarBackground_holo_light_darkactionbar">#222222</color>
     <color name="slidingmenu_actionbarBackground_holo_light">#dddddd</color>
-    <color name="slidingmenu_textColor_holo_light_darkactionbar">#ffffff</color>    
+    <color name="slidingmenu_textColor_holo_light_darkactionbar">#ffffff</color>
     <color name="slidingmenu_textColor_holo_light">#000000</color>
     <color name="slidingmenu_textColor_secondary_holo_light_darkactionbar">#cccccc</color>
-    <color name="slidingmenu_textColor_secondary_holo_light">#333333</color>    
+    <color name="slidingmenu_textColor_secondary_holo_light">#333333</color>
     <color name="MenU_Blue_Light">#1c2130</color>
     <color name="MenU_Blue_Dark">#151926</color>
     <color name="MenU_Turquoise_Light">#028f76</color>
@@ -19,5 +19,7 @@
     <color name="MenU_Peach_Light">#ffeaad</color>
     <color name="MenU_Grey_Dark">#656565</color>
     <color name="MenU_Grey_Light">#808080</color>
+    <color name="CoffeCafe_Bar">#066565</color>
+    <color name="CoffeeCafe_textColor">#ffffff</color>
 
 </resources>

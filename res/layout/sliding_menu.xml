@@ -24,14 +24,11 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/relativeLayout1"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <RelativeLayout
+                android:id="@+id/slidingmenu_home_button"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:background="@drawable/slidingmenu_home_background"
@@ -66,6 +63,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/slidingmenu_featured_button"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:background="@drawable/slidingmenu_featured_background"
@@ -96,6 +94,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/slidingmenu_restaurant_button"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:background="@drawable/slidingmenu_restaurants_background"
@@ -126,6 +125,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/slidingmenu_account_button"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:background="@drawable/slidingmenu_accounts_background"
@@ -156,6 +156,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/slidingmenu_setting_button"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:background="@drawable/slidingmenu_settings_background"
@@ -185,6 +186,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/slidingmenu_about_button"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:background="@drawable/slidingmenu_about_background"
@@ -215,6 +217,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/slidingmenu_information_panel"
                 android:layout_width="match_parent"
                 android:layout_height="128dp"
                 android:background="?attr/slidingmenu_actionbarBackground" >
@@ -240,7 +243,6 @@
                     android:text="@string/slidingmenu_info_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="?attr/slidingmenu_textColor_secondary" />
-
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

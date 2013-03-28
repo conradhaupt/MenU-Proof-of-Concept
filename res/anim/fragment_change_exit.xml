@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <alpha
-        android:duration="@android:integer/config_mediumAnimTime"
-        android:fromAlpha="1"
-        android:toAlpha="0" />
-
     <translate
-        android:duration="@android:integer/config_mediumAnimTime"
+        android:duration="@android:integer/config_shortAnimTime"
         android:fromXDelta="0%"
-        android:toXDelta="-100%p"
+        android:toXDelta="100%p"
         android:zAdjustment="top" />
-
-    <rotate
-        android:duration="@android:integer/config_mediumAnimTime"
-        android:fromDegrees="0"
-        android:pivotX="50%p"
-        android:pivotY="50%p"
-        android:toDegrees="-45" />
 
 </set>

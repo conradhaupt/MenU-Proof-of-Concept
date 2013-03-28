@@ -27,6 +27,9 @@
     <string name="slidingmenu_info_title">MenU Android App</string>
     <string name="slidingmenu_info_content">Conrad Haupt ©2013</string>
     <string name="card_featured_title">Featured</string>
-    
+    <string name="title_section3">Section 3</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section1">Section 1</string>
+    <string name="restaurant_description_title">Description</string>
 
 </resources>

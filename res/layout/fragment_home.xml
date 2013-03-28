@@ -13,10 +13,4 @@
         android:text="@string/home_featured_title"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <com.fima.cardsui.views.CardUI
-        android:id="@+id/cardsView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </com.fima.cardsui.views.CardUI>
-
 </LinearLayout>

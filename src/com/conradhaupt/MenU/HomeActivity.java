@@ -1,12 +1,11 @@
 package com.conradhaupt.MenU;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,20 +14,9 @@ import android.view.View.OnClickListener;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class HomeActivity extends SlidingFragmentActivity
+public class HomeActivity extends SlidingFragmentActivity implements
+		OnClickListener
 {
-	private OnClickListener clickListen = new OnClickListener()
-	{
-		@Override
-		public void onClick(View v)
-		{
-			switch (v.getId())
-			{
-			default:
-				return;
-			}
-		}
-	};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -66,9 +54,22 @@ public class HomeActivity extends SlidingFragmentActivity
 		slide.setShadowWidthRes(R.dimen.menusliding_shadow_width);
 
 		// This code assigns the current fragment
-		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.add(R.id.fragment_frame, new HomeFragment());
 		ft.commit();
+
+		// This code assigns the onClickListener to all views requiring it
+		int[] viewIDs = { R.id.slidingmenu_home_button,
+				R.id.slidingmenu_about_button,
+				R.id.slidingmenu_featured_button,
+				R.id.slidingmenu_information_panel,
+				R.id.slidingmenu_restaurant_button,
+				R.id.slidingmenu_setting_button,
+				R.id.slidingmenu_account_button };
+		for (int i = 0; i < viewIDs.length; i++)
+		{
+			(findViewById(viewIDs[i])).setOnClickListener(this);
+		}
 	}
 
 	@Override
@@ -96,12 +97,13 @@ public class HomeActivity extends SlidingFragmentActivity
 	{
 		System.out.println("Action bar button was pressed!");
 		System.out.println(item.getItemId());
-		FragmentTransaction ft = this.getFragmentManager().beginTransaction();
+		FragmentTransaction ft = this.getSupportFragmentManager()
+				.beginTransaction();
 		switch (item.getItemId())
 		{
 		case R.id.menu_search:
-			ft.setCustomAnimations(android.R.animator.fade_in,
-					android.R.animator.fade_out);
+			ft.setCustomAnimations(R.anim.fragment_change_enter,
+					R.anim.fragment_change_exit);
 			ft.replace(R.id.fragment_frame, new RestaurantFragment());
 			ft.addToBackStack(null);
 			ft.commit();
@@ -121,10 +123,12 @@ public class HomeActivity extends SlidingFragmentActivity
 	public void onHomeMenuClicked(View v)
 	{
 		System.out.println("Home");
-		this.getFragmentManager().popBackStack(
-				this.getFragmentManager().getBackStackEntryAt(0).getName()
-						.toString(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		getSlidingMenu().showMenu();
+		for (int i = 0; i < this.getSupportFragmentManager()
+				.getBackStackEntryCount(); i++)
+		{
+			this.getSupportFragmentManager().popBackStack();
+		}
+		getSlidingMenu().showContent();
 	}
 
 	public void onFeaturedMenuClicked(View v)
@@ -135,16 +139,22 @@ public class HomeActivity extends SlidingFragmentActivity
 	public void onRestaurantsMenuClicked(View v)
 	{
 		System.out.println("Restaurants");
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.setCustomAnimations(R.anim.fragment_change_enter,
+				R.anim.fragment_change_exit);
+		ft.replace(R.id.fragment_frame, new RestaurantFragment());
+		ft.addToBackStack("RestaurantFragment");
+		ft.commit();
 	}
 
 	public void onAccountsMenuClicked(View v)
 	{
 		System.out.println("Account has been pressed");
-		FragmentTransaction ft = this.getFragmentManager().beginTransaction();
-		ft.setCustomAnimations(android.R.animator.fade_in,
-				android.R.animator.fade_out);
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.setCustomAnimations(R.anim.fragment_change_enter,
+				R.anim.fragment_change_exit);
 		ft.replace(R.id.fragment_frame, new AccountFragment());
-		ft.addToBackStack("Account fragment");
+		ft.addToBackStack("AccountFragment");
 		ft.commit();
 		getSlidingMenu().showContent();
 	}
@@ -152,24 +162,71 @@ public class HomeActivity extends SlidingFragmentActivity
 	public void onSettingsMenuClicked(View v)
 	{
 		System.out.println("Settings has been pressed");
-		FragmentTransaction ft = this.getFragmentManager().beginTransaction();
-		ft.setCustomAnimations(android.R.animator.fade_in,
-				android.R.animator.fade_out);
-		ft.replace(R.id.fragment_frame, new SettingsFragment());
-		ft.addToBackStack("Setting fragment");
-		ft.commit();
-		getSlidingMenu().showContent();
+		// FragmentTransaction ft =
+		// this.getFragmentManager().beginTransaction();
+		// ft.setCustomAnimations(R.anim.fragment_change_enter,
+		// R.anim.fragment_change_exit);
+		// ft.replace(R.id.fragment_frame, new SettingsFragment());
+		// ft.addToBackStack("Setting fragment");
+		// ft.commit();
+		// getSlidingMenu().showContent();
 	}
 
 	public void onAboutMenuClicked(View v)
 	{
 		System.out.println("About has been pressed");
-		FragmentTransaction ft = this.getFragmentManager().beginTransaction();
-		ft.setCustomAnimations(android.R.animator.fade_in,
-				android.R.animator.fade_out);
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.setCustomAnimations(R.anim.fragment_change_enter,
+				R.anim.fragment_change_exit);
 		ft.replace(R.id.fragment_frame, new AboutFragment());
-		ft.addToBackStack("About Fragment");
+		ft.addToBackStack("AboutFragment");
 		ft.commit();
 		getSlidingMenu().showContent();
+	}
+
+	public void onBrowserClicked(View view)
+	{
+		System.out.println("Browser has been pressed");
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.setCustomAnimations(R.anim.fragment_change_enter,
+				R.anim.fragment_change_exit);
+		ft.replace(R.id.fragment_frame, new RestaurantBrowserFragment());
+		ft.addToBackStack("RestaurantBrowserFragment");
+		ft.commit();
+	}
+	public void onInformationClicked(View view){
+		System.out.println("Information panel has been pressed");
+	}
+
+	@Override
+	public void onClick(View v)
+	{
+		System.out.println("onClick run for view with id " + v.getId() + "!");
+		switch (v.getId())
+		{
+		case R.id.slidingmenu_home_button:		
+			this.onHomeMenuClicked(v);
+			break;
+		case R.id.slidingmenu_featured_button:
+			this.onFeaturedMenuClicked(v);
+			break;
+		case R.id.slidingmenu_restaurant_button:
+			this.onRestaurantsMenuClicked(v);
+			break;
+		case R.id.slidingmenu_account_button:
+			this.onAccountsMenuClicked(v);
+			break;
+		case R.id.slidingmenu_setting_button:
+			this.onSettingsMenuClicked(v);
+			break;
+		case R.id.slidingmenu_about_button:
+			this.onAboutMenuClicked(v);
+			break;
+		case R.id.slidingmenu_information_panel:
+			this.onInformationClicked(v);
+			break;
+		default:
+			return;
+		}
 	}
 }
