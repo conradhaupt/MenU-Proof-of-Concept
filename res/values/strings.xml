@@ -37,6 +37,22 @@
     <string name="aboutMenU_dialog_license_termsandconditions">Terms and conditions</string>
     <string name="aboutMenU_dialog_website">Website</string>
     <string name="aboutMenU_dialog_close">Close</string>
+    <string name="aboutMenU_dialog_website_link">http://www.conradhaupt.co.za</string>
+    <string name="aboutMenU_dialog_license_text">Do whatever you want with this app!</string>
+    <string name="aboutMenU_dialog_license_copyright">Copyright 2013 Conrad Haupt</string>
+    <string name="aboutMenU_dialog_license_termsandconditions_text">Seriously, do what ever you want!</string>
+    <string name="aboutMenU_dialog_license_website_button">Website</string>
+    <string name="aboutMenU_dialog_license_website_button_notavailable">No available website</string>
+    <string name="aboutMenU_dialog_license_slidingmenu_copyright">Copyright 2012 Jeremy Feinstein</string>
+    <string name="aboutMenU_dialog_license_crouton_copyright">Copyright 2012 Evgeny Shishkin</string>
+    <string name="ApacheLicense">Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</string>
+    <string name="ApacheLicenseURL">http://www.apache.org/licenses/LICENSE-2.0</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="aboutMenU_dialog_license_close">Close</string>
 
 </resources>
