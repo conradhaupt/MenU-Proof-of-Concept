@@ -31,5 +31,12 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section1">Section 1</string>
     <string name="restaurant_description_title">Description</string>
+    <string name="aboutMenU_dialog_license">License</string>
+    <string name="aboutMenU_dialog_license_slidingmenu">Slidingmenu license</string>
+    <string name="aboutMenU_dialog_license_crouton">AppMsg Crouton license</string>
+    <string name="aboutMenU_dialog_license_termsandconditions">Terms and conditions</string>
+    <string name="aboutMenU_dialog_website">Website</string>
+    <string name="aboutMenU_dialog_close">Close</string>
+    <string name="title_activity_settings">Settings</string>
 
 </resources>

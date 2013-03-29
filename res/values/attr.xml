@@ -13,5 +13,11 @@
     <attr name="slidingmenu_ic_collection_sort_by_size" format="reference" />
     <attr name="slidingmenu_ic_collection_view_as_grid" format="reference" />
     <attr name="slidingmenu_ic_social_person" format="reference" />
+    <attr name="aboutMenU_dialog_header_background" format="reference" />
+    <attr name="aboutMenU_dialog_header_bar" format="reference" />
+    <attr name="aboutMenU_dialog_header_drawable" format="reference" />
+    <attr name="aboutMenU_dialog_background" format="reference" />
+    <attr name="aboutMenU_dialog_bar" format="reference" />
+    <attr name="aboutMenU_dialog_textColor" format="reference" />
 
 </resources>

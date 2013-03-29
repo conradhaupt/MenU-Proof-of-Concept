@@ -1,10 +1,9 @@
 package com.conradhaupt.MenU;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -162,14 +161,9 @@ public class HomeActivity extends SlidingFragmentActivity implements
 	public void onSettingsMenuClicked(View v)
 	{
 		System.out.println("Settings has been pressed");
-		// FragmentTransaction ft =
-		// this.getFragmentManager().beginTransaction();
-		// ft.setCustomAnimations(R.anim.fragment_change_enter,
-		// R.anim.fragment_change_exit);
-		// ft.replace(R.id.fragment_frame, new SettingsFragment());
-		// ft.addToBackStack("Setting fragment");
-		// ft.commit();
-		// getSlidingMenu().showContent();
+		Intent intent = new Intent(this, SettingsActivity.class);
+		startActivity(intent);
+		getSlidingMenu().showContent();
 	}
 
 	public void onAboutMenuClicked(View v)
@@ -194,8 +188,14 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		ft.addToBackStack("RestaurantBrowserFragment");
 		ft.commit();
 	}
-	public void onInformationClicked(View view){
+
+	public void onInformationClicked(View view)
+	{
 		System.out.println("Information panel has been pressed");
+		AboutDialogFragment aboutDialogFragment = new AboutDialogFragment();
+		aboutDialogFragment.show(this.getSupportFragmentManager(),
+				"AboutDialog");
+		getSlidingMenu().showContent();
 	}
 
 	@Override
@@ -204,7 +204,7 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		System.out.println("onClick run for view with id " + v.getId() + "!");
 		switch (v.getId())
 		{
-		case R.id.slidingmenu_home_button:		
+		case R.id.slidingmenu_home_button:
 			this.onHomeMenuClicked(v);
 			break;
 		case R.id.slidingmenu_featured_button:

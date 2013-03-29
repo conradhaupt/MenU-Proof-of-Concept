@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
 
 
@@ -21,6 +22,12 @@
         <item name="slidingmenu_ic_collection_view_as_grid">@drawable/ic_collection_view_as_grid_holo_dark</item>
         <item name="slidingmenu_ic_social_person">@drawable/ic_social_person_holo_dark</item>
         <item name="slidingmenu_textColor_secondary">@color/slidingmenu_textColor_secondary_holo_light_darkactionbar</item>
+        <item name="aboutMenU_dialog_header_background">@color/MenU_Red_Light</item>
+        <item name="aboutMenU_dialog_header_drawable">@drawable/ic_logo_monochrome_light</item>
+        <item name="aboutMenU_dialog_header_bar">@color/MenU_Red_Dark</item>
+        <item name="aboutMenU_dialog_background">@color/aboutMenU_dialog_background_holo_light_darkactionbar</item>
+        <item name="aboutMenU_dialog_bar">@color/aboutMenU_dialog_bar_holo_light_darkactionbar</item>
+        <item name="aboutMenU_dialog_textColor">@color/aboutMenU_dialog_textColor_holo_light_darkactionbar</item>
     </style>
 
     <style name="holo_light" parent="@android:style/Theme.Holo.Light">
@@ -36,6 +43,18 @@
         <item name="slidingmenu_ic_collection_view_as_grid">@drawable/ic_collection_view_as_grid_holo_light</item>
         <item name="slidingmenu_ic_social_person">@drawable/ic_social_person_holo_light</item>
         <item name="slidingmenu_textColor_secondary">@color/slidingmenu_textColor_secondary_holo_light</item>
+        <item name="aboutMenU_dialog_header_background">@color/MenU_Red_Light</item>
+        <item name="aboutMenU_dialog_header_drawable">@drawable/ic_logo_monochrome_dark</item>
+        <item name="aboutMenU_dialog_header_bar">@color/MenU_Red_Dark</item>
+        <item name="aboutMenU_dialog_background">@color/aboutMenU_dialog_background_holo_light</item>
+        <item name="aboutMenU_dialog_bar">@color/aboutMenU_dialog_bar_holo_light</item>
+        <item name="aboutMenU_dialog_textColor">@color/aboutMenU_dialog_textColor_holo_light</item>
+    </style>
+
+    <style name="LoginFormContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
     </style>
 
 </resources>

@@ -200,7 +200,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="8dp"
-                    android:src="?attr/slidingmenu_ic_action_about" />
+                    android:src="@drawable/ic_action_about_holo_dark" />
 
                 <TextView
                     android:id="@+id/textView6"

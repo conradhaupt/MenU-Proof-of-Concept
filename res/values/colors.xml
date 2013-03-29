@@ -20,6 +20,12 @@
     <color name="MenU_Grey_Dark">#656565</color>
     <color name="MenU_Grey_Light">#808080</color>
     <color name="CoffeCafe_Bar">#066565</color>
+    <color name="aboutMenU_dialog_textColor_holo_light_darkactionbar">#ffffff</color>
+    <color name="aboutMenU_dialog_textColor_holo_light">#000000</color>
+    <color name="aboutMenU_dialog_background_holo_light">#dddddd</color>
+    <color name="aboutMenU_dialog_background_holo_light_darkactionbar">#222222</color>
+    <color name="aboutMenU_dialog_bar_holo_light">#bdbdbd</color>
+    <color name="aboutMenU_dialog_bar_holo_light_darkactionbar">#424242</color>
     <color name="CoffeeCafe_textColor">#ffffff</color>
 
 </resources>
