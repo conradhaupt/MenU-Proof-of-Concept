@@ -28,6 +28,7 @@
         <item name="aboutMenU_dialog_background">@color/aboutMenU_dialog_background_holo_light_darkactionbar</item>
         <item name="aboutMenU_dialog_bar">@color/aboutMenU_dialog_bar_holo_light_darkactionbar</item>
         <item name="aboutMenU_dialog_textColor">@color/aboutMenU_dialog_textColor_holo_light_darkactionbar</item>
+        <item name="slidingmenu_ic_action_copyright">@drawable/ic_action_copyright_holo_dark</item>
     </style>
 
     <style name="holo_light" parent="@android:style/Theme.Holo.Light">
@@ -49,6 +50,7 @@
         <item name="aboutMenU_dialog_background">@color/aboutMenU_dialog_background_holo_light</item>
         <item name="aboutMenU_dialog_bar">@color/aboutMenU_dialog_bar_holo_light</item>
         <item name="aboutMenU_dialog_textColor">@color/aboutMenU_dialog_textColor_holo_light</item>
+        <item name="slidingmenu_ic_action_copyright">@drawable/ic_action_copyright_holo_light</item>
     </style>
 
     <style name="LoginFormContainer">

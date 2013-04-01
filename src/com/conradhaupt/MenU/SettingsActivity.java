@@ -54,10 +54,10 @@ public class SettingsActivity extends PreferenceActivity
 		switch (themeValue)
 		{
 		case 0:
-			this.setTheme(R.style.holo_light_darkactionbar);
+			this.setTheme(R.style.holo_light);
 			break;
 		case 1:
-			this.setTheme(R.style.holo_light);
+			this.setTheme(R.style.holo_light_darkactionbar);
 			break;
 		default:
 			System.out.println("Preference value is not assigned to a theme.");

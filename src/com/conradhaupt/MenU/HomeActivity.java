@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.github.espiandev.showcaseview.ShowcaseView;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -29,10 +33,10 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		switch (themeValue)
 		{
 		case 0:
-			this.setTheme(R.style.holo_light_darkactionbar);
+			this.setTheme(R.style.holo_light);
 			break;
 		case 1:
-			this.setTheme(R.style.holo_light);
+			this.setTheme(R.style.holo_light_darkactionbar);
 			break;
 		default:
 			System.out.println("Preference value is not assigned to a theme.");
@@ -42,12 +46,21 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setHomeButtonEnabled(true);
 		setContentView(R.layout.activity_home);
-		setBehindContentView(R.layout.sliding_menu);
 
 		// This code assigns the sliding menu parameters
 		SlidingMenu slide = this.getSlidingMenu();
 		slide.setMode(SlidingMenu.LEFT);
-		slide.setBehindOffsetRes(R.dimen.menu_ic_logomenusize);
+		if (!pref.getBoolean("smallslidingmenu_checkbox", false))
+		{
+			slide.setBehindOffsetRes(R.dimen.menu_ic_logomenusize);
+			setBehindContentView(R.layout.sliding_menu);
+		} else
+		{
+			setBehindContentView(R.layout.sliding_menu_small);
+			slide.setBehindOffset((int) ((this.getResources()
+					.getDisplayMetrics().widthPixels) - (64 * this
+					.getResources().getDisplayMetrics().density)));
+		}
 		slide.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		slide.setShadowDrawable(R.drawable.menusliding_shadow);
 		slide.setShadowWidthRes(R.dimen.menusliding_shadow_width);
@@ -69,6 +82,12 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		{
 			(findViewById(viewIDs[i])).setOnClickListener(this);
 		}
+	}
+
+	@Override
+	public void onResume()
+	{
+		super.onResume();
 	}
 
 	@Override
@@ -101,16 +120,18 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		switch (item.getItemId())
 		{
 		case R.id.menu_search:
-			ft.setCustomAnimations(R.anim.fragment_change_enter,
-					R.anim.fragment_change_exit);
-			ft.replace(R.id.fragment_frame, new RestaurantFragment());
-			ft.addToBackStack(null);
-			ft.commit();
+			this.getSlidingMenu().showMenu();
 			break;
 		case android.R.id.home:
 			getSlidingMenu().showMenu();
 			break;
 		case R.id.menu_dropdown:
+			ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
+			co.hideOnClickOutside = true;
+			ShowcaseView.insertShowcaseView(
+					this.findViewById(R.id.slidingmenu_home_button), this,
+					"THIS IS A FUCKEN BUTTON FOOL!!",
+					"press it... I know you want to...", co);
 			getSlidingMenu().showMenu();
 			break;
 		default:
@@ -121,13 +142,15 @@ public class HomeActivity extends SlidingFragmentActivity implements
 
 	public void onHomeMenuClicked(View v)
 	{
-		System.out.println("Home");
-		for (int i = 0; i < this.getSupportFragmentManager()
-				.getBackStackEntryCount(); i++)
-		{
-			this.getSupportFragmentManager().popBackStack();
-		}
-		getSlidingMenu().showContent();
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		boolean isAncestral = false;
+		isAncestral = pref.getBoolean("homenewinstance_switch", false);
+		this.instantiateFragment(new HomeFragment(), true, isAncestral,
+				"HomeFragment", R.anim.fragment_change_enter,
+				R.anim.fragment_change_exit, null);
+		this.getSlidingMenu().showContent();
+		System.out.println("Home has been pressed.");
 	}
 
 	public void onFeaturedMenuClicked(View v)
@@ -137,65 +160,46 @@ public class HomeActivity extends SlidingFragmentActivity implements
 
 	public void onRestaurantsMenuClicked(View v)
 	{
-		System.out.println("Restaurants");
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.setCustomAnimations(R.anim.fragment_change_enter,
-				R.anim.fragment_change_exit);
-		ft.replace(R.id.fragment_frame, new RestaurantFragment());
-		ft.addToBackStack("RestaurantFragment");
-		ft.commit();
+		this.instantiateFragment(new RestaurantFragment(), true, true,
+				"RestaurantFragment", R.anim.fragment_change_enter,
+				R.anim.fragment_change_exit, null);
+		this.getSlidingMenu().showContent();
+		System.out.println("Restaurant has been pressed.");
 	}
 
 	public void onAccountsMenuClicked(View v)
 	{
-		System.out.println("Account has been pressed");
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.setCustomAnimations(R.anim.fragment_change_enter,
-				R.anim.fragment_change_exit);
-		ft.replace(R.id.fragment_frame, new AccountFragment());
-		ft.addToBackStack("AccountFragment");
-		ft.commit();
-		getSlidingMenu().showContent();
+		this.instantiateFragment(new AccountFragment(), true, true,
+				"AccountFragment", R.anim.fragment_change_enter,
+				R.anim.fragment_change_exit, null);
+		this.getSlidingMenu().showContent();
+		System.out.println("Account has been pressed.");
 	}
 
 	public void onSettingsMenuClicked(View v)
 	{
 		System.out.println("Settings has been pressed");
+		getSlidingMenu().showContent();
 		Intent intent = new Intent(this, SettingsActivity.class);
 		startActivity(intent);
-		getSlidingMenu().showContent();
 	}
 
 	public void onAboutMenuClicked(View v)
 	{
-		System.out.println("About has been pressed");
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.setCustomAnimations(R.anim.fragment_change_enter,
-				R.anim.fragment_change_exit);
-		ft.replace(R.id.fragment_frame, new AboutFragment());
-		ft.addToBackStack("AboutFragment");
-		ft.commit();
-		getSlidingMenu().showContent();
-	}
-
-	public void onBrowserClicked(View view)
-	{
-		System.out.println("Browser has been pressed");
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.setCustomAnimations(R.anim.fragment_change_enter,
-				R.anim.fragment_change_exit);
-		ft.replace(R.id.fragment_frame, new RestaurantBrowserFragment());
-		ft.addToBackStack("RestaurantBrowserFragment");
-		ft.commit();
+		this.instantiateFragment(new AboutFragment(), true, true,
+				"AboutFragment", R.anim.fragment_change_enter,
+				R.anim.fragment_change_exit, null);
+		this.getSlidingMenu().showContent();
+		System.out.println("About has been pressed.");
 	}
 
 	public void onInformationClicked(View view)
 	{
 		System.out.println("Information panel has been pressed");
+		getSlidingMenu().showContent();
 		AboutDialogFragment aboutDialogFragment = new AboutDialogFragment();
 		aboutDialogFragment.show(this.getSupportFragmentManager(),
 				"AboutDialog");
-		getSlidingMenu().showContent();
 	}
 
 	@Override
@@ -228,5 +232,83 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		default:
 			return;
 		}
+	}
+
+	public void instantiateFragment(Fragment newFragment,
+			boolean addToBackStack, boolean isAncestral, String tag,
+			int introAnimation, int outroAnimation, Bundle arguments)
+	{
+		boolean isCurrentFragment = false;
+
+		try
+		{
+			// Check if the current fragment is the one being instantiated
+			isCurrentFragment = this
+					.getSupportFragmentManager()
+					.getBackStackEntryAt(
+							this.getSupportFragmentManager()
+									.getBackStackEntryCount() - 1).getName()
+					.equals(tag);
+			if (!isCurrentFragment)
+			{
+				// If the fragment is ancestral then check for previous
+				// instantiations of the fragment
+				if (isAncestral)
+				{
+					// The current fragment is not the one being instantiated
+					// Attempt to pop back to an instance of the fragment, if
+					// there
+					try
+					{
+						this.getSupportFragmentManager()
+								.popBackStack(
+										tag,
+										this.getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
+
+						// Check if the requested fragment was in the BackStack
+						// and
+						// has been brought forward
+						isCurrentFragment = this
+								.getSupportFragmentManager()
+								.getBackStackEntryAt(
+										this.getSupportFragmentManager()
+												.getBackStackEntryCount() - 1)
+								.getName().equals(tag);
+						if (isCurrentFragment)
+						{
+							System.out
+									.println("The fragment was in the BackStack and has been navigated to.");
+							return;
+						}
+					} catch (Exception e)
+					{
+						System.out.println("Error thrown on popping!");
+					}
+				}
+			} else
+			{
+				System.out
+						.println("The fragment is already the current one, doing nothing!");
+				return;
+			}
+		} catch (NullPointerException e)
+		{
+			System.out.println("You're at the front page, instantiate away!");
+		} catch (ArrayIndexOutOfBoundsException e)
+		{
+			System.out.println("You're at the front page, instantiate away!");
+		}
+
+		// Since the fragment does not exist in the backstack or
+		// as the current fragment then instantiate it
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.setCustomAnimations(introAnimation, outroAnimation);
+		newFragment.setArguments(arguments);
+		ft.replace(R.id.fragment_frame, newFragment);
+		if (addToBackStack)
+		{
+			ft.addToBackStack(tag);
+		}
+		ft.commit();
 	}
 }

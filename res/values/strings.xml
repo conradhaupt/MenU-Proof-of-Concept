@@ -27,9 +27,6 @@
     <string name="slidingmenu_info_title">MenU Android App</string>
     <string name="slidingmenu_info_content">Conrad Haupt ©2013</string>
     <string name="card_featured_title">Featured</string>
-    <string name="title_section3">Section 3</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section1">Section 1</string>
     <string name="restaurant_description_title">Description</string>
     <string name="aboutMenU_dialog_license">License</string>
     <string name="aboutMenU_dialog_license_slidingmenu">Slidingmenu license</string>
@@ -54,5 +51,7 @@ limitations under the License.</string>
     <string name="ApacheLicenseURL">http://www.apache.org/licenses/LICENSE-2.0</string>
     <string name="title_activity_settings">Settings</string>
     <string name="aboutMenU_dialog_license_close">Close</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_account_settings">Account Settings</string>
 
 </resources>
