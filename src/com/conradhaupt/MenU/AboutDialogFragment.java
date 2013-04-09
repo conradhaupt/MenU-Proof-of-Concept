@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -41,7 +42,8 @@ public class AboutDialogFragment extends DialogFragment implements
 				R.id.aboutMenU_dialog_license,
 				R.id.aboutMenU_dialog_termsandconditions,
 				R.id.aboutMenU_dialog_slidingmenulicense,
-				R.id.aboutMenU_dialog_appmsgcroutonlicense };
+				R.id.aboutMenU_dialog_appmsgcroutonlicense ,
+				R.id.aboutMenU_dialog_showcaseviewlicense};
 		for (int i = 0; i < options.length; i++)
 		{
 			this.getDialog().findViewById(options[i])
@@ -56,6 +58,8 @@ public class AboutDialogFragment extends DialogFragment implements
 		switch (v.getId())
 		{
 		case R.id.aboutMenU_dialog_website:
+			Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(this.getResources().getString(R.string.aboutMenU_dialog_website_link)));
+			this.startActivity(intent);
 			System.out.println("Navigating to app website!");
 			break;
 		case R.id.aboutMenU_dialog_license:
@@ -105,6 +109,18 @@ public class AboutDialogFragment extends DialogFragment implements
 					R.drawable.ic_action_settings_holo_dark, this.getActivity()
 							.getSupportFragmentManager(),
 					"Crouton LicenseDialogFragment");
+			break;
+		case R.id.aboutMenU_dialog_showcaseviewlicense:
+			System.out.println("Navigating to showcase view library license!");
+			new LicenseDialogFragment().create(
+					R.string.aboutMenU_dialog_license_showcaseview,
+					R.string.ApacheLicense,
+					R.string.aboutMenU_dialog_license_showcaseview_copyright,
+					R.string.ApacheLicenseURL, R.color.MenU_Blue_Light,
+					R.color.MenU_Blue_Dark,
+					R.drawable.ic_action_settings_holo_dark, this.getActivity()
+							.getSupportFragmentManager(),
+					"ShowcaseView LicenseDialogFragment");
 			break;
 		default:
 			break;

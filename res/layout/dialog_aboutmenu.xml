@@ -180,6 +180,36 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="?attr/aboutMenU_dialog_textColor" />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/aboutMenU_dialog_showcaseviewlicense"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:clickable="true" >
+
+            <RelativeLayout
+                android:id="@+id/RelativeLayout05"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="?attr/aboutMenU_dialog_bar" >
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/TextView05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/RelativeLayout05"
+                android:layout_centerVertical="true"
+                android:text="@string/aboutMenU_dialog_license_showcaseview"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/aboutMenU_dialog_textColor" />
+
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>

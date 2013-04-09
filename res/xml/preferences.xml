@@ -28,15 +28,28 @@
                 android:key="storeexternal_switch"
                 android:title="Store menus externally" />
         </PreferenceCategory>
-        
-    </PreferenceScreen><PreferenceScreen android:title="Behaviour" android:key="behaviour_preferencescreen"><PreferenceCategory android:key="behaviour_preferencecategory" android:title="Behaviour">
-            <SwitchPreference android:defaultValue="true" android:key="homenewinstance_switch" android:summary="Clear the backstack when you go to the home page (reset history)" android:title="Home is Ancestral" />
-            
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:key="behaviour_preferencescreen"
+        android:title="Behaviour" >
+        <PreferenceCategory
+            android:key="behaviour_preferencecategory"
+            android:title="Behaviour" >
+            <SwitchPreference
+                android:defaultValue="true"
+                android:key="homenewinstance_switch"
+                android:summary="Clear the backstack when you go to the home page (reset history)"
+                android:title="Home is Ancestral" />
         </PreferenceCategory>
-    <PreferenceCategory android:title="Network Behaviour" android:key="networkbehvaiour_preferencecategory">
-        <SwitchPreference android:title="Always online" android:summary="Don't save information locally" android:key="alwaysonline_switch"/>
-    </PreferenceCategory>
-</PreferenceScreen>
+        <PreferenceCategory
+            android:key="networkbehvaiour_preferencecategory"
+            android:title="Network Behaviour" >
+            <SwitchPreference
+                android:key="alwaysonline_switch"
+                android:summary="Don&apos;t save information locally"
+                android:title="Always online" />
+        </PreferenceCategory>
+    </PreferenceScreen>
     <PreferenceScreen
         android:key="lookandfeel_preferencescreen"
         android:title="Look and feel" >
@@ -49,7 +62,21 @@
             android:negativeButtonText="Cancel"
             android:positiveButtonText="Change"
             android:title="Theme" />
-        <CheckBoxPreference android:key="smallslidingmenu_checkbox" android:title="Small menu" android:defaultValue="false"/>
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="smallslidingmenu_checkbox"
+            android:title="Small menu" />
+
+        <ListPreference
+            android:defaultValue="0"
+            android:dialogTitle="Slidingmenu side"
+            android:entries="@array/slidingmenuside_preference_array"
+            android:entryValues="@array/slidingmenuside_int_preference_array"
+            android:key="slidingmenuside_listpreference"
+            android:negativeButtonText="Cancel"
+            android:positiveButtonText="Change"
+            android:title="Slidingmenu side" />
     </PreferenceScreen>
 
 </PreferenceScreen>

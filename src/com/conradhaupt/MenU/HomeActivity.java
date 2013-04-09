@@ -20,6 +20,7 @@ import com.slidingmenu.lib.app.SlidingFragmentActivity;
 public class HomeActivity extends SlidingFragmentActivity implements
 		OnClickListener
 {
+	private int firstFragmentID;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -49,7 +50,6 @@ public class HomeActivity extends SlidingFragmentActivity implements
 
 		// This code assigns the sliding menu parameters
 		SlidingMenu slide = this.getSlidingMenu();
-		slide.setMode(SlidingMenu.LEFT);
 		if (!pref.getBoolean("smallslidingmenu_checkbox", false))
 		{
 			slide.setBehindOffsetRes(R.dimen.menu_ic_logomenusize);
@@ -62,13 +62,12 @@ public class HomeActivity extends SlidingFragmentActivity implements
 					.getResources().getDisplayMetrics().density)));
 		}
 		slide.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		slide.setShadowDrawable(R.drawable.menusliding_shadow);
 		slide.setShadowWidthRes(R.dimen.menusliding_shadow_width);
 
 		// This code assigns the current fragment
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.add(R.id.fragment_frame, new HomeFragment());
-		ft.commit();
+		ft.add(R.id.fragment_frame, new HomeFragment(), "HomeFragment");
+		firstFragmentID = ft.commit();
 
 		// This code assigns the onClickListener to all views requiring it
 		int[] viewIDs = { R.id.slidingmenu_home_button,
@@ -87,6 +86,30 @@ public class HomeActivity extends SlidingFragmentActivity implements
 	@Override
 	public void onResume()
 	{
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		SlidingMenu slide = this.getSlidingMenu();
+		switch (Integer.parseInt(pref.getString(
+				"slidingmenuside_listpreference", "-1")))
+		{
+		case 0:
+			System.out.println("Setting slide menu to slide from the left.");
+			slide.setMode(SlidingMenu.LEFT);
+			slide.setShadowDrawable(R.drawable.menusliding_shadow_left);
+			break;
+		case 1:
+			System.out.println("Setting slide menu to slide from the right.");
+			slide.setMode(SlidingMenu.RIGHT);
+			slide.setShadowDrawable(R.drawable.menusliding_shadow_right);
+			break;
+		default:
+			System.out
+					.println("Setting slide menu to slide from the left as no setting has been defined.");
+			slide.setMode(SlidingMenu.LEFT);
+			slide.setShadowDrawable(R.drawable.menusliding_shadow_left);
+			break;
+
+		}
 		super.onResume();
 	}
 
@@ -130,8 +153,8 @@ public class HomeActivity extends SlidingFragmentActivity implements
 			co.hideOnClickOutside = true;
 			ShowcaseView.insertShowcaseView(
 					this.findViewById(R.id.slidingmenu_home_button), this,
-					"THIS IS A FUCKEN BUTTON FOOL!!",
-					"press it... I know you want to...", co);
+					"THIS IS A BUTTON!", "press it... I know you want to...",
+					co);
 			getSlidingMenu().showMenu();
 			break;
 		default:
@@ -146,9 +169,18 @@ public class HomeActivity extends SlidingFragmentActivity implements
 				.getDefaultSharedPreferences(this);
 		boolean isAncestral = false;
 		isAncestral = pref.getBoolean("homenewinstance_switch", false);
-		this.instantiateFragment(new HomeFragment(), true, isAncestral,
-				"HomeFragment", R.anim.fragment_change_enter,
-				R.anim.fragment_change_exit, null);
+		if (!isAncestral)
+		{
+			this.instantiateFragment(new HomeFragment(), true, isAncestral,
+					"HomeFragment", R.anim.fragment_change_enter,
+					R.anim.fragment_change_exit, null);
+		} else
+		{
+			this.getSupportFragmentManager().popBackStack(
+					this.getSupportFragmentManager().getBackStackEntryAt(0)
+							.getId(),
+					this.getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
+		}
 		this.getSlidingMenu().showContent();
 		System.out.println("Home has been pressed.");
 	}
@@ -160,9 +192,9 @@ public class HomeActivity extends SlidingFragmentActivity implements
 
 	public void onRestaurantsMenuClicked(View v)
 	{
-		this.instantiateFragment(new RestaurantFragment(), true, true,
-				"RestaurantFragment", R.anim.fragment_change_enter,
-				R.anim.fragment_change_exit, null);
+		// this.instantiateFragment(new RestaurantBrowserFragment(), true, true,
+		// "RestaurantFragment", R.anim.fragment_change_enter,
+		// R.anim.fragment_change_exit, null);
 		this.getSlidingMenu().showContent();
 		System.out.println("Restaurant has been pressed.");
 	}
@@ -274,6 +306,7 @@ public class HomeActivity extends SlidingFragmentActivity implements
 										this.getSupportFragmentManager()
 												.getBackStackEntryCount() - 1)
 								.getName().equals(tag);
+
 						if (isCurrentFragment)
 						{
 							System.out
@@ -302,7 +335,8 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		// Since the fragment does not exist in the backstack or
 		// as the current fragment then instantiate it
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.setCustomAnimations(introAnimation, outroAnimation);
+		ft.setCustomAnimations(introAnimation, outroAnimation, outroAnimation,
+				introAnimation);
 		newFragment.setArguments(arguments);
 		ft.replace(R.id.fragment_frame, newFragment);
 		if (addToBackStack)

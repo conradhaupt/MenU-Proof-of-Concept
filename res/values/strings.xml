@@ -53,5 +53,9 @@ limitations under the License.</string>
     <string name="aboutMenU_dialog_license_close">Close</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_account_settings">Account Settings</string>
-
+    <string name="aboutMenU_dialog_license_showcaseview">Showcase View License</string>
+    <string name="aboutMenU_dialog_license_showcaseview_copyright">Copyright 2012 Alex Curran</string>
+    <string name="aboutMenU_dialog_license_slidingmenu_website">https://github.com/jfeinstein10/SlidingMenu</string>
+    <string name="aboutMenU_dialog_license_crouton_website">https://github.com/johnkil/Android-AppMsg</string>
+    <string name="aboutMenU_dialog_license_showcaseview_website">https://github.com/Espiandev/ShowcaseView</string>
 </resources>
