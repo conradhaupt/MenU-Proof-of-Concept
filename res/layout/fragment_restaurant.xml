@@ -14,7 +14,7 @@
         android:background="#bb3f34" >
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/home_recommended_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/coffee_cafe" />
@@ -33,7 +33,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/card_featured_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relativeLayout1"
@@ -46,7 +46,7 @@
         android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/card_featured_title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="65dp" >
     </ListView>

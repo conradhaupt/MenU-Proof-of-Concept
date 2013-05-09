@@ -27,5 +27,6 @@
     <color name="aboutMenU_dialog_bar_holo_light">#bdbdbd</color>
     <color name="aboutMenU_dialog_bar_holo_light_darkactionbar">#424242</color>
     <color name="CoffeeCafe_textColor">#ffffff</color>
+    <color name="activity_background">#e5e5e5</color>
 
 </resources>

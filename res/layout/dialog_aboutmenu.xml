@@ -10,7 +10,7 @@
         android:background="?attr/aboutMenU_dialog_header_background" >
 
         <ImageView
-            android:id="@+id/imageView1"
+            android:id="@+id/home_recommended_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -20,7 +20,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="5dp"
-            android:layout_alignLeft="@+id/imageView1"
+            android:layout_alignLeft="@+id/home_recommended_3"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
@@ -84,7 +84,7 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/card_featured_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/relativeLayout1"

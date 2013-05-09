@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ProgressBar;
 
 import com.github.espiandev.showcaseview.ShowcaseView;
 import com.slidingmenu.lib.SlidingMenu;
@@ -142,9 +143,6 @@ public class HomeActivity extends SlidingFragmentActivity implements
 				.beginTransaction();
 		switch (item.getItemId())
 		{
-		case R.id.menu_search:
-			this.getSlidingMenu().showMenu();
-			break;
 		case android.R.id.home:
 			getSlidingMenu().showMenu();
 			break;
@@ -171,15 +169,30 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		isAncestral = pref.getBoolean("homenewinstance_switch", false);
 		if (!isAncestral)
 		{
-			this.instantiateFragment(new HomeFragment(), true, isAncestral,
-					"HomeFragment", R.anim.fragment_change_enter,
-					R.anim.fragment_change_exit, null);
+			if (!this
+					.getSupportFragmentManager()
+					.getBackStackEntryAt(
+							this.getSupportFragmentManager()
+									.getBackStackEntryCount() - 1).getName()
+					.equals("HomeFragment"))
+			{
+				this.instantiateFragment(new HomeFragment(), true, isAncestral,
+						"HomeFragment", R.anim.fragment_change_enter,
+						R.anim.fragment_change_exit, null);
+			}
 		} else
 		{
-			this.getSupportFragmentManager().popBackStack(
-					this.getSupportFragmentManager().getBackStackEntryAt(0)
-							.getId(),
-					this.getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
+			try
+			{
+				this.getSupportFragmentManager()
+						.popBackStack(
+								this.getSupportFragmentManager()
+										.getBackStackEntryAt(0).getId(),
+								this.getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
+			} catch (NullPointerException e)
+			{
+
+			}
 		}
 		this.getSlidingMenu().showContent();
 		System.out.println("Home has been pressed.");
@@ -187,6 +200,8 @@ public class HomeActivity extends SlidingFragmentActivity implements
 
 	public void onFeaturedMenuClicked(View v)
 	{
+		Intent intent = new Intent(this, LoginActivity.class);
+		startActivity(intent);
 		System.out.println("Featured");
 	}
 

@@ -23,11 +23,11 @@
         android:layout_below="@+id/relativeLayout1" >
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <com.conradhaupt.MenU.views.SquareRelativeLayout
+            <RelativeLayout
                 android:id="@+id/slidingmenu_home_button"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
@@ -36,7 +36,7 @@
                 android:onClick="onHomeMenuClicked" >
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/home_recommended_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="false"
@@ -48,9 +48,9 @@
                     android:layout_margin="8dp"
                     android:src="@drawable/ic_collection_view_as_grid_holo_dark" />
 
-            </com.conradhaupt.MenU.views.SquareRelativeLayout>
+            </RelativeLayout>
 
-            <com.conradhaupt.MenU.views.SquareRelativeLayout
+            <RelativeLayout
                 android:id="@+id/slidingmenu_featured_button"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
@@ -68,9 +68,9 @@
                     android:layout_margin="8dp"
                     android:src="@drawable/ic_collection_labels_holo_dark" />
 
-            </com.conradhaupt.MenU.views.SquareRelativeLayout>
+            </RelativeLayout>
 
-            <com.conradhaupt.MenU.views.SquareRelativeLayout
+            <RelativeLayout
                 android:id="@+id/slidingmenu_restaurant_button"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
@@ -88,9 +88,9 @@
                     android:layout_margin="8dp"
                     android:src="@drawable/ic_collection_sort_by_size_holo_dark" />
 
-            </com.conradhaupt.MenU.views.SquareRelativeLayout>
+            </RelativeLayout>
 
-            <com.conradhaupt.MenU.views.SquareRelativeLayout
+            <RelativeLayout
                 android:id="@+id/slidingmenu_account_button"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
@@ -107,9 +107,9 @@
                     android:layout_centerVertical="false"
                     android:layout_margin="8dp"
                     android:src="@drawable/ic_social_person_holo_dark" />
-            </com.conradhaupt.MenU.views.SquareRelativeLayout>
+            </RelativeLayout>
 
-            <com.conradhaupt.MenU.views.SquareRelativeLayout
+            <RelativeLayout
                 android:id="@+id/slidingmenu_setting_button"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
@@ -127,9 +127,9 @@
                     android:layout_margin="8dp"
                     android:src="@drawable/ic_action_settings_holo_dark" />
 
-            </com.conradhaupt.MenU.views.SquareRelativeLayout>
+            </RelativeLayout>
 
-            <com.conradhaupt.MenU.views.SquareRelativeLayout
+            <RelativeLayout
                 android:id="@+id/slidingmenu_about_button"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
@@ -147,9 +147,9 @@
                     android:layout_margin="8dp"
                     android:src="@drawable/ic_action_about_holo_dark" />
 
-            </com.conradhaupt.MenU.views.SquareRelativeLayout>
+            </RelativeLayout>
 
-            <com.conradhaupt.MenU.views.SquareRelativeLayout
+            <RelativeLayout
                 android:id="@+id/slidingmenu_information_panel"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
@@ -164,7 +164,7 @@
                     android:layout_centerVertical="false"
                     android:src="?attr/slidingmenu_ic_action_copyright" />
 
-            </com.conradhaupt.MenU.views.SquareRelativeLayout>
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

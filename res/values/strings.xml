@@ -58,4 +58,8 @@ limitations under the License.</string>
     <string name="aboutMenU_dialog_license_slidingmenu_website">https://github.com/jfeinstein10/SlidingMenu</string>
     <string name="aboutMenU_dialog_license_crouton_website">https://github.com/johnkil/Android-AppMsg</string>
     <string name="aboutMenU_dialog_license_showcaseview_website">https://github.com/Espiandev/ShowcaseView</string>
+    <string name="home_recommended_title">Recommended</string>
+    <string name="home_nearby_title">Nearby</string>
+    <string name="login_cancel">Cancel</string>
+    <string name="login_login">Login</string>
 </resources>

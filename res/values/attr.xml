@@ -20,5 +20,11 @@
     <attr name="aboutMenU_dialog_bar" format="reference" />
     <attr name="aboutMenU_dialog_textColor" format="reference" />
     <attr name="slidingmenu_ic_action_copyright" format="reference" />
+    <attr name="card_background" format="reference" />
+    <attr name="card_ic_menu_expander" format="reference" />
+
+    <declare-styleable name="squareRelativeLayout">
+        <attr name="square_relative_horizontally" format="boolean" />
+    </declare-styleable>
 
 </resources>
