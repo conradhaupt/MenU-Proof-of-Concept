@@ -1,9 +1,6 @@
 package com.conradhaupt.MenU.views;
 
-import com.conradhaupt.MenU.R;
-
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
@@ -38,19 +35,19 @@ public class SquareRelativeLayout extends RelativeLayout
 			int defStyle)
 	{
 		super(context, attrs, defStyle);
-//		TypedArray a = context.obtainStyledAttributes(attrs,
-//				R.styleable.squareRelativeLayout);
-//		final int N = a.getIndexCount();
-//		for (int i = 0; i < N; i++)
-//		{
-//			int attr = a.getIndex(i);
-//			switch (attr)
-//			{
-//			case R.styleable.squareRelativeLayout_square_relative_horizontally:
-//				this.squareBasedHorizontal = a.getBoolean(attr, false);
-//				break;
-//			}
-//		}
+		// TypedArray a = context.obtainStyledAttributes(attrs,
+		// R.styleable.squareRelativeLayout);
+		// final int N = a.getIndexCount();
+		// for (int i = 0; i < N; i++)
+		// {
+		// int attr = a.getIndex(i);
+		// switch (attr)
+		// {
+		// case R.styleable.squareRelativeLayout_square_relative_horizontally:
+		// this.squareBasedHorizontal = a.getBoolean(attr, false);
+		// break;
+		// }
+		// }
 	}
 
 	public boolean isSquareBasedHorizontal()

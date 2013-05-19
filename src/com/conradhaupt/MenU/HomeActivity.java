@@ -1,27 +1,20 @@
 package com.conradhaupt.MenU;
 
+import com.conradhaupt.MenU.R;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ProgressBar;
 
-import com.github.espiandev.showcaseview.ShowcaseView;
-import com.slidingmenu.lib.SlidingMenu;
-import com.slidingmenu.lib.app.SlidingFragmentActivity;
-
-public class HomeActivity extends SlidingFragmentActivity implements
-		OnClickListener
+public class HomeActivity extends FragmentActivity implements OnClickListener
 {
-	private int firstFragmentID;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -50,38 +43,36 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		setContentView(R.layout.activity_home);
 
 		// This code assigns the sliding menu parameters
-		SlidingMenu slide = this.getSlidingMenu();
 		if (!pref.getBoolean("smallslidingmenu_checkbox", false))
 		{
-			slide.setBehindOffsetRes(R.dimen.menu_ic_logomenusize);
-			setBehindContentView(R.layout.sliding_menu);
+			// slide.setBehindOffsetRes(R.dimen.menu_ic_logomenusize);
+			// setBehindContentView(R.layout.sliding_menu);
 		} else
 		{
-			setBehindContentView(R.layout.sliding_menu_small);
-			slide.setBehindOffset((int) ((this.getResources()
-					.getDisplayMetrics().widthPixels) - (64 * this
-					.getResources().getDisplayMetrics().density)));
+			// setBehindContentView(R.layout.sliding_menu_small);
+			// slide.setBehindOffset((int) ((this.getResources()
+			// .getDisplayMetrics().widthPixels) - (64 * this
+			// .getResources().getDisplayMetrics().density)));
 		}
-		slide.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		slide.setShadowWidthRes(R.dimen.menusliding_shadow_width);
+		// slide.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		// slide.setShadowWidthRes(R.dimen.menusliding_shadow_width);
 
 		// This code assigns the current fragment
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.add(R.id.fragment_frame, new HomeFragment(), "HomeFragment");
-		firstFragmentID = ft.commit();
 
 		// This code assigns the onClickListener to all views requiring it
-		int[] viewIDs = { R.id.slidingmenu_home_button,
-				R.id.slidingmenu_about_button,
-				R.id.slidingmenu_featured_button,
-				R.id.slidingmenu_information_panel,
-				R.id.slidingmenu_restaurant_button,
-				R.id.slidingmenu_setting_button,
-				R.id.slidingmenu_account_button };
-		for (int i = 0; i < viewIDs.length; i++)
-		{
-			(findViewById(viewIDs[i])).setOnClickListener(this);
-		}
+		// int[] viewIDs = { R.id.slidingmenu_home_button,
+		// R.id.slidingmenu_about_button,
+		// R.id.slidingmenu_featured_button,
+		// R.id.slidingmenu_information_panel,
+		// R.id.slidingmenu_restaurant_button,
+		// R.id.slidingmenu_setting_button,
+		// R.id.slidingmenu_account_button };
+		// for (int i = 0; i < viewIDs.length; i++)
+		// {
+		// (findViewById(viewIDs[i])).setOnClickListener(this);
+		// }
 	}
 
 	@Override
@@ -89,25 +80,25 @@ public class HomeActivity extends SlidingFragmentActivity implements
 	{
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		SlidingMenu slide = this.getSlidingMenu();
+		// SlidingMenu slide = this.getSlidingMenu();
 		switch (Integer.parseInt(pref.getString(
 				"slidingmenuside_listpreference", "-1")))
 		{
 		case 0:
 			System.out.println("Setting slide menu to slide from the left.");
-			slide.setMode(SlidingMenu.LEFT);
-			slide.setShadowDrawable(R.drawable.menusliding_shadow_left);
+			// slide.setMode(SlidingMenu.LEFT);
+			// slide.setShadowDrawable(R.drawable.menusliding_shadow_left);
 			break;
 		case 1:
 			System.out.println("Setting slide menu to slide from the right.");
-			slide.setMode(SlidingMenu.RIGHT);
-			slide.setShadowDrawable(R.drawable.menusliding_shadow_right);
+			// slide.setMode(SlidingMenu.RIGHT);
+			// slide.setShadowDrawable(R.drawable.menusliding_shadow_right);
 			break;
 		default:
 			System.out
 					.println("Setting slide menu to slide from the left as no setting has been defined.");
-			slide.setMode(SlidingMenu.LEFT);
-			slide.setShadowDrawable(R.drawable.menusliding_shadow_left);
+			// slide.setMode(SlidingMenu.LEFT);
+			// slide.setShadowDrawable(R.drawable.menusliding_shadow_left);
 			break;
 
 		}
@@ -144,16 +135,10 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		switch (item.getItemId())
 		{
 		case android.R.id.home:
-			getSlidingMenu().showMenu();
+			// getSlidingMenu().showMenu();
 			break;
 		case R.id.menu_dropdown:
-			ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
-			co.hideOnClickOutside = true;
-			ShowcaseView.insertShowcaseView(
-					this.findViewById(R.id.slidingmenu_home_button), this,
-					"THIS IS A BUTTON!", "press it... I know you want to...",
-					co);
-			getSlidingMenu().showMenu();
+			// getSlidingMenu().showMenu();
 			break;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -194,7 +179,7 @@ public class HomeActivity extends SlidingFragmentActivity implements
 
 			}
 		}
-		this.getSlidingMenu().showContent();
+		// this.getSlidingMenu().showContent();
 		System.out.println("Home has been pressed.");
 	}
 
@@ -210,7 +195,7 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		// this.instantiateFragment(new RestaurantBrowserFragment(), true, true,
 		// "RestaurantFragment", R.anim.fragment_change_enter,
 		// R.anim.fragment_change_exit, null);
-		this.getSlidingMenu().showContent();
+		// this.getSlidingMenu().showContent();
 		System.out.println("Restaurant has been pressed.");
 	}
 
@@ -219,14 +204,14 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		this.instantiateFragment(new AccountFragment(), true, true,
 				"AccountFragment", R.anim.fragment_change_enter,
 				R.anim.fragment_change_exit, null);
-		this.getSlidingMenu().showContent();
+		// this.getSlidingMenu().showContent();
 		System.out.println("Account has been pressed.");
 	}
 
 	public void onSettingsMenuClicked(View v)
 	{
 		System.out.println("Settings has been pressed");
-		getSlidingMenu().showContent();
+		// getSlidingMenu().showContent();
 		Intent intent = new Intent(this, SettingsActivity.class);
 		startActivity(intent);
 	}
@@ -236,14 +221,14 @@ public class HomeActivity extends SlidingFragmentActivity implements
 		this.instantiateFragment(new AboutFragment(), true, true,
 				"AboutFragment", R.anim.fragment_change_enter,
 				R.anim.fragment_change_exit, null);
-		this.getSlidingMenu().showContent();
+		// this.getSlidingMenu().showContent();
 		System.out.println("About has been pressed.");
 	}
 
 	public void onInformationClicked(View view)
 	{
 		System.out.println("Information panel has been pressed");
-		getSlidingMenu().showContent();
+		// getSlidingMenu().showContent();
 		AboutDialogFragment aboutDialogFragment = new AboutDialogFragment();
 		aboutDialogFragment.show(this.getSupportFragmentManager(),
 				"AboutDialog");

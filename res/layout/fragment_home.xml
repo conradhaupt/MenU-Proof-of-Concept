@@ -21,21 +21,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true" />
         </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/home_layout"
-            android:layout_width="match_parent"
-            android:layout_height="521dp"
-            android:background="#456789"
-            android:orientation="vertical" >
-
-            <com.fima.cardsui.views.CardUI
-                android:id="@+id/cardUI1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-            </com.fima.cardsui.views.CardUI>
-
-        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

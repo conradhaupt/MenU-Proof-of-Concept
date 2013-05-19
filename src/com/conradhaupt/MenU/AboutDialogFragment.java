@@ -1,5 +1,6 @@
 package com.conradhaupt.MenU;
 
+import com.conradhaupt.MenU.R;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -42,8 +43,8 @@ public class AboutDialogFragment extends DialogFragment implements
 				R.id.aboutMenU_dialog_license,
 				R.id.aboutMenU_dialog_termsandconditions,
 				R.id.aboutMenU_dialog_slidingmenulicense,
-				R.id.aboutMenU_dialog_appmsgcroutonlicense ,
-				R.id.aboutMenU_dialog_showcaseviewlicense};
+				R.id.aboutMenU_dialog_appmsgcroutonlicense,
+				R.id.aboutMenU_dialog_showcaseviewlicense };
 		for (int i = 0; i < options.length; i++)
 		{
 			this.getDialog().findViewById(options[i])
@@ -58,7 +59,9 @@ public class AboutDialogFragment extends DialogFragment implements
 		switch (v.getId())
 		{
 		case R.id.aboutMenU_dialog_website:
-			Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(this.getResources().getString(R.string.aboutMenU_dialog_website_link)));
+			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(this
+					.getResources().getString(
+							R.string.aboutMenU_dialog_website_link)));
 			this.startActivity(intent);
 			System.out.println("Navigating to app website!");
 			break;

@@ -1,5 +1,7 @@
 package com.conradhaupt.MenU;
 
+
+import com.conradhaupt.MenU.R;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
