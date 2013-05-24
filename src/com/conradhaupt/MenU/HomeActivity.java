@@ -59,7 +59,8 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 
 		// This code assigns the current fragment
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.add(R.id.fragment_frame, new HomeFragment(), "HomeFragment");
+		ft.add(R.id.activity_home_fragment_frame, new HomeFragment(),
+				"HomeFragment");
 
 		// This code assigns the onClickListener to all views requiring it
 		// int[] viewIDs = { R.id.slidingmenu_home_button,
@@ -338,7 +339,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		ft.setCustomAnimations(introAnimation, outroAnimation, outroAnimation,
 				introAnimation);
 		newFragment.setArguments(arguments);
-		ft.replace(R.id.fragment_frame, newFragment);
+		ft.replace(R.id.activity_home_fragment_frame, newFragment);
 		if (addToBackStack)
 		{
 			ft.addToBackStack(tag);
