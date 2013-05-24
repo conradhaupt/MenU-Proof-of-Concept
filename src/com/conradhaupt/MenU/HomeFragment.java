@@ -26,7 +26,6 @@ public class HomeFragment extends Fragment
 
 	public void onResume()
 	{
-		System.out.println("Added card!");
 		super.onResume();
 	}
 

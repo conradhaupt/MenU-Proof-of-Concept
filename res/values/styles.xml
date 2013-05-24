@@ -31,6 +31,8 @@
         <item name="slidingmenu_ic_action_copyright">@drawable/ic_action_copyright_holo_dark</item>
         <item name="android:windowBackground">@color/activity_background</item>
         <item name="android:colorBackground">@color/activity_background</item>
+        <item name="ic_drawer">@drawable/ic_drawer_holo_light_darkactionbar</item>
+        <item name="ic_action_refresh">@drawable/ic_action_refresh_holo_light_darkactionbar</item>
     </style>
 
     <style name="holo_light" parent="@android:style/Theme.Holo.Light">
@@ -55,6 +57,8 @@
         <item name="slidingmenu_ic_action_copyright">@drawable/ic_action_copyright_holo_light</item>
         <item name="android:windowBackground">@color/activity_background</item>
         <item name="android:colorBackground">@color/activity_background</item>
+        <item name="ic_drawer">@drawable/ic_drawer_holo_light</item>
+        <item name="ic_action_refresh">@drawable/ic_action_refresh_holo_light</item>
     </style>
 
     <style name="LoginFormContainer">

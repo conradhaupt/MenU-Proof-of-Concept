@@ -62,4 +62,8 @@ limitations under the License.</string>
     <string name="home_nearby_title">Nearby</string>
     <string name="login_cancel">Cancel</string>
     <string name="login_login">Login</string>
+    <string name="activity_home_drawer_open">Open drawer</string>
+    <string name="activity_home_drawer_close">Close drawer</string>
+    <string name="activity_home_drawer_title_closed">MenU</string>
+    <string name="activity_home_drawer_title_open">Navigation</string>
 </resources>

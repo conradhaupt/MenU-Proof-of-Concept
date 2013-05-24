@@ -3,12 +3,16 @@ package com.conradhaupt.MenU;
 import com.conradhaupt.MenU.R;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +22,12 @@ import android.widget.RelativeLayout;
 
 public class HomeActivity extends FragmentActivity implements OnClickListener
 {
+
+	private DrawerLayout mDrawer;
+	private RelativeLayout mDrawerView;
+	private ActionBarDrawerToggle mDrawerToggle;
+	private CharSequence mDrawerTitle;
+	private CharSequence mTitle;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -45,77 +55,128 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		getActionBar().setHomeButtonEnabled(true);
 		setContentView(R.layout.activity_home);
 
-		// This code assigns the sliding menu parameters
-		RelativeLayout drawer = (RelativeLayout) this
+		// This instantiates the drawer variables
+		mDrawerView = (RelativeLayout) this
 				.findViewById(R.id.activity_home_navigation_drawer);
+		mDrawer = (DrawerLayout) this.findViewById(R.id.activity_home_drawer);
+
+		// This assigns the sliding drawer shadow
+		mDrawer.setDrawerShadow(R.drawable.activity_home_drawer_shadow,
+				Gravity.LEFT);
+		mDrawer.setDrawerShadow(R.drawable.activity_home_drawer_shadow,
+				Gravity.RIGHT);
+
+		// This code assigns the sliding menu parameters
 		if (!pref.getBoolean("smallslidingmenu_checkbox", false))
 		{
-			LayoutParams param = (LayoutParams) drawer.getLayoutParams();
+			LayoutParams param = (LayoutParams) mDrawerView.getLayoutParams();
 			param.width = (int) this.getResources().getDimension(
 					R.dimen.activity_home_drawer_width_large);
-			drawer.setLayoutParams(param);
+			mDrawerView.setLayoutParams(param);
 			View menu = this.getLayoutInflater().inflate(R.layout.sliding_menu,
 					null);
-			drawer.addView(menu);
+			mDrawerView.addView(menu);
 		} else
 		{
-			LayoutParams param = (LayoutParams) drawer.getLayoutParams();
+			LayoutParams param = (LayoutParams) mDrawerView.getLayoutParams();
 			param.width = (int) this.getResources().getDimension(
 					R.dimen.activity_home_drawer_width_small);
-			drawer.setLayoutParams(param);
+			mDrawerView.setLayoutParams(param);
 			View menu = this.getLayoutInflater().inflate(
 					R.layout.sliding_menu_small, null);
-			drawer.addView(menu);
+			mDrawerView.addView(menu);
 		}
-
-		// This code assigns the current fragment
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.add(R.id.activity_home_fragment_frame, new HomeFragment(),
-				"HomeFragment");
 
 		// This code assigns the onClickListener to all views requiring it
 		int[] viewIDs = { R.id.slidingmenu_home_button,
 				R.id.slidingmenu_about_button,
 				R.id.slidingmenu_featured_button,
 				R.id.slidingmenu_information_panel,
-				R.id.slidingmenu_restaurant_button,
 				R.id.slidingmenu_setting_button,
 				R.id.slidingmenu_account_button };
 		for (int i = 0; i < viewIDs.length; i++)
 		{
 			(findViewById(viewIDs[i])).setOnClickListener(this);
 		}
+
+		// This code changes the actionbar to the drawer specific version
+		mTitle = this.getResources().getString(
+				R.string.activity_home_drawer_title_closed);
+		mDrawerTitle = this.getResources().getString(
+				R.string.activity_home_drawer_title_open);
+		TypedValue typedValue = new TypedValue();
+		getTheme().resolveAttribute(R.attr.ic_drawer, typedValue, true);
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer,
+				typedValue.resourceId, R.string.activity_home_drawer_open,
+				R.string.activity_home_drawer_close)
+		{
+
+			/** Called when a drawer has settled in a completely closed state. */
+			public void onDrawerClosed(View view)
+			{
+				getActionBar().setTitle(mTitle);
+				invalidateOptionsMenu(); // creates call to
+				// onPrepareOptionsMenu()
+			}
+
+			/** Called when a drawer has settled in a completely open state. */
+			public void onDrawerOpened(View drawerView)
+			{
+				getActionBar().setTitle(mDrawerTitle);
+				invalidateOptionsMenu(); // creates call to
+				// onPrepareOptionsMenu()
+			}
+		};
+		mDrawer.setDrawerListener(mDrawerToggle);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setHomeButtonEnabled(true);
 	}
 
 	@Override
 	public void onResume()
 	{
+		// This code assigns the current fragment
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		DrawerLayout menu = (DrawerLayout) this
-				.findViewById(R.id.activity_home_drawer);
-		switch (Integer.parseInt(pref.getString(
-				"slidingmenuside_listpreference", "-1")))
-		{
-		case 0:
-			System.out.println("Setting slide menu to slide from the left.");
-			// slide.setMode(SlidingMenu.LEFT);
-			// slide.setShadowDrawable(R.drawable.menusliding_shadow_left);
-			break;
-		case 1:
-			System.out.println("Setting slide menu to slide from the right.");
-			// slide.setMode(SlidingMenu.RIGHT);
-			// slide.setShadowDrawable(R.drawable.menusliding_shadow_right);
-			break;
-		default:
-			System.out
-					.println("Setting slide menu to slide from the left as no setting has been defined.");
-			// slide.setMode(SlidingMenu.LEFT);
-			// slide.setShadowDrawable(R.drawable.menusliding_shadow_left);
-			break;
-
-		}
+		boolean isAncestral = false;
+		isAncestral = pref.getBoolean("homenewinstance_switch", false);
+		this.instantiateFragment(new HomeFragment(), false, isAncestral,
+				"HomeFragment", android.R.anim.fade_in,
+				android.R.anim.fade_out, null);
+		// switch (Integer.parseInt(pref.getString(
+		// "slidingmenuside_listpreference", "-1")))
+		// {
+		// case 0:
+		// System.out.println("Setting slide menu to slide from the left.");
+		// mDrawerView.setGravity(Gravity.LEFT);
+		// break;
+		// case 1:
+		// System.out.println("Setting slide menu to slide from the right.");
+		// mDrawerView.setGravity(Gravity.RIGHT);
+		// break;
+		// default:
+		// System.out
+		// .println("Setting slide menu to slide from the left as no setting has been defined.");
+		// mDrawerView.setGravity(Gravity.LEFT);
+		// break;
+		//
+		// }
 		super.onResume();
+	}
+
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState)
+	{
+		super.onPostCreate(savedInstanceState);
+		// Sync the toggle state after onRestoreInstanceState has occurred.
+		mDrawerToggle.syncState();
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig)
+	{
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
 	@Override
@@ -143,15 +204,21 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 	{
 		System.out.println("Action bar button was pressed!");
 		System.out.println(item.getItemId());
+
+		// Pass the event to ActionBarDrawerToggle, if it returns
+		// true, then it has handled the app icon touch event
+		if (mDrawerToggle.onOptionsItemSelected(item))
+		{
+			return true;
+		}
+
+		// Handle your other action bar items...
 		FragmentTransaction ft = this.getSupportFragmentManager()
 				.beginTransaction();
 		switch (item.getItemId())
 		{
-		case android.R.id.home:
-			// getSlidingMenu().showMenu();
-			break;
 		case R.id.menu_dropdown:
-			// getSlidingMenu().showMenu();
+			mDrawer.openDrawer(Gravity.LEFT);
 			break;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -179,7 +246,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 						R.anim.fragment_change_exit, null);
 			}
 		} else
-		{
+		{			
 			try
 			{
 				this.getSupportFragmentManager()
@@ -192,7 +259,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 
 			}
 		}
-		// this.getSlidingMenu().showContent();
+		mDrawer.closeDrawer(Gravity.LEFT);
 		System.out.println("Home has been pressed.");
 	}
 
@@ -200,7 +267,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 	{
 		Intent intent = new Intent(this, LoginActivity.class);
 		startActivity(intent);
-		System.out.println("Featured");
+		System.out.println("Featured has been pressed.");
 	}
 
 	public void onRestaurantsMenuClicked(View v)
@@ -208,7 +275,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		// this.instantiateFragment(new RestaurantBrowserFragment(), true, true,
 		// "RestaurantFragment", R.anim.fragment_change_enter,
 		// R.anim.fragment_change_exit, null);
-		// this.getSlidingMenu().showContent();
+		mDrawer.closeDrawer(Gravity.LEFT);
 		System.out.println("Restaurant has been pressed.");
 	}
 
@@ -217,14 +284,14 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		this.instantiateFragment(new AccountFragment(), true, true,
 				"AccountFragment", R.anim.fragment_change_enter,
 				R.anim.fragment_change_exit, null);
-		// this.getSlidingMenu().showContent();
+		mDrawer.closeDrawer(Gravity.LEFT);
 		System.out.println("Account has been pressed.");
 	}
 
 	public void onSettingsMenuClicked(View v)
 	{
 		System.out.println("Settings has been pressed");
-		// getSlidingMenu().showContent();
+		mDrawer.closeDrawer(Gravity.LEFT);
 		Intent intent = new Intent(this, SettingsActivity.class);
 		startActivity(intent);
 	}
@@ -234,14 +301,14 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		this.instantiateFragment(new AboutFragment(), true, true,
 				"AboutFragment", R.anim.fragment_change_enter,
 				R.anim.fragment_change_exit, null);
-		// this.getSlidingMenu().showContent();
+		mDrawer.closeDrawer(Gravity.LEFT);
 		System.out.println("About has been pressed.");
 	}
 
 	public void onInformationClicked(View view)
 	{
 		System.out.println("Information panel has been pressed");
-		// getSlidingMenu().showContent();
+		mDrawer.closeDrawer(Gravity.LEFT);
 		AboutDialogFragment aboutDialogFragment = new AboutDialogFragment();
 		aboutDialogFragment.show(this.getSupportFragmentManager(),
 				"AboutDialog");
@@ -283,6 +350,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 			boolean addToBackStack, boolean isAncestral, String tag,
 			int introAnimation, int outroAnimation, Bundle arguments)
 	{
+		System.out.println("Instantiate Fragment Run!");
 		boolean isCurrentFragment = false;
 
 		try
@@ -348,8 +416,8 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		// Since the fragment does not exist in the backstack or
 		// as the current fragment then instantiate it
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.setCustomAnimations(introAnimation, outroAnimation, outroAnimation,
-				introAnimation);
+		ft.setCustomAnimations(introAnimation, outroAnimation, introAnimation,
+				outroAnimation);
 		newFragment.setArguments(arguments);
 		ft.replace(R.id.activity_home_fragment_frame, newFragment);
 		if (addToBackStack)
