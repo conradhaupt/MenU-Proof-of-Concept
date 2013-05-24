@@ -4,23 +4,13 @@
     android:layout_height="fill_parent"
     android:background="?attr/slidingmenu_background" >
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:background="?attr/slidingmenu_actionbarBackground" >
-    </RelativeLayout>
-
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/relativeLayout1" >
+        android:layout_alignParentTop="true" >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -30,7 +20,7 @@
             <RelativeLayout
                 android:id="@+id/slidingmenu_home_button"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="@dimen/activity_home_drawer_element_height"
                 android:background="@drawable/slidingmenu_home_background"
                 android:clickable="true"
                 android:onClick="onHomeMenuClicked" >
@@ -65,7 +55,7 @@
             <RelativeLayout
                 android:id="@+id/slidingmenu_featured_button"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="@dimen/activity_home_drawer_element_height"
                 android:background="@drawable/slidingmenu_featured_background"
                 android:clickable="true"
                 android:onClick="onFeaturedMenuClicked" >
@@ -96,7 +86,7 @@
             <RelativeLayout
                 android:id="@+id/slidingmenu_restaurant_button"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="@dimen/activity_home_drawer_element_height"
                 android:background="@drawable/slidingmenu_restaurants_background"
                 android:clickable="true"
                 android:onClick="onRestaurantsMenuClicked" >
@@ -127,7 +117,7 @@
             <RelativeLayout
                 android:id="@+id/slidingmenu_account_button"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="@dimen/activity_home_drawer_element_height"
                 android:background="@drawable/slidingmenu_accounts_background"
                 android:clickable="true"
                 android:onClick="onAccountsMenuClicked" >
@@ -158,7 +148,7 @@
             <RelativeLayout
                 android:id="@+id/slidingmenu_setting_button"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="@dimen/activity_home_drawer_element_height"
                 android:background="@drawable/slidingmenu_settings_background"
                 android:clickable="true"
                 android:onClick="onSettingsMenuClicked" >
@@ -188,7 +178,7 @@
             <RelativeLayout
                 android:id="@+id/slidingmenu_about_button"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
+                android:layout_height="@dimen/activity_home_drawer_element_height"
                 android:background="@drawable/slidingmenu_about_background"
                 android:clickable="true"
                 android:onClick="onAboutMenuClicked" >
@@ -219,7 +209,7 @@
             <RelativeLayout
                 android:id="@+id/slidingmenu_information_panel"
                 android:layout_width="match_parent"
-                android:layout_height="128dp"
+                android:layout_height="@dimen/activity_home_drawer_element_copyright_height"
                 android:background="?attr/slidingmenu_actionbarBackground" >
 
                 <TextView

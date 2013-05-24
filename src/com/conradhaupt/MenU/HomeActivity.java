@@ -8,10 +8,13 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.RelativeLayout;
 
 public class HomeActivity extends FragmentActivity implements OnClickListener
 {
@@ -43,19 +46,27 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		setContentView(R.layout.activity_home);
 
 		// This code assigns the sliding menu parameters
+		RelativeLayout drawer = (RelativeLayout) this
+				.findViewById(R.id.activity_home_navigation_drawer);
 		if (!pref.getBoolean("smallslidingmenu_checkbox", false))
 		{
-			// slide.setBehindOffsetRes(R.dimen.menu_ic_logomenusize);
-			// setBehindContentView(R.layout.sliding_menu);
+			LayoutParams param = (LayoutParams) drawer.getLayoutParams();
+			param.width = (int) this.getResources().getDimension(
+					R.dimen.activity_home_drawer_width_large);
+			drawer.setLayoutParams(param);
+			View menu = this.getLayoutInflater().inflate(R.layout.sliding_menu,
+					null);
+			drawer.addView(menu);
 		} else
 		{
-			// setBehindContentView(R.layout.sliding_menu_small);
-			// slide.setBehindOffset((int) ((this.getResources()
-			// .getDisplayMetrics().widthPixels) - (64 * this
-			// .getResources().getDisplayMetrics().density)));
+			LayoutParams param = (LayoutParams) drawer.getLayoutParams();
+			param.width = (int) this.getResources().getDimension(
+					R.dimen.activity_home_drawer_width_small);
+			drawer.setLayoutParams(param);
+			View menu = this.getLayoutInflater().inflate(
+					R.layout.sliding_menu_small, null);
+			drawer.addView(menu);
 		}
-		// slide.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		// slide.setShadowWidthRes(R.dimen.menusliding_shadow_width);
 
 		// This code assigns the current fragment
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -63,17 +74,17 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 				"HomeFragment");
 
 		// This code assigns the onClickListener to all views requiring it
-		// int[] viewIDs = { R.id.slidingmenu_home_button,
-		// R.id.slidingmenu_about_button,
-		// R.id.slidingmenu_featured_button,
-		// R.id.slidingmenu_information_panel,
-		// R.id.slidingmenu_restaurant_button,
-		// R.id.slidingmenu_setting_button,
-		// R.id.slidingmenu_account_button };
-		// for (int i = 0; i < viewIDs.length; i++)
-		// {
-		// (findViewById(viewIDs[i])).setOnClickListener(this);
-		// }
+		int[] viewIDs = { R.id.slidingmenu_home_button,
+				R.id.slidingmenu_about_button,
+				R.id.slidingmenu_featured_button,
+				R.id.slidingmenu_information_panel,
+				R.id.slidingmenu_restaurant_button,
+				R.id.slidingmenu_setting_button,
+				R.id.slidingmenu_account_button };
+		for (int i = 0; i < viewIDs.length; i++)
+		{
+			(findViewById(viewIDs[i])).setOnClickListener(this);
+		}
 	}
 
 	@Override
@@ -81,7 +92,8 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 	{
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		// SlidingMenu slide = this.getSlidingMenu();
+		DrawerLayout menu = (DrawerLayout) this
+				.findViewById(R.id.activity_home_drawer);
 		switch (Integer.parseInt(pref.getString(
 				"slidingmenuside_listpreference", "-1")))
 		{
