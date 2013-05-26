@@ -190,7 +190,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="8dp"
-                    android:src="@drawable/ic_action_about_holo_dark" />
+                    android:src="@drawable/ic_action_about_holo_light" />
 
                 <TextView
                     android:id="@+id/textView6"
@@ -203,14 +203,14 @@
                     android:gravity="center"
                     android:text="@string/slidingmenu_about"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/slidingmenu_textColor_holo_light_darkactionbar" />
+                    android:textColor="@color/slidingmenu_textColor_holo_light" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/slidingmenu_information_panel"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/activity_home_drawer_element_copyright_height"
-                android:background="?attr/slidingmenu_actionbarBackground" >
+                android:background="@drawable/slidingmenu_copyright_background" >
 
                 <TextView
                     android:id="@+id/textView7"
@@ -221,7 +221,7 @@
                     android:layout_margin="32dp"
                     android:text="@string/slidingmenu_info_title"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="?attr/slidingmenu_textColor_secondary" />
+                    android:textColor="@color/slidingmenu_textColor_holo_light" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -232,7 +232,7 @@
                     android:layout_margin="32dp"
                     android:text="@string/slidingmenu_info_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="?attr/slidingmenu_textColor_secondary" />
+                    android:textColor="@color/slidingmenu_textColor_holo_light" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

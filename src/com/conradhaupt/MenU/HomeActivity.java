@@ -64,7 +64,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		mDrawer.setDrawerShadow(R.drawable.activity_home_drawer_shadow,
 				Gravity.LEFT);
 		mDrawer.setDrawerShadow(R.drawable.activity_home_drawer_shadow,
-				Gravity.RIGHT);
+				Gravity.RIGHT);		
 
 		// This code assigns the sliding menu parameters
 		if (!pref.getBoolean("smallslidingmenu_checkbox", false))
@@ -246,7 +246,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 						R.anim.fragment_change_exit, null);
 			}
 		} else
-		{			
+		{
 			try
 			{
 				this.getSupportFragmentManager()
