@@ -54,6 +54,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.conradhaupt.MenU.HomeActivity" />
         </activity>
+
+        <service android:name=".MenUService" />
     </application>
 
 </manifest>
