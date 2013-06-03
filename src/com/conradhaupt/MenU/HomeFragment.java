@@ -1,8 +1,7 @@
 package com.conradhaupt.MenU;
 
-import com.conradhaupt.MenU.R;
-
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,9 +10,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
-import android.widget.TextView;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class HomeFragment extends Fragment implements OnClickListener
 {
@@ -28,6 +30,22 @@ public class HomeFragment extends Fragment implements OnClickListener
 		// Inflate the layout for this fragment
 		setHasOptionsMenu(true);
 		return inflater.inflate(R.layout.fragment_home, container, false);
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState)
+	{
+		super.onActivityCreated(savedInstanceState);
+
+		// Instantiate the listview
+		ListView listView = (ListView) this.getActivity().findViewById(
+				R.id.home_fragment_listview);
+		String[] values = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "K",
+				"L" };
+		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+				getActivity(), android.R.layout.simple_list_item_1, values);
+		listView.setAdapter(arrayAdapter);
+		System.out.println();
 	}
 
 	public void onResume()
@@ -67,44 +85,44 @@ public class HomeFragment extends Fragment implements OnClickListener
 	}
 
 	public class HomeFragmentLoader extends
-			AsyncTask<Activity, Integer, Integer>
+			AsyncTask<Activity, Activity, Activity>
 	{
 
 		private Activity activity;
 
 		@Override
-		protected Integer doInBackground(Activity... params)
+		protected Activity doInBackground(Activity... params)
 		{
-			this.activity = params[0];
-			while (!isCancelled())
-			{
-				System.out.println("Not cancelled!");
-			}
-			return null;
+			System.out.println("doInBackground run");
+			return params[0];
 		}
 
 		@Override
-		protected void onProgressUpdate(Integer... values)
+		protected void onProgressUpdate(Activity... values)
 		{
 			super.onProgressUpdate(values);
 		}
 
 		@Override
-		protected void onPostExecute(Integer result)
+		protected void onPostExecute(Activity result)
 		{
+			// If the asyntask has finished successfully then run this code
 			System.out.println("onProgressUpdate run");
-			// TextView textView = (TextView) HomeFragment.this.getActivity()
-			// .findViewById(R.id.textView1);
-			// textView.setText("HELLO THERE!");
+			// Instantiate the listview
+			ListView listView = (ListView) result
+					.findViewById(R.id.home_fragment_listview);
+			final String[] values = { "A", "B", "C", "D", "E", "F", "G", "H",
+					"I", "K", "L", "M", "N", "O" };
+			final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+					getActivity(), android.R.layout.simple_list_item_1, values);
+			listView.setAdapter(arrayAdapter);
 			super.onPostExecute(result);
 		}
 
 		@Override
 		protected void onCancelled()
 		{
-			TextView textView = (TextView) activity
-					.findViewById(R.id.textView1);
-			textView.setText("HELLO THERE!");
+			// If the asynctask is cancelled run this code
 			System.out.println("Canceled");
 		}
 
