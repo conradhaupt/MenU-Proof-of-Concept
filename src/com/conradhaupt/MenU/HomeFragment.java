@@ -1,7 +1,6 @@
 package com.conradhaupt.MenU;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,10 +16,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.conradhaupt.MenU.objects.Card;
+import com.conradhaupt.MenU.views.ListViewCardAdapter;
+
 public class HomeFragment extends Fragment implements OnClickListener
 {
 
 	private HomeFragmentLoader homeFragmentLoader = null;
+	public String[] values = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,15 +39,6 @@ public class HomeFragment extends Fragment implements OnClickListener
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
 		super.onActivityCreated(savedInstanceState);
-
-		// Instantiate the listview
-		ListView listView = (ListView) this.getActivity().findViewById(
-				R.id.home_fragment_listview);
-		String[] values = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "K",
-				"L" };
-		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-				getActivity(), android.R.layout.simple_list_item_1, values);
-		listView.setAdapter(arrayAdapter);
 		System.out.println();
 	}
 
@@ -88,8 +82,6 @@ public class HomeFragment extends Fragment implements OnClickListener
 			AsyncTask<Activity, Activity, Activity>
 	{
 
-		private Activity activity;
-
 		@Override
 		protected Activity doInBackground(Activity... params)
 		{
@@ -111,11 +103,20 @@ public class HomeFragment extends Fragment implements OnClickListener
 			// Instantiate the listview
 			ListView listView = (ListView) result
 					.findViewById(R.id.home_fragment_listview);
-			final String[] values = { "A", "B", "C", "D", "E", "F", "G", "H",
-					"I", "K", "L", "M", "N", "O" };
-			final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+			final ListViewCardAdapter adapter = new ListViewCardAdapter(
 					getActivity(), android.R.layout.simple_list_item_1, values);
-			listView.setAdapter(arrayAdapter);
+			listView.setAdapter(adapter);
+			listView.setOnItemClickListener(new OnItemClickListener()
+			{
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View v,
+						int position, long id)
+				{
+					// values[position] = "NOTHING!";
+					// arrayAdapter.notifyDataSetChanged();
+				}
+			});
 			super.onPostExecute(result);
 		}
 
