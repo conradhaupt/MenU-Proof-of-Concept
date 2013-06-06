@@ -23,10 +23,13 @@ public class ListViewCardAdapter extends ArrayAdapter<String>
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
 		View view = super.getView(position, convertView, parent);
+		// if (convertView == null)
+		// {
 		Animation animation = new AlphaAnimation(0, 1);
 		animation.setDuration(300);
 		animation.setStartOffset(40 * position);
 		view.startAnimation(animation);
+		// }
 		return view;
 	}
 }

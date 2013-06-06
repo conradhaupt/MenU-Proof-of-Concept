@@ -1,5 +1,7 @@
 package com.conradhaupt.MenU;
 
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,10 +15,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.conradhaupt.MenU.objects.Card;
 import com.conradhaupt.MenU.views.ListViewCardAdapter;
 
 public class HomeFragment extends Fragment implements OnClickListener
@@ -24,6 +24,8 @@ public class HomeFragment extends Fragment implements OnClickListener
 
 	private HomeFragmentLoader homeFragmentLoader = null;
 	public String[] values = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+	public ListView listView;
+	public ListViewCardAdapter adapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,12 +47,40 @@ public class HomeFragment extends Fragment implements OnClickListener
 	public void onResume()
 	{
 		// Assign onClickListeners to the corresponding views in this fragment
+		System.out.println("onResume run");
 		int[] itemIDs = {};
 		for (int i = 0; i < itemIDs.length; i++)
 		{
 			this.getActivity().findViewById(itemIDs[i])
 					.setOnClickListener(this);
 		}
+
+		// Execute the listview asynctask
+		if (homeFragmentLoader == null)
+		{
+			System.out.println("homeFragmentInstantiated");
+			homeFragmentLoader = (HomeFragmentLoader) new HomeFragmentLoader();
+			homeFragmentLoader.execute(this.getActivity());
+
+			// Instantiate the listview
+			listView = (ListView) this.getActivity().findViewById(
+					R.id.home_fragment_listview);
+			adapter = new ListViewCardAdapter(getActivity(),
+					android.R.layout.simple_list_item_1, values);
+			listView.setAdapter(adapter);
+			listView.setOnItemClickListener(new OnItemClickListener()
+			{
+
+				@Override
+				public void onItemClick(AdapterView<?> arg0, View v,
+						int position, long id)
+				{
+					values[position] = "NOTHING!";
+					adapter.notifyDataSetChanged();
+				}
+			});
+		}
+
 		super.onResume();
 	}
 
@@ -67,10 +97,16 @@ public class HomeFragment extends Fragment implements OnClickListener
 		case R.id.fragment_home_refresh:
 			System.out
 					.println("Refreshing home fragment, starting up a new HomeFragmentLoader");
-			// Assign the temporary variable the value of the new object and
-			// execute
-			homeFragmentLoader = (HomeFragmentLoader) new HomeFragmentLoader();
-			homeFragmentLoader.execute(this.getActivity());
+			String[] newArray = new String[values.length + 1];
+			for (int i = 0; i < values.length; i++)
+			{
+				newArray[i] = values[i];
+			}
+			newArray[newArray.length - 1] = "Q";
+			System.out.println(Arrays.toString(values));
+			System.out.println(Arrays.toString(newArray));
+			values = newArray;
+			adapter.notifyDataSetChanged();
 			break;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -100,23 +136,6 @@ public class HomeFragment extends Fragment implements OnClickListener
 		{
 			// If the asyntask has finished successfully then run this code
 			System.out.println("onProgressUpdate run");
-			// Instantiate the listview
-			ListView listView = (ListView) result
-					.findViewById(R.id.home_fragment_listview);
-			final ListViewCardAdapter adapter = new ListViewCardAdapter(
-					getActivity(), android.R.layout.simple_list_item_1, values);
-			listView.setAdapter(adapter);
-			listView.setOnItemClickListener(new OnItemClickListener()
-			{
-
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View v,
-						int position, long id)
-				{
-					// values[position] = "NOTHING!";
-					// arrayAdapter.notifyDataSetChanged();
-				}
-			});
 			super.onPostExecute(result);
 		}
 
