@@ -1,6 +1,8 @@
 package com.conradhaupt.MenU;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -23,7 +25,8 @@ public class HomeFragment extends Fragment implements OnClickListener
 {
 
 	private HomeFragmentLoader homeFragmentLoader = null;
-	public String[] values = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J" };
+	public List<String> values = new LinkedList<String>(Arrays.asList("A", "B",
+			"C", "D", "E", "F"));
 	public ListView listView;
 	public ListViewCardAdapter adapter;
 
@@ -66,7 +69,7 @@ public class HomeFragment extends Fragment implements OnClickListener
 			listView = (ListView) this.getActivity().findViewById(
 					R.id.home_fragment_listview);
 			adapter = new ListViewCardAdapter(getActivity(),
-					android.R.layout.simple_list_item_1, values);
+					android.R.layout.simple_list_item_checked, values);
 			listView.setAdapter(adapter);
 			listView.setOnItemClickListener(new OnItemClickListener()
 			{
@@ -75,7 +78,7 @@ public class HomeFragment extends Fragment implements OnClickListener
 				public void onItemClick(AdapterView<?> arg0, View v,
 						int position, long id)
 				{
-					values[position] = "NOTHING!";
+					values.remove(position);
 					adapter.notifyDataSetChanged();
 				}
 			});
@@ -97,15 +100,7 @@ public class HomeFragment extends Fragment implements OnClickListener
 		case R.id.fragment_home_refresh:
 			System.out
 					.println("Refreshing home fragment, starting up a new HomeFragmentLoader");
-			String[] newArray = new String[values.length + 1];
-			for (int i = 0; i < values.length; i++)
-			{
-				newArray[i] = values[i];
-			}
-			newArray[newArray.length - 1] = "Q";
-			System.out.println(Arrays.toString(values));
-			System.out.println(Arrays.toString(newArray));
-			values = newArray;
+			values.add("Q");
 			adapter.notifyDataSetChanged();
 			break;
 		default:
