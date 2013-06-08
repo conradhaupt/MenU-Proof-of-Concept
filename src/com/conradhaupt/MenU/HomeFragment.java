@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -29,6 +33,8 @@ public class HomeFragment extends Fragment implements OnClickListener
 			"C", "D", "E", "F"));
 	public ListView listView;
 	public ListViewCardAdapter adapter;
+	public int card_animation_duration;
+	public int card_animation_delay;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +43,10 @@ public class HomeFragment extends Fragment implements OnClickListener
 		System.out.println("Home fragment created!");
 		// Inflate the layout for this fragment
 		setHasOptionsMenu(true);
+		card_animation_duration = this.getResources().getInteger(
+				R.integer.fragment_home_card_remove_anim_duration);
+		card_animation_delay = this.getResources().getInteger(
+				R.integer.fragment_home_card_remove_anim_delay);
 		return inflater.inflate(R.layout.fragment_home, container, false);
 	}
 
@@ -68,7 +78,7 @@ public class HomeFragment extends Fragment implements OnClickListener
 			// Instantiate the listview
 			listView = (ListView) this.getActivity().findViewById(
 					R.id.home_fragment_listview);
-			adapter = new ListViewCardAdapter(getActivity(),
+			adapter = new ListViewCardAdapter(this.getActivity(),
 					android.R.layout.simple_list_item_checked, values);
 			listView.setAdapter(adapter);
 			listView.setOnItemClickListener(new OnItemClickListener()
@@ -78,8 +88,35 @@ public class HomeFragment extends Fragment implements OnClickListener
 				public void onItemClick(AdapterView<?> arg0, View v,
 						int position, long id)
 				{
-					values.remove(position);
-					adapter.notifyDataSetChanged();
+					Animation animation = AnimationUtils.loadAnimation(
+							HomeFragment.this.getActivity(), R.anim.card_remove);
+					animation.setDuration(card_animation_duration);
+					animation.setStartOffset(position * card_animation_delay);
+					final int position2 = position;
+					animation.setAnimationListener(new AnimationListener()
+					{
+						@Override
+						public void onAnimationStart(Animation animation)
+						{
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onAnimationRepeat(Animation animation)
+						{
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onAnimationEnd(Animation animation)
+						{
+							values.remove(position2);
+							adapter.notifyDataSetChanged();
+						}
+					});
+					v.startAnimation(animation);
 				}
 			});
 		}
