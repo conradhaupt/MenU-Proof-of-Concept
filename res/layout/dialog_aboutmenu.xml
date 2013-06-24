@@ -72,7 +72,7 @@
             android:clickable="true" >
 
             <RelativeLayout
-                android:id="@+id/relativeLayout1"
+                android:id="@+id/fragment_account_header"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_alignParentBottom="true"
@@ -87,7 +87,7 @@
                 android:id="@+id/card_featured_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/relativeLayout1"
+                android:layout_alignLeft="@+id/fragment_account_header"
                 android:layout_centerVertical="true"
                 android:text="@string/aboutMenU_dialog_license"
                 android:textAppearance="?android:attr/textAppearanceMedium"

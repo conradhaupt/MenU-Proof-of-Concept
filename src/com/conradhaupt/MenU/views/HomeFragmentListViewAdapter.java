@@ -14,15 +14,16 @@ import android.widget.ArrayAdapter;
 
 import com.conradhaupt.MenU.R;
 
-public class ListViewCardAdapter extends ArrayAdapter<String>
+public class HomeFragmentListViewAdapter extends ArrayAdapter<String>
 {
 
 	Context context;
 	public int card_animation_duration;
 	public int card_animation_duration_addition;
 	public int card_animation_delay;
+	List<String> objects;
 
-	public ListViewCardAdapter(Context context, int textViewResourceId,
+	public HomeFragmentListViewAdapter(Context context, int textViewResourceId,
 			List<String> objects)
 	{
 		super(context, textViewResourceId, objects);
@@ -33,6 +34,7 @@ public class ListViewCardAdapter extends ArrayAdapter<String>
 				R.integer.fragment_home_card_appear_anim_duration_addition);
 		card_animation_delay = context.getResources().getInteger(
 				R.integer.fragment_home_card_appear_anim_delay);
+		this.objects = objects;
 	}
 
 	@Override

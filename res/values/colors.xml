@@ -28,5 +28,9 @@
     <color name="aboutMenU_dialog_bar_holo_light_darkactionbar">#424242</color>
     <color name="CoffeeCafe_textColor">#ffffff</color>
     <color name="activity_background">#e5e5e5</color>
+    <color name="fragment_account_header_background_holo_light">#e5e5e5</color>
+    <color name="fragment_account_header_background_holo_light_darkactionbar">#888888</color>    
+    <color name="fragment_account_header_textColor_holo_light">#000000</color>
+    <color name="fragment_account_header_textColor_holo_light_darkactionbar">#ffffff</color>    
 
 </resources>

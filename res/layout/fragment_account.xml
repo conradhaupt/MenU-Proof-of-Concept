@@ -4,4 +4,76 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <RelativeLayout
+        android:id="@+id/fragment_account_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="?attr/fragment_account_header_background"
+        android:padding="15dp" >
+
+        <TextView
+            android:id="@+id/fragment_account_header_info_primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/fragment_account_profilepicture"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/fragment_account_profilepicture"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="?attr/fragment_account_header_textColor" />
+
+        <QuickContactBadge
+            android:id="@+id/fragment_account_profilepicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_contact_picture" />
+
+        <TextView
+            android:id="@+id/fragment_account_header_info_secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/fragment_account_profilepicture"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/fragment_account_profilepicture"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="?attr/fragment_account_header_textColor" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fragment_account_header_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/fragment_account_header_bar_height"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/fragment_account_header"
+        android:background="?attr/fragment_account_header_bar_background" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="Small Text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?attr/fragment_account_header_textColor" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/SUBMITMEBITCH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_account_header_bar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:text="Button" />
+
 </RelativeLayout>

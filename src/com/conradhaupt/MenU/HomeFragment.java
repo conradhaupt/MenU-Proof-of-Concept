@@ -23,7 +23,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.conradhaupt.MenU.views.ListViewCardAdapter;
+import com.conradhaupt.MenU.views.HomeFragmentListViewAdapter;
 
 public class HomeFragment extends Fragment implements OnClickListener
 {
@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment implements OnClickListener
 	public List<String> values = new LinkedList<String>(Arrays.asList("A", "B",
 			"C", "D", "E", "F"));
 	public ListView listView;
-	public ListViewCardAdapter adapter;
+	public HomeFragmentListViewAdapter adapter;
 	public int card_animation_duration;
 	public int card_animation_delay;
 
@@ -78,7 +78,7 @@ public class HomeFragment extends Fragment implements OnClickListener
 			// Instantiate the listview
 			listView = (ListView) this.getActivity().findViewById(
 					R.id.home_fragment_listview);
-			adapter = new ListViewCardAdapter(this.getActivity(),
+			adapter = new HomeFragmentListViewAdapter(this.getActivity(),
 					android.R.layout.simple_list_item_checked, values);
 			listView.setAdapter(adapter);
 			listView.setOnItemClickListener(new OnItemClickListener()
@@ -87,36 +87,7 @@ public class HomeFragment extends Fragment implements OnClickListener
 				@Override
 				public void onItemClick(AdapterView<?> arg0, View v,
 						int position, long id)
-				{
-					Animation animation = AnimationUtils.loadAnimation(
-							HomeFragment.this.getActivity(), R.anim.card_remove);
-					animation.setDuration(card_animation_duration);
-					animation.setStartOffset(position * card_animation_delay);
-					final int position2 = position;
-					animation.setAnimationListener(new AnimationListener()
-					{
-						@Override
-						public void onAnimationStart(Animation animation)
-						{
-							// TODO Auto-generated method stub
-
-						}
-
-						@Override
-						public void onAnimationRepeat(Animation animation)
-						{
-							// TODO Auto-generated method stub
-
-						}
-
-						@Override
-						public void onAnimationEnd(Animation animation)
-						{
-							values.remove(position2);
-							adapter.notifyDataSetChanged();
-						}
-					});
-					v.startAnimation(animation);
+				{					
 				}
 			});
 		}

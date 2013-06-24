@@ -28,15 +28,15 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 	private RelativeLayout mDrawerView;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private CharSequence mDrawerTitle;
-	private CharSequence mTitle;	
+	private CharSequence mTitle;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-		super.onCreate(savedInstanceState);
-		// This code sets the App theme
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(this);
+		super.onCreate(savedInstanceState);
+		// This code sets the App theme
 		int themeValue = Integer.parseInt(pref.getString(
 				"theme_listpreference", "-1"));
 		switch (themeValue)

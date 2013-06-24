@@ -1,9 +1,11 @@
 package com.conradhaupt.MenU;
 
-
 import com.conradhaupt.MenU.R;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +20,13 @@ public class LoginActivity extends Activity
 		setContentView(R.layout.activity_login);
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getActionBar().setDisplayShowTitleEnabled(false);
+	}
+
+	@Override
+	public void onBackPressed()
+	{
+		super.onBackPressed();
 	}
 
 	@Override

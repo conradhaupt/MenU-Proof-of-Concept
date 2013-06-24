@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <RelativeLayout
-        android:id="@+id/relativeLayout1"
+        android:id="@+id/fragment_account_header"
         android:layout_width="wrap_content"
         android:layout_height="128dp"
         android:layout_alignParentLeft="true"
@@ -36,7 +36,7 @@
         android:id="@+id/card_featured_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/relativeLayout1"
+        android:layout_below="@+id/fragment_account_header"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="13dp"
         android:text="Large Text"

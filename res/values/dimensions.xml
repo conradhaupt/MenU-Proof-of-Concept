@@ -7,5 +7,6 @@
     <dimen name="activity_home_drawer_width_small">64dp</dimen>
     <dimen name="activity_home_drawer_element_height">64dp</dimen>
     <dimen name="activity_home_drawer_element_copyright_height">128dp</dimen>
+    <dimen name="fragment_account_header_bar_height">48dp</dimen>
 
 </resources>

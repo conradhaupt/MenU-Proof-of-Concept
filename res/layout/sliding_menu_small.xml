@@ -152,7 +152,7 @@
                     android:layout_centerHorizontal="false"
                     android:layout_centerInParent="true"
                     android:layout_centerVertical="false"
-                    android:src="?attr/slidingmenu_ic_action_copyright" />
+                    android:src="@drawable/ic_action_copyright_holo_light" />
 
             </RelativeLayout>
         </LinearLayout>

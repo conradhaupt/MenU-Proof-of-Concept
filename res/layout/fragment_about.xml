@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <RelativeLayout
-        android:id="@+id/relativeLayout1"
+        android:id="@+id/fragment_account_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -30,12 +30,12 @@
         android:id="@+id/relativeLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/relativeLayout1"
+        android:layout_alignLeft="@+id/fragment_account_header"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="false"
-        android:layout_alignRight="@+id/relativeLayout1"
-        android:layout_below="@+id/relativeLayout1"
+        android:layout_alignRight="@+id/fragment_account_header"
+        android:layout_below="@+id/fragment_account_header"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="#cccccc"

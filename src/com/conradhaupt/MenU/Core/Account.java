@@ -4,7 +4,13 @@ import java.util.Scanner;
 
 public class Account
 {
-
+	//Account errors
+	public static int INVALID_EMAIL = 0;
+	public static int INVALID_USERNAME = 1;
+	public static int INVALID_PASSWORD = 2;
+	public static int EXISTING_EMAIL = 3;
+	public static int EXISTING_USERNAME = 4;
+	
 	// Object variables
 	private String accountID = null;
 	private String username = null;

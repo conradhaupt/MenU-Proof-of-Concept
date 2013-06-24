@@ -66,4 +66,5 @@ limitations under the License.</string>
     <string name="activity_home_drawer_close">Close drawer</string>
     <string name="activity_home_drawer_title_closed">MenU</string>
     <string name="activity_home_drawer_title_open">Navigation</string>
+    <string name="menu_account_settings">Account settings</string>
 </resources>

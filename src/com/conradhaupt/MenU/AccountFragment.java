@@ -1,9 +1,6 @@
 package com.conradhaupt.MenU;
 
-
-import com.conradhaupt.MenU.R;
-import android.app.ActionBar;
-import android.app.ActionBar.OnNavigationListener;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,10 +8,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
-public class AccountFragment extends Fragment implements OnNavigationListener
+import com.conradhaupt.MenU.Core.Account;
+import com.conradhaupt.MenU.Core.MenUServerInteraction;
+
+public class AccountFragment extends Fragment implements OnClickListener
 {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,19 +23,15 @@ public class AccountFragment extends Fragment implements OnNavigationListener
 		System.out.println("Account fragment created!");
 		// Inflate the layout for this fragment
 		setHasOptionsMenu(true);
-		// Create the actionbar dropdown menu
-		ActionBar actionBar = this.getActivity().getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		// Set up the dropdown list navigation in the action bar.
-		actionBar.setListNavigationCallbacks(
-		// Specify a SpinnerAdapter to populate the dropdown list.
-				new ArrayAdapter<String>(actionBar.getThemedContext(),
-						android.R.layout.simple_list_item_1,
-						android.R.id.text1, new String[] {
-								"Conradjhaupt@gmail.com",
-								"conrad.haupt@gmail.com",
-								"philip.b.haupt@gmail.com", }), this);
 		return inflater.inflate(R.layout.fragment_account, container, false);
+	}
+
+	@Override
+	public void onResume()
+	{
+		this.getActivity().findViewById(R.id.SUBMITMEBITCH)
+				.setOnClickListener(this);
+		super.onResume();
 	}
 
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
@@ -47,9 +43,6 @@ public class AccountFragment extends Fragment implements OnNavigationListener
 	@Override
 	public void onPause()
 	{
-		// Create the actionbar dropdown menu
-		ActionBar actionBar = this.getActivity().getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		super.onPause();
 	}
 
@@ -63,10 +56,31 @@ public class AccountFragment extends Fragment implements OnNavigationListener
 	}
 
 	@Override
-	public boolean onNavigationItemSelected(int itemPosition, long itemId)
+	public void onClick(View view)
 	{
 		// TODO Auto-generated method stub
-		return false;
+		if (view.getId() == R.id.SUBMITMEBITCH)
+		{
+			System.out.println("Button was clicked");
+			new AsyncTask<Integer, Integer, Integer>()
+			{
+
+				@Override
+				protected Integer doInBackground(Integer... params)
+				{
+					System.out.println("doInBackground run");
+					Account account = new Account();
+					account.setEmail("me@conradhaupt.co.za");
+					account.setFirstName("Conrad");
+					account.setLastName("Haupt");
+					account.setPassword("misteryork");
+					account.setPostalAddress("8 18th street, parkmore");
+					account.setUsername("Phenominal");
+					MenUServerInteraction.registerAccount(account);
+					return null;
+				}
+			}.execute(1);
+		}
 	}
 
 }
