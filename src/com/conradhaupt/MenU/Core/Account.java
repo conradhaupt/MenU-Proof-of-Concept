@@ -4,13 +4,24 @@ import java.util.Scanner;
 
 public class Account
 {
-	//Account errors
+	// Account errors
 	public static int INVALID_EMAIL = 0;
 	public static int INVALID_USERNAME = 1;
 	public static int INVALID_PASSWORD = 2;
 	public static int EXISTING_EMAIL = 3;
 	public static int EXISTING_USERNAME = 4;
-	
+
+	// Account information limits
+	public static String ALLOWED_USERNAME_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890()_-";
+	public static int MIN_PASSWORD_LENGTH = 12;
+	public static int MIN_USERNAME_LENGTH = 6;
+	public static int MAX_USERNAME_LENGTH = 20;
+	public static int MAX_PASSWORD_LENGTH = 50;
+	public static int MAX_FIRSTNAME_LENGTH = 250;
+	public static int MAX_LASTNAME_LENGTH = 250;
+	public static int MIN_FIRSTNAME_LENGTH = 1;
+	public static int MIN_LASTNAME_LENGTH = 1;
+
 	// Object variables
 	private String accountID = null;
 	private String username = null;
@@ -184,6 +195,7 @@ public class Account
 	{
 
 		Account output = new Account();
+
 		// Assign all the values to the account object
 		Scanner codeScan = new Scanner(code).useDelimiter("#");
 		String temp;
@@ -208,5 +220,85 @@ public class Account
 
 		}
 		return output;
+	}
+
+	public static AccountValidationError validate(Account account)
+	{
+		AccountValidationError validationError = new AccountValidationError();
+
+		boolean temp;
+
+		// Check the username
+		// Check for invalid characters
+		temp = true;
+		for (int i = 0; i < account.getUsername().length(); i++)
+		{
+			if (Account.ALLOWED_USERNAME_CHARACTERS.indexOf(account
+					.getUsername().charAt(i)) == -1)
+			{
+				temp = false;
+			}
+		}
+		if (!temp)
+		{
+			validationError
+					.addError(AccountValidationError.USERNAME_INVALID_CHARACTERS);
+		}
+		// Check for specified length
+		temp = true;
+		if (!(account.getUsername().length() >= Account.MIN_USERNAME_LENGTH)
+				|| !(account.getUsername().length() < Account.MAX_USERNAME_LENGTH))
+		{
+			temp = false;
+		}
+		if (!temp)
+		{
+			validationError
+					.addError(AccountValidationError.USERNAME_INVALID_LENGTH);
+		}
+
+		// Check the password
+		// Check the specified length
+		temp = true;
+		if (!(account.getPassword().length() >= Account.MIN_PASSWORD_LENGTH)
+				|| !(account.getPassword().length() < Account.MAX_PASSWORD_LENGTH))
+		{
+			temp = false;
+		}
+		if (!temp)
+		{
+			validationError
+					.addError(AccountValidationError.PASSWORD_INVALID_LENGTH);
+		}
+
+		// Check the first name
+		// Check the specified length
+		temp = true;
+		if (!(account.getFirstName().length() >= Account.MIN_FIRSTNAME_LENGTH)
+				|| !(account.getFirstName().length() < Account.MAX_FIRSTNAME_LENGTH))
+		{
+			temp = false;
+		}
+		if (!temp)
+		{
+			validationError
+					.addError(AccountValidationError.FIRSTNAME_INVALID_LENGTH);
+		}
+
+		// Check the last name
+		// Check the specified length
+		temp = true;
+		if (!(account.getLastName().length() >= Account.MIN_LASTNAME_LENGTH)
+				|| !(account.getLastName().length() < Account.MAX_LASTNAME_LENGTH))
+		{
+			temp = false;
+		}
+		if (!temp)
+		{
+			validationError
+					.addError(AccountValidationError.LASTNAME_INVALID_LENGTH);
+		}
+
+		return validationError;
 	}
 }

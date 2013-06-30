@@ -67,4 +67,12 @@ limitations under the License.</string>
     <string name="activity_home_drawer_title_closed">MenU</string>
     <string name="activity_home_drawer_title_open">Navigation</string>
     <string name="menu_account_settings">Account settings</string>
+    <string name="activity_login_register_title">Register</string>
+    <string name="activity_login_register_username_hint">Username</string>
+    <string name="activity_login_register_password_hint">Password</string>
+    <string name="activity_login_register_password_hint_repeat">Password again</string>
+    <string name="activity_login_register_firstname_hint">First name</string>
+    <string name="activity_login_register_lastname_hint">Last name</string>
+    <string name="activity_login_register_email_hint">Email</string>
+    <string name="activity_login_register_submit">Register</string>
 </resources>

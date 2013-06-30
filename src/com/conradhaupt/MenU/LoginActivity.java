@@ -1,6 +1,10 @@
 package com.conradhaupt.MenU;
 
 import com.conradhaupt.MenU.R;
+import com.conradhaupt.MenU.Core.Account;
+import com.conradhaupt.MenU.Core.AccountValidationError;
+import com.conradhaupt.MenU.Core.MenUServerInteraction;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,18 +13,51 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.Toast;
 
-public class LoginActivity extends Activity
+public class LoginActivity extends Activity implements OnClickListener
 {
+
+	private EditText usernameEditText;
+	private EditText passwordEditText;
+	private EditText passwordRepeatEditText;
+	private EditText firstnameEditText;
+	private EditText lastnameEditText;
+	private EditText emailEditText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
+		setContentView(R.layout.activity_login_register);
+
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setDisplayShowTitleEnabled(false);
+
+		// Assign OnClickListeners
+		int[] ids = { R.id.activity_login_register_button_submit };
+		for (int i = 0; i < ids.length; i++)
+		{
+			this.findViewById(ids[i]).setOnClickListener(this);
+		}
+
+		// Retrieve editTexts
+		usernameEditText = (EditText) this
+				.findViewById(R.id.activity_login_register_textview_username);
+		passwordEditText = (EditText) this
+				.findViewById(R.id.activity_login_register_textview_password);
+		passwordRepeatEditText = (EditText) this
+				.findViewById(R.id.activity_login_register_textview_password_repeat);
+		firstnameEditText = (EditText) this
+				.findViewById(R.id.activity_login_register_textview_firstname);
+		lastnameEditText = (EditText) this
+				.findViewById(R.id.activity_login_register_textview_lastname);
+		emailEditText = (EditText) this
+				.findViewById(R.id.activity_login_register_textview_email);
 	}
 
 	@Override
@@ -56,4 +93,40 @@ public class LoginActivity extends Activity
 		return super.onOptionsItemSelected(item);
 	}
 
+	@Override
+	public void onClick(View v)
+	{
+		switch (v.getId())
+		{
+		case R.id.activity_login_register_button_submit:
+			System.out.println("Register button clicked.");
+			Account account = new Account();
+			account.setUsername(usernameEditText.getText().toString());
+			if (passwordEditText.getText().equals(
+					passwordRepeatEditText.getText()))
+			{
+				account.setPassword(passwordEditText.getText().toString());
+			} else
+			{
+				Toast.makeText(this, "Passwords do not match!", 2000);
+			}
+			account.setFirstName(firstnameEditText.getText().toString());
+			account.setLastName(lastnameEditText.getText().toString());
+			account.setEmail(emailEditText.getText().toString());
+			AccountValidationError error = Account.validate(account);
+			if (error.getHeader() == AccountValidationError.HEADER_NO_ERRORS)
+			{
+				// No errors, submitting account for registration
+				MenUServerInteraction.registerAccount(account);
+			} else
+			{
+				// Error retrieved, displaying the errors
+			}
+			break;
+		default:
+			System.out
+					.println("That hasn't been assigned any code here, it is a worthless OnClickReciever.");
+			break;
+		}
+	}
 }
