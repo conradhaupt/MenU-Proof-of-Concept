@@ -1,22 +1,22 @@
 package com.conradhaupt.MenU.Core;
 
-import java.util.List;
-
 public class AccountValidationError
 {
 	// Object variables
 	private int header = 0;
-	private List<Integer> error;
+	private int[] error = new int[0];
+	{
+	};
 
 	// Error codes
 	public static final int HEADER_NO_ERRORS = 0;
 	public static final int HEADER_ERRORS = 1;
 	public static final int USERNAME_INVALID_CHARACTERS = 0;
 	public static final int USERNAME_INVALID_LENGTH = 1;
-	public static final int PASSWORD_INVALID_LENGTH = 3;
-	public static final int EMAIL_INVALID_NOT_EMAIL = 4;
-	public static final int FIRSTNAME_INVALID_LENGTH = 5;
-	public static final int LASTNAME_INVALID_LENGTH = 6;
+	public static final int PASSWORD_INVALID_LENGTH = 2;
+	public static final int EMAIL_INVALID_NOT_EMAIL = 3;
+	public static final int FIRSTNAME_INVALID_LENGTH = 4;
+	public static final int LASTNAME_INVALID_LENGTH = 5;
 
 	public AccountValidationError()
 	{
@@ -25,9 +25,15 @@ public class AccountValidationError
 
 	public boolean addError(int errorCode)
 	{
-		if (!error.contains(errorCode))
+		if (!this.containsError(errorCode))
 		{
-			error.add(errorCode);
+			int[] temp = new int[error.length + 1];
+			for (int i = 0; i < error.length; i++)
+			{
+				temp[i] = error[i];
+			}
+			temp[temp.length - 1] = errorCode;
+			error = temp;
 		} else
 		{
 			updateHeader();
@@ -39,24 +45,30 @@ public class AccountValidationError
 
 	public boolean removeError(int errorCode)
 	{
-		if (error.contains(errorCode))
+		if (this.containsError(errorCode))
 		{
-			while (error.contains(errorCode))
+			int[] temp = new int[error.length - 1];
+			int position = 0;
+			for (int i = 0; i < error.length; i++)
 			{
-				error.remove(error.lastIndexOf(errorCode));
+				if (error[i] != errorCode)
+				{
+					temp[position] = error[i];
+					position++;
+				}
 			}
+			error = temp;
+			updateHeader();
 		} else
 		{
-			updateHeader();
 			return false;
 		}
-		updateHeader();
 		return true;
 	}
 
 	private void updateHeader()
 	{
-		if (error.size() > 0)
+		if (error.length > 0)
 		{
 			header = AccountValidationError.HEADER_ERRORS;
 		} else
@@ -65,7 +77,7 @@ public class AccountValidationError
 		}
 	}
 
-	public List<Integer> getErrors()
+	public int[] getErrors()
 	{
 		return error;
 	}
@@ -78,5 +90,17 @@ public class AccountValidationError
 	public boolean hasErrors()
 	{
 		return header == AccountValidationError.HEADER_ERRORS ? true : false;
+	}
+
+	public boolean containsError(int errorCode)
+	{
+		for (int i = 0; i < error.length; i++)
+		{
+			if (error[i] == errorCode)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

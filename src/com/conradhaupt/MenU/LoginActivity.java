@@ -1,15 +1,10 @@
 package com.conradhaupt.MenU;
 
-import com.conradhaupt.MenU.R;
-import com.conradhaupt.MenU.Core.Account;
-import com.conradhaupt.MenU.Core.AccountValidationError;
-import com.conradhaupt.MenU.Core.MenUServerInteraction;
+import java.util.Arrays;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +12,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.conradhaupt.MenU.Core.Account;
+import com.conradhaupt.MenU.Core.AccountValidationError;
+import com.conradhaupt.MenU.Core.MenUServerInteraction;
 
 public class LoginActivity extends Activity implements OnClickListener
 {
@@ -108,20 +107,42 @@ public class LoginActivity extends Activity implements OnClickListener
 				account.setPassword(passwordEditText.getText().toString());
 			} else
 			{
-				Toast.makeText(this, "Passwords do not match!", 2000);
+				Toast.makeText(this, "Passwords do not match!",
+						Toast.LENGTH_LONG).show();
 			}
 			account.setFirstName(firstnameEditText.getText().toString());
 			account.setLastName(lastnameEditText.getText().toString());
 			account.setEmail(emailEditText.getText().toString());
-			AccountValidationError error = Account.validate(account);
-			if (error.getHeader() == AccountValidationError.HEADER_NO_ERRORS)
+
+			new AsyncTask<Account, Integer, Integer>()
 			{
-				// No errors, submitting account for registration
-				MenUServerInteraction.registerAccount(account);
-			} else
-			{
-				// Error retrieved, displaying the errors
-			}
+
+				@Override
+				protected Integer doInBackground(Account... account)
+				{
+					try
+					{
+						AccountValidationError error = Account
+								.validate(account[0]);
+						if (error.getHeader() == AccountValidationError.HEADER_NO_ERRORS)
+						{
+							// No errors, submitting account for registration
+							MenUServerInteraction.registerAccount(account[0]);
+						} else
+						{
+							// Error retrieved, displaying the errors
+						}
+						System.out
+								.println(error.getHeader() == AccountValidationError.HEADER_NO_ERRORS ? "YES"
+										: "NO");
+						System.out.println(Arrays.toString(error.getErrors()));
+					} catch (Exception e)
+					{
+						System.out.println(e);
+					}
+					return null;
+				}
+			}.execute(account);
 			break;
 		default:
 			System.out

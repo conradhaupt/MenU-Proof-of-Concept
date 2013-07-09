@@ -13,7 +13,7 @@ public class Account
 
 	// Account information limits
 	public static String ALLOWED_USERNAME_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890()_-";
-	public static int MIN_PASSWORD_LENGTH = 12;
+	public static int MIN_PASSWORD_LENGTH = 6;
 	public static int MIN_USERNAME_LENGTH = 6;
 	public static int MAX_USERNAME_LENGTH = 20;
 	public static int MAX_PASSWORD_LENGTH = 50;
@@ -228,6 +228,7 @@ public class Account
 
 		boolean temp;
 
+		System.out.println("Checking username");
 		// Check the username
 		// Check for invalid characters
 		temp = true;
@@ -257,6 +258,7 @@ public class Account
 					.addError(AccountValidationError.USERNAME_INVALID_LENGTH);
 		}
 
+		System.out.println("Checking password");
 		// Check the password
 		// Check the specified length
 		temp = true;
@@ -271,6 +273,7 @@ public class Account
 					.addError(AccountValidationError.PASSWORD_INVALID_LENGTH);
 		}
 
+		System.out.println("Checking first name");
 		// Check the first name
 		// Check the specified length
 		temp = true;
@@ -285,6 +288,7 @@ public class Account
 					.addError(AccountValidationError.FIRSTNAME_INVALID_LENGTH);
 		}
 
+		System.out.println("Checking last name");
 		// Check the last name
 		// Check the specified length
 		temp = true;
