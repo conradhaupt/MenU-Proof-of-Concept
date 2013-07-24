@@ -5,7 +5,7 @@
         android:icon="?attr/ic_menu_search_holo"
         android:menuCategory="alternative"
         android:orderInCategory="50"
-        android:showAsAction="always"
+        android:showAsAction="ifRoom"
         android:title="@string/menu_search">
     </item>
     <item

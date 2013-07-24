@@ -11,17 +11,19 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONObject;
 
-import android.util.Log;
+import android.content.Context;
 
 public class MenUServerInteraction
 {
-	public static int registerAccount(Account account)
+
+	public static AccountError registerAccount(Account account, Context context)
 	{
+		System.out.println("Registering account");
+		AccountError outputErrors = new AccountError(context);
+		String output = null;
 		try
 		{
 			List<NameValuePair> variables = new ArrayList<NameValuePair>();
@@ -41,13 +43,10 @@ public class MenUServerInteraction
 					"http://conradhaupt.co.za/menuOrderSystem/account_create.php");
 			post.setEntity(new UrlEncodedFormEntity(variables));
 			response = client.execute(post);
-			System.out.println("Executed");
 			if (response != null)
 			{
-				System.out.println("Response doesn't equal null");
 				InputStream in = response.getEntity().getContent();
 
-				String a;
 				if (in != null)
 				{
 					StringBuilder sb = new StringBuilder();
@@ -64,19 +63,36 @@ public class MenUServerInteraction
 					{
 						in.close();
 					}
-					a = sb.toString();
+					output = sb.toString();
 				} else
 				{
-					a = "";
+					output = "";
 				}
-				Log.i("Read from Server", a);
-				System.out.println("Read from server: " + a);
 			}
-			System.out.println("Hello?");
 		} catch (Exception t)
 		{
-			System.out.println(t);
+			output = t.toString();
 		}
-		return -1;
+
+		System.out
+				.println("Connected to server with output or returned message of:\n"
+						+ output);
+		// Add all errors if found
+		if (output.contains(AccountError.CONNECTION_NOT_AVAILABLE_KEYWORD))
+		{
+			outputErrors.addError(AccountError.CONNECTION_NOT_AVAILABLE);
+		}
+		if (output.contains(AccountError.USERNAME_NOT_AVAILABLE_KEYWORD))
+		{
+			outputErrors.addError(AccountError.USERNAME_NOT_AVAILABLE);
+		}
+		if (output.contains(AccountError.EMAIL_NOT_AVAILABLE_KEYWORD))
+		{
+			outputErrors.addError(AccountError.EMAIL_NOT_AVAILABLE);
+		}
+		System.out
+				.println("The RegistrationError object recorded the following errors:\n"
+						+ outputErrors.getStringErrors());
+		return outputErrors;
 	}
 }

@@ -39,7 +39,7 @@ public class RestaurantBrowserFragment extends ListFragment implements
 
 	public void onResume()
 	{
-		listView = (ListView) this.getActivity().findViewById(R.id.listView1);
+		listView = (ListView) this.getActivity().findViewById(R.id.licenseDialog_listview);
 		listView.setOnScrollListener(this);
 		super.onResume();
 	}

@@ -1,62 +1,110 @@
 package com.conradhaupt.MenU;
 
-import java.util.Arrays;
-
-import android.app.Activity;
-import android.os.AsyncTask;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
-import com.conradhaupt.MenU.Core.Account;
-import com.conradhaupt.MenU.Core.AccountValidationError;
-import com.conradhaupt.MenU.Core.MenUServerInteraction;
-
-public class LoginActivity extends Activity implements OnClickListener
+public class LoginActivity extends FragmentActivity
 {
 
-	private EditText usernameEditText;
-	private EditText passwordEditText;
-	private EditText passwordRepeatEditText;
-	private EditText firstnameEditText;
-	private EditText lastnameEditText;
-	private EditText emailEditText;
+	public static int viewPagerPageCount = 2;
+	private ViewPager mPager;
+	private PagerAdapter mAdapter;
+	private Button registerButton;
+	private Button loginButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login_register);
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		// This code sets the App theme
+		int themeValue = Integer.parseInt(pref.getString(
+				"theme_listpreference", "-1"));
+		switch (themeValue)
+		{
+		case 0:
+			this.setTheme(R.style.holo_light);
+			break;
+		case 1:
+			this.setTheme(R.style.holo_light_darkactionbar);
+			break;
+		default:
+			System.out.println("Preference value is not assigned to a theme.");
+			break;
+		}
+		setContentView(R.layout.activity_login);
 
 		// Show the Up button in the action bar.
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setDisplayShowTitleEnabled(false);
+		getActionBar().setTitle("Login");
 
-		// Assign OnClickListeners
-		int[] ids = { R.id.activity_login_register_button_submit };
-		for (int i = 0; i < ids.length; i++)
+		// Assign button variables
+		loginButton = (Button) this
+				.findViewById(R.id.activity_login_login_button);
+		registerButton = (Button) this
+				.findViewById(R.id.activity_login_register_button);
+
+		// Assign ViewPager variables
+		mPager = (ViewPager) this.findViewById(R.id.activity_login_viewpager);
+		mAdapter = new LoginPagerAdapter(this.getSupportFragmentManager());
+		mPager.setAdapter(mAdapter);
+		mPager.setOnPageChangeListener(new OnPageChangeListener()
 		{
-			this.findViewById(ids[i]).setOnClickListener(this);
-		}
 
-		// Retrieve editTexts
-		usernameEditText = (EditText) this
-				.findViewById(R.id.activity_login_register_textview_username);
-		passwordEditText = (EditText) this
-				.findViewById(R.id.activity_login_register_textview_password);
-		passwordRepeatEditText = (EditText) this
-				.findViewById(R.id.activity_login_register_textview_password_repeat);
-		firstnameEditText = (EditText) this
-				.findViewById(R.id.activity_login_register_textview_firstname);
-		lastnameEditText = (EditText) this
-				.findViewById(R.id.activity_login_register_textview_lastname);
-		emailEditText = (EditText) this
-				.findViewById(R.id.activity_login_register_textview_email);
+			@Override
+			public void onPageSelected(int position)
+			{
+				switch (position)
+				{
+				case 0:
+					getActionBar().setTitle("Login");
+					break;
+				case 1:
+					getActionBar().setTitle("Register");
+					break;
+				}
+			}
+
+			@Override
+			public void onPageScrolled(int position, float positionOffset,
+					int positionOffsetPixels)
+			{
+				if (positionOffset != 0)
+				{
+					loginButton.setLayoutParams(new LinearLayout.LayoutParams(
+							LayoutParams.WRAP_CONTENT,
+							LayoutParams.WRAP_CONTENT,
+							7f - (6 * positionOffset)));
+					registerButton
+							.setLayoutParams(new LinearLayout.LayoutParams(
+									LayoutParams.WRAP_CONTENT,
+									LayoutParams.WRAP_CONTENT,
+									1f + (6 * positionOffset)));
+				}
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0)
+			{
+				// TODO Auto-generated method stub
+
+			}
+		});
 	}
 
 	@Override
@@ -92,62 +140,34 @@ public class LoginActivity extends Activity implements OnClickListener
 		return super.onOptionsItemSelected(item);
 	}
 
-	@Override
-	public void onClick(View v)
+	private class LoginPagerAdapter extends FragmentPagerAdapter
 	{
-		switch (v.getId())
+		public LoginPagerAdapter(FragmentManager fm)
 		{
-		case R.id.activity_login_register_button_submit:
-			System.out.println("Register button clicked.");
-			Account account = new Account();
-			account.setUsername(usernameEditText.getText().toString());
-			if (passwordEditText.getText().equals(
-					passwordRepeatEditText.getText()))
-			{
-				account.setPassword(passwordEditText.getText().toString());
-			} else
-			{
-				Toast.makeText(this, "Passwords do not match!",
-						Toast.LENGTH_LONG).show();
-			}
-			account.setFirstName(firstnameEditText.getText().toString());
-			account.setLastName(lastnameEditText.getText().toString());
-			account.setEmail(emailEditText.getText().toString());
-
-			new AsyncTask<Account, Integer, Integer>()
-			{
-
-				@Override
-				protected Integer doInBackground(Account... account)
-				{
-					try
-					{
-						AccountValidationError error = Account
-								.validate(account[0]);
-						if (error.getHeader() == AccountValidationError.HEADER_NO_ERRORS)
-						{
-							// No errors, submitting account for registration
-							MenUServerInteraction.registerAccount(account[0]);
-						} else
-						{
-							// Error retrieved, displaying the errors
-						}
-						System.out
-								.println(error.getHeader() == AccountValidationError.HEADER_NO_ERRORS ? "YES"
-										: "NO");
-						System.out.println(Arrays.toString(error.getErrors()));
-					} catch (Exception e)
-					{
-						System.out.println(e);
-					}
-					return null;
-				}
-			}.execute(account);
-			break;
-		default:
-			System.out
-					.println("That hasn't been assigned any code here, it is a worthless OnClickReciever.");
-			break;
+			super(fm);
+			// TODO Auto-generated constructor stub
 		}
+
+		@Override
+		public Fragment getItem(int position)
+		{
+			System.out.println("Getting item for position " + position);
+			switch (position)
+			{
+			case 0:
+				return new LoginFragment();
+			case 1:
+				return new RegisterFragment();
+			}
+			return null;
+		}
+
+		@Override
+		public int getCount()
+		{
+			// TODO Auto-generated method stub
+			return viewPagerPageCount;
+		}
+
 	}
 }

@@ -1,23 +1,31 @@
 package com.conradhaupt.MenU;
 
-import com.conradhaupt.MenU.R;
+import java.util.Arrays;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class AboutDialogFragment extends DialogFragment implements
-		OnClickListener
+		OnItemClickListener
 {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState)
 	{
+		System.out.println("");
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		// Get the layout inflater
 		LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -37,96 +45,63 @@ public class AboutDialogFragment extends DialogFragment implements
 		return builder.create();
 	}
 
+	@Override
 	public void onResume()
 	{
-		int[] options = { R.id.aboutMenU_dialog_website,
-				R.id.aboutMenU_dialog_license,
-				R.id.aboutMenU_dialog_termsandconditions,
-				R.id.aboutMenU_dialog_slidingmenulicense,
-				R.id.aboutMenU_dialog_appmsgcroutonlicense,
-				R.id.aboutMenU_dialog_showcaseviewlicense };
-		for (int i = 0; i < options.length; i++)
-		{
-			this.getDialog().findViewById(options[i])
-					.setOnClickListener(AboutDialogFragment.this);
-		}
 		super.onResume();
+
+		// Assign values to layout
+		// Populate listview
+		ListView list = (ListView) this.getDialog().findViewById(
+				R.id.license_dialog_listview);
+		System.out.println("Setting adapter");
+		String[] temp = this.getResources().getStringArray(
+				R.array.licenseDialog_licenses);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+				android.R.layout.simple_list_item_1, temp);
+		System.out.println(Arrays.toString(temp));
+		list.setAdapter(adapter);
+		System.out.println("Setting OnItemClickListener");
+		list.setOnItemClickListener(this);
+		System.out.println("OnCreateView");
 	}
 
 	@Override
-	public void onClick(View v)
+	public void onItemClick(AdapterView<?> adapterView, View view,
+			int position, long id)
 	{
-		switch (v.getId())
+		if (position == 0)
 		{
-		case R.id.aboutMenU_dialog_website:
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(this
-					.getResources().getString(
-							R.string.aboutMenU_dialog_website_link)));
+					.getResources().getStringArray(
+							R.array.licenseDialog_license_website)[0]));
 			this.startActivity(intent);
 			System.out.println("Navigating to app website!");
-			break;
-		case R.id.aboutMenU_dialog_license:
-			System.out.println("Navigating to app license!");
-			new LicenseDialogFragment().create(
-					R.string.aboutMenU_dialog_license,
-					R.string.aboutMenU_dialog_license_text,
-					R.string.aboutMenU_dialog_license_copyright,
-					R.string.aboutMenU_dialog_website_link,
-					R.color.MenU_Red_Light, R.color.MenU_Red_Dark,
-					R.drawable.ic_logo_monochrome_dark, this.getActivity()
-							.getSupportFragmentManager(),
-					"LicenseDialogFragment");
-			break;
-		case R.id.aboutMenU_dialog_termsandconditions:
-			System.out.println("Navigating to app terms and conditions!");
-			new LicenseDialogFragment().create(
-					R.string.aboutMenU_dialog_license_termsandconditions,
-					R.string.aboutMenU_dialog_license_termsandconditions_text,
-					R.string.aboutMenU_dialog_license_copyright,
-					R.string.aboutMenU_dialog_website_link,
-					R.color.MenU_Turquoise_Light, R.color.MenU_Turquoise_Dark,
-					R.drawable.ic_action_settings_holo_dark, this.getActivity()
-							.getSupportFragmentManager(),
-					"LicenseDialogFragment");
-			break;
-		case R.id.aboutMenU_dialog_slidingmenulicense:
-			System.out.println("Navigating to slidingmenu library license!");
-			new LicenseDialogFragment().create(
-					R.string.aboutMenU_dialog_license_slidingmenu,
-					R.string.ApacheLicense,
-					R.string.aboutMenU_dialog_license_slidingmenu_copyright,
-					R.string.ApacheLicenseURL, R.color.MenU_Peach_Light,
-					R.color.MenU_Peach_Dark,
-					R.drawable.ic_action_settings_holo_dark, this.getActivity()
-							.getSupportFragmentManager(),
-					"Slidingmenu LicenseDialogFragment");
-			break;
-		case R.id.aboutMenU_dialog_appmsgcroutonlicense:
-			System.out.println("Navigating to appmsg crouton library license!");
-			new LicenseDialogFragment().create(
-					R.string.aboutMenU_dialog_license_crouton,
-					R.string.ApacheLicense,
-					R.string.aboutMenU_dialog_license_crouton_copyright,
-					R.string.ApacheLicenseURL, R.color.MenU_Green_Light,
-					R.color.MenU_Green_Dark,
-					R.drawable.ic_action_settings_holo_dark, this.getActivity()
-							.getSupportFragmentManager(),
-					"Crouton LicenseDialogFragment");
-			break;
-		case R.id.aboutMenU_dialog_showcaseviewlicense:
-			System.out.println("Navigating to showcase view library license!");
-			new LicenseDialogFragment().create(
-					R.string.aboutMenU_dialog_license_showcaseview,
-					R.string.ApacheLicense,
-					R.string.aboutMenU_dialog_license_showcaseview_copyright,
-					R.string.ApacheLicenseURL, R.color.MenU_Blue_Light,
-					R.color.MenU_Blue_Dark,
-					R.drawable.ic_action_settings_holo_dark, this.getActivity()
-							.getSupportFragmentManager(),
-					"ShowcaseView LicenseDialogFragment");
-			break;
-		default:
-			break;
+		} else
+		{
+			SharedPreferences pref = this.getActivity().getPreferences(
+					Context.MODE_PRIVATE);
+			String[] titles = this.getResources().getStringArray(
+					R.array.licenseDialog_licenses);
+			String[] copyrights = this.getResources().getStringArray(
+					R.array.licenseDialog_license_copyrights);
+			String[] texts = this.getResources().getStringArray(
+					R.array.licenseDialog_license);
+			String[] websites = this.getResources().getStringArray(
+					R.array.licenseDialog_license_website);
+			TypedArray headerDrawables = this.getResources().obtainTypedArray(
+					R.array.licenseDialog_license_header_drawable);
+			int drawableID = headerDrawables.getResourceId(position, -1);
+			if (drawableID != -1)
+			{
+				System.out.println(position);
+				new LicenseDialogFragment().create(titles[position],
+						texts[position], copyrights[position],
+						websites[position], drawableID,
+						R.drawable.ic_logo_monochrome_dark,
+						this.getFragmentManager(), position + "");
+			}
+			headerDrawables.recycle();
 		}
 	}
 }

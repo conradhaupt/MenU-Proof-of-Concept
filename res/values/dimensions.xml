@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <dimen name="menu_ic_logomenusize">96dp</dimen>
-    <dimen name="menusliding_shadow_width">15dp</dimen>
+
     <dimen name="activity_home_drawer_width_large">250dp</dimen>
     <dimen name="activity_home_drawer_width_small">64dp</dimen>
     <dimen name="activity_home_drawer_element_height">64dp</dimen>
     <dimen name="activity_home_drawer_element_copyright_height">128dp</dimen>
-    <dimen name="fragment_account_header_bar_height">48dp</dimen>
 
 </resources>

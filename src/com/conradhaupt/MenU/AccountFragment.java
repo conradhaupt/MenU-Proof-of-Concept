@@ -1,5 +1,6 @@
 package com.conradhaupt.MenU;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,7 +30,7 @@ public class AccountFragment extends Fragment implements OnClickListener
 	@Override
 	public void onResume()
 	{
-		this.getActivity().findViewById(R.id.SUBMITMEBITCH)
+		this.getActivity().findViewById(R.id.fragment_account_temp_submit)
 				.setOnClickListener(this);
 		super.onResume();
 	}
@@ -58,9 +59,9 @@ public class AccountFragment extends Fragment implements OnClickListener
 	@Override
 	public void onClick(View view)
 	{
-		// TODO Auto-generated method stub
-		if (view.getId() == R.id.SUBMITMEBITCH)
+		if (view.getId() == R.id.fragment_account_temp_submit)
 		{
+			final Context context = this.getActivity();
 			System.out.println("Button was clicked");
 			new AsyncTask<Integer, Integer, Integer>()
 			{
@@ -76,11 +77,10 @@ public class AccountFragment extends Fragment implements OnClickListener
 					account.setPassword("misteryork");
 					account.setPostalAddress("8 18th street, parkmore");
 					account.setUsername("Phenominal");
-					MenUServerInteraction.registerAccount(account);
+					MenUServerInteraction.registerAccount(account, context);
 					return null;
 				}
 			}.execute(1);
 		}
 	}
-
 }

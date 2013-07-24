@@ -4,7 +4,5 @@
     <integer name="fragment_home_card_appear_anim_duration">500</integer>
     <integer name="fragment_home_card_appear_anim_duration_addition">100</integer>
     <integer name="fragment_home_card_appear_anim_delay">200</integer>
-    <integer name="fragment_home_card_remove_anim_duration">500</integer>    
-    <integer name="fragment_home_card_remove_anim_delay">100</integer>
 
 </resources>

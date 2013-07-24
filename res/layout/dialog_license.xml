@@ -11,87 +11,68 @@
         android:background="@color/MenU_Grey_Light" >
 
         <ImageView
-            android:id="@+id/license_dialog_drawable"
+            android:id="@+id/license_dialog_header_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:src="?attr/aboutMenU_dialog_header_drawable" />
-
-        <RelativeLayout
-            android:id="@+id/license_dialog_header_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="5dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="false"
-            android:background="@color/MenU_Grey_Dark" >
-        </RelativeLayout>
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="256dp"
-        android:background="?attr/aboutMenU_dialog_background"
-        android:orientation="vertical"
-        android:paddingBottom="5dp" >
+        android:layout_height="wrap_content" >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:clickable="true"
-            android:padding="5dp" >
-
-            <TextView
-                android:id="@+id/license_dialog_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:text="Medium Text"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/license_dialog_copyright"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:text="Small Text"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:clickable="true"
-            android:padding="5dp" >
+            android:layout_height="wrap_content"
+            android:background="?attr/aboutMenU_dialog_background"
+            android:orientation="vertical"
+            android:paddingBottom="5dp" >
 
             <RelativeLayout
-                android:id="@+id/RelativeLayout01"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:background="?attr/aboutMenU_dialog_bar" >
+                android:layout_height="64dp"
+                android:clickable="true"
+                android:padding="5dp" >
+
+                <TextView
+                    android:id="@+id/license_dialog_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"                    
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="?attr/aboutMenU_dialog_textColor" />
+
+                <TextView
+                    android:id="@+id/license_dialog_copyright"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"                    
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="?attr/aboutMenU_dialog_textColor" />
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/license_dialog_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/RelativeLayout01"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:gravity="center_horizontal"
-                android:linksClickable="true"
-                android:text="Loading..." />
-        </RelativeLayout>
-    </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:padding="16dp" >
+
+                <TextView
+                    android:id="@+id/license_dialog_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:gravity="center_horizontal"
+                    android:linksClickable="true"                    
+                    android:textColor="?attr/aboutMenU_dialog_textColor" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

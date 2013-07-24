@@ -33,9 +33,9 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
+		super.onCreate(savedInstanceState);
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		super.onCreate(savedInstanceState);
 		// This code sets the App theme
 		int themeValue = Integer.parseInt(pref.getString(
 				"theme_listpreference", "-1"));
@@ -213,9 +213,6 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 			return true;
 		}
 
-		// Handle your other action bar items...
-		FragmentTransaction ft = this.getSupportFragmentManager()
-				.beginTransaction();
 		switch (item.getItemId())
 		{
 		case R.id.menu_dropdown:

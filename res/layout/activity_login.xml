@@ -2,16 +2,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".LoginActivity" >
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" >
+        android:layout_alignParentTop="true" >
 
+        <android.support.v4.view.ViewPager
+            android:id="@+id/activity_login_viewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </android.support.v4.view.ViewPager>
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" >
+
+        <Button
+            android:id="@+id/activity_login_login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/fragment_login_login" />
+
+        <View
+            android:id="@+id/ViewColorPickerHelper"
+            android:layout_width="1dip"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="4dip"
+            android:layout_marginTop="4dip"
+            android:background="?android:attr/dividerVertical" />
+
+        <Button
+            android:id="@+id/activity_login_register_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/fragment_login_register" />
+    </LinearLayout>
 
 </RelativeLayout>

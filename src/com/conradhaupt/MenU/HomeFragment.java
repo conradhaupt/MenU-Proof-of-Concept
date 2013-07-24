@@ -29,12 +29,6 @@ public class HomeFragment extends Fragment implements OnClickListener
 {
 
 	private HomeFragmentLoader homeFragmentLoader = null;
-	public List<String> values = new LinkedList<String>(Arrays.asList("A", "B",
-			"C", "D", "E", "F"));
-	public ListView listView;
-	public HomeFragmentListViewAdapter adapter;
-	public int card_animation_duration;
-	public int card_animation_delay;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,10 +37,6 @@ public class HomeFragment extends Fragment implements OnClickListener
 		System.out.println("Home fragment created!");
 		// Inflate the layout for this fragment
 		setHasOptionsMenu(true);
-		card_animation_duration = this.getResources().getInteger(
-				R.integer.fragment_home_card_remove_anim_duration);
-		card_animation_delay = this.getResources().getInteger(
-				R.integer.fragment_home_card_remove_anim_delay);
 		return inflater.inflate(R.layout.fragment_home, container, false);
 	}
 
@@ -68,29 +58,7 @@ public class HomeFragment extends Fragment implements OnClickListener
 					.setOnClickListener(this);
 		}
 
-		// Execute the listview asynctask
-		if (homeFragmentLoader == null)
-		{
-			System.out.println("homeFragmentInstantiated");
-			homeFragmentLoader = (HomeFragmentLoader) new HomeFragmentLoader();
-			homeFragmentLoader.execute(this.getActivity());
-
-			// Instantiate the listview
-			listView = (ListView) this.getActivity().findViewById(
-					R.id.home_fragment_listview);
-			adapter = new HomeFragmentListViewAdapter(this.getActivity(),
-					android.R.layout.simple_list_item_checked, values);
-			listView.setAdapter(adapter);
-			listView.setOnItemClickListener(new OnItemClickListener()
-			{
-
-				@Override
-				public void onItemClick(AdapterView<?> arg0, View v,
-						int position, long id)
-				{					
-				}
-			});
-		}
+		refresh();
 
 		super.onResume();
 	}
@@ -108,13 +76,18 @@ public class HomeFragment extends Fragment implements OnClickListener
 		case R.id.fragment_home_refresh:
 			System.out
 					.println("Refreshing home fragment, starting up a new HomeFragmentLoader");
-			values.add("Q");
-			adapter.notifyDataSetChanged();
+			refresh();
 			break;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 		return true;
+	}
+
+	private void refresh()
+	{
+		// Refresh has been run, doing stuff
+		System.out.println("Home fragment refresh run.");
 	}
 
 	public class HomeFragmentLoader extends

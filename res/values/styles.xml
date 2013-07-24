@@ -12,7 +12,7 @@
     <style name="holo_light_darkactionbar" parent="@android:style/Theme.Holo.Light.DarkActionBar">
         <item name="ic_menu_moreoverflow">@drawable/ic_menu_moreoverflow_normal_holo_dark</item>
         <item name="ic_menu_search_holo">@drawable/ic_menu_search_holo_dark</item>
-        <item name="slidingmenu_background">@drawable/slidingmenu_background_repeat_holo_light_darkactionbar</item>
+        <item name="slidingmenu_background">@color/slidingmenu_background_holo_light_darkactionbar</item>
         <item name="slidingmenu_textColor">@color/slidingmenu_textColor_holo_light_darkactionbar</item>
         <item name="slidingmenu_actionbarBackground">@color/slidingmenu_actionbarBackground_holo_light_darkactionbar</item>
         <item name="slidingmenu_ic_action_about">@drawable/ic_action_about_holo_dark</item>
@@ -22,11 +22,9 @@
         <item name="slidingmenu_ic_collection_view_as_grid">@drawable/ic_collection_view_as_grid_holo_dark</item>
         <item name="slidingmenu_ic_social_person">@drawable/ic_social_person_holo_dark</item>
         <item name="slidingmenu_textColor_secondary">@color/slidingmenu_textColor_secondary_holo_light_darkactionbar</item>
-        <item name="aboutMenU_dialog_header_background">@color/MenU_Red_Light</item>
-        <item name="aboutMenU_dialog_header_drawable">@drawable/ic_logo_monochrome_light</item>
-        <item name="aboutMenU_dialog_header_bar">@color/MenU_Red_Dark</item>
+        <item name="aboutMenU_dialog_header_background">@drawable/licensedialog_header_background_red</item>
+        <item name="aboutMenU_dialog_header_drawable">@drawable/ic_logo_monochrome_light</item>        
         <item name="aboutMenU_dialog_background">@color/aboutMenU_dialog_background_holo_light_darkactionbar</item>
-        <item name="aboutMenU_dialog_bar">@color/aboutMenU_dialog_bar_holo_light_darkactionbar</item>
         <item name="aboutMenU_dialog_textColor">@color/aboutMenU_dialog_textColor_holo_light_darkactionbar</item>
         <item name="slidingmenu_ic_action_copyright">@drawable/ic_action_copyright_holo_dark</item>
         <item name="android:windowBackground">@color/activity_background</item>
@@ -45,7 +43,7 @@
     <style name="holo_light" parent="@android:style/Theme.Holo.Light">
         <item name="ic_menu_moreoverflow">@drawable/ic_menu_moreoverflow_normal_holo_light</item>
         <item name="ic_menu_search_holo">@drawable/ic_menu_search_holo_light</item>
-        <item name="slidingmenu_background">@drawable/slidingmenu_background_repeat_holo_light</item>
+        <item name="slidingmenu_background">@color/slidingmenu_background_holo_light</item>
         <item name="slidingmenu_textColor">@color/slidingmenu_textColor_holo_light</item>
         <item name="slidingmenu_actionbarBackground">@color/slidingmenu_actionbarBackground_holo_light</item>
         <item name="slidingmenu_ic_action_about">@drawable/ic_action_about_holo_light</item>
@@ -55,11 +53,9 @@
         <item name="slidingmenu_ic_collection_view_as_grid">@drawable/ic_collection_view_as_grid_holo_light</item>
         <item name="slidingmenu_ic_social_person">@drawable/ic_social_person_holo_light</item>
         <item name="slidingmenu_textColor_secondary">@color/slidingmenu_textColor_secondary_holo_light</item>
-        <item name="aboutMenU_dialog_header_background">@color/MenU_Red_Light</item>
-        <item name="aboutMenU_dialog_header_drawable">@drawable/ic_logo_monochrome_dark</item>
-        <item name="aboutMenU_dialog_header_bar">@color/MenU_Red_Dark</item>
+        <item name="aboutMenU_dialog_header_background">@drawable/licensedialog_header_background_red</item>
+        <item name="aboutMenU_dialog_header_drawable">@drawable/ic_logo_monochrome_dark</item>        
         <item name="aboutMenU_dialog_background">@color/aboutMenU_dialog_background_holo_light</item>
-        <item name="aboutMenU_dialog_bar">@color/aboutMenU_dialog_bar_holo_light</item>
         <item name="aboutMenU_dialog_textColor">@color/aboutMenU_dialog_textColor_holo_light</item>
         <item name="slidingmenu_ic_action_copyright">@drawable/ic_action_copyright_holo_light</item>
         <item name="android:windowBackground">@color/activity_background</item>
@@ -73,12 +69,6 @@
         <item name="fragment_account_header_bar_background">@drawable/fragment_account_header_bar_background_holo_light</item>
         <item name="fragment_account_header_textColor">@color/fragment_account_header_textColor_holo_light</item>
         <item name="ic_action_settings">@drawable/ic_action_settings_holo_light</item>
-    </style>
-
-    <style name="LoginFormContainer">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">16dp</item>
     </style>
 
 </resources>

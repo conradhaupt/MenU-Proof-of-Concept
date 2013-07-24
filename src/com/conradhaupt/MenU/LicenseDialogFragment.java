@@ -1,7 +1,7 @@
 package com.conradhaupt.MenU;
 
-
 import com.conradhaupt.MenU.R;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -17,26 +17,23 @@ import android.widget.TextView;
 
 public class LicenseDialogFragment extends DialogFragment
 {
-	private int licenseString = -1;
-	private int licenseTitle = -1;
-	private int licenseCopyright = -1;
-	private int licenseWebsiteLink = -1;
-	private int licenseColourPrimary = -1;
-	private int licenseColourSecondary = -1;
+	private String licenseText;
+	private String licenseTitle;
+	private String licenseCopyright;
+	private String licenseWebsiteLink;
+	private int licenseBackgroundDrawable = -1;
 	private int licenseDrawable = -1;
-	private String websiteURL;
 
-	public void create(int licenseTitleID, int licenseStringID,
-			int licenseCopyrightID, int licenseWebsiteLink,
-			int licenseColourPrimaryID, int licenseColourSecondaryID,
-			int licenseDrawableID, FragmentManager fragmentManager, String tag)
+	public void create(String licenseTitle, String licenseText,
+			String licenseCopyright, String licenseWebsiteLink,
+			int licenseBackgroundDrawableID, int licenseDrawableID,
+			FragmentManager fragmentManager, String tag)
 	{
-		this.licenseTitle = licenseTitleID;
-		this.licenseString = licenseStringID;
-		this.licenseCopyright = licenseCopyrightID;
+		this.licenseText = licenseText;
+		this.licenseTitle = licenseTitle;
+		this.licenseCopyright = licenseCopyright;
 		this.licenseWebsiteLink = licenseWebsiteLink;
-		this.licenseColourPrimary = licenseColourPrimaryID;
-		this.licenseColourSecondary = licenseColourSecondaryID;
+		this.licenseBackgroundDrawable = licenseBackgroundDrawableID;
 		this.licenseDrawable = licenseDrawableID;
 
 		this.show(fragmentManager, tag);
@@ -44,26 +41,31 @@ public class LicenseDialogFragment extends DialogFragment
 
 	public void onResume()
 	{
-		RelativeLayout relativeLayout2 = (RelativeLayout) this.getDialog()
-				.findViewById(R.id.license_dialog_header_background);
-		relativeLayout2.setBackgroundResource(this.licenseColourPrimary);
-		RelativeLayout relativeLayout = (RelativeLayout) this.getDialog()
-				.findViewById(R.id.license_dialog_header_bar);
-		relativeLayout.setBackgroundResource(this.licenseColourSecondary);
-		ImageView image = (ImageView) this.getDialog().findViewById(
-				R.id.license_dialog_drawable);
-		image.setImageResource(this.licenseDrawable);
-		TextView text = (TextView) this.getDialog().findViewById(
-				R.id.license_dialog_textView);
-		text.setText(this.licenseString);
-		TextView text2 = (TextView) this.getDialog().findViewById(
-				R.id.license_dialog_copyright);
-		text2.setText(this.licenseCopyright);
-		TextView text3 = (TextView) this.getDialog().findViewById(
-				R.id.license_dialog_title);
-		text3.setText(this.licenseTitle);
-		this.websiteURL = this.getString(this.licenseWebsiteLink);
 		super.onResume();
+		System.out.println("Adjusting header");
+		RelativeLayout header = (RelativeLayout) this.getDialog().findViewById(
+				R.id.license_dialog_header_background);
+		header.setBackgroundResource(licenseBackgroundDrawable);
+
+		System.out.println("Adjusting header image");
+		ImageView headerImage = (ImageView) this.getDialog().findViewById(
+				R.id.license_dialog_header_image);
+		headerImage.setImageResource(licenseDrawable);
+
+		System.out.println("Adjusting title");
+		TextView title = (TextView) this.getDialog().findViewById(
+				R.id.license_dialog_title);
+		title.setText(licenseTitle);
+
+		System.out.println("Adjusting copyright");
+		TextView copyright = (TextView) this.getDialog().findViewById(
+				R.id.license_dialog_copyright);
+		copyright.setText(licenseCopyright);
+
+		System.out.println("Adjusting text");
+		TextView text = (TextView) this.getDialog().findViewById(
+				R.id.license_dialog_text);
+		text.setText(licenseText);
 	}
 
 	@Override
@@ -100,7 +102,7 @@ public class LicenseDialogFragment extends DialogFragment
 
 	public void navigateToWebsite()
 	{
-		Uri uri = Uri.parse(this.websiteURL);
+		Uri uri = Uri.parse(this.licenseWebsiteLink);
 		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 		startActivity(intent);
 	}

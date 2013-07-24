@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
+    android:padding="16dp" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="false"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/fragment_login_register_textview_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/fragment_login_register_username_hint" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/fragment_login_register_textview_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/fragment_login_register_password_hint"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/fragment_login_register_textview_password_repeat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/fragment_login_register_password_hint_repeat"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/fragment_login_register_textview_firstname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/fragment_login_register_firstname_hint"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/fragment_login_register_textview_lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/fragment_login_register_lastname_hint"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/fragment_login_register_textview_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/fragment_login_register_email_hint"
+            android:inputType="textEmailAddress" />
+    </LinearLayout>
+
+</RelativeLayout>
