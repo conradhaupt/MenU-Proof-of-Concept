@@ -242,19 +242,22 @@ public class LoginActivity extends FragmentActivity implements OnClickListener
 				System.out.println(successfulMessage);
 				Crouton crouton = Crouton.makeText(this, successfulMessage,
 						Style.CONFIRM);
-				Configuration.Builder configBuild = new Configuration.Builder();
-				configBuild.setDuration(Configuration.DURATION_INFINITE);
-				crouton.setConfiguration(configBuild.build());
-				crouton.setOnClickListener(new OnClickListener()
+				if (clickableClose)
 				{
-
-					@Override
-					public void onClick(View v)
+					Configuration.Builder configBuild = new Configuration.Builder();
+					configBuild.setDuration(Configuration.DURATION_INFINITE);
+					crouton.setConfiguration(configBuild.build());
+					crouton.setOnClickListener(new OnClickListener()
 					{
-						System.out.println("Crouton clicked");
-						((LoginActivity) v.getContext()).onBackPressed();
-					}
-				});
+
+						@Override
+						public void onClick(View v)
+						{
+							System.out.println("Crouton clicked");
+							((LoginActivity) v.getContext()).onBackPressed();
+						}
+					});
+				}
 				crouton.show();
 			}
 		}

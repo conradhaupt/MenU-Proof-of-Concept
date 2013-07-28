@@ -76,7 +76,6 @@ public class LoginFragment extends Fragment
 				usernameEditText.setText("");
 				passwordEditText.setText("");
 			}
-			System.out.println("Login fragment recieved errors");
 			((LoginActivity) (this.getActivity())).loadError(
 					result,
 					this.getResources().getString(
