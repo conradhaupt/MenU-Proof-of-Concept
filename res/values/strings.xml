@@ -48,5 +48,12 @@
     <string name="account_verification_connection_not_available">Could not connect to the internet</string>
     <string name="account_verification_connection_not_available_unknown">An unknown network error occurred</string>
     <string name="account_verification_successful">Your account has been created</string>
+    <string name="fragment_login_login_password_hint">Password</string>
+    <string name="fragment_login_login_username_hint">Username</string>
+    <string name="account_verification_account_doesnt_exist">That account does not exist</string>
+    <string name="account_verification_password_not_correct">Your password was incorrect</string>
+    <string name="account_verification_account_suspended">That account has been suspended, please contact support</string>
+    <string name="account_verification_account_unknown_login_error">An unknown login error occurred</string>
+    <string name="account_verification_login_successful">You have been logged in successfully</string>
 
 </resources>

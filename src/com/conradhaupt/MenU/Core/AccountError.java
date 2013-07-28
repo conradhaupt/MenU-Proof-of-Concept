@@ -27,6 +27,12 @@ public class AccountError
 	public static final int EMAIL_INVALID_LENGTH = 10;
 	public static final int EMAIL_NOT_AVAILABLE = 11;
 
+	// Account validation error codes
+	public static final int ACCOUNT_DOESNT_EXIST = 20;
+	public static final int PASSWORD_NOT_CORRECT = 21;
+	public static final int ACCOUNT_SUSPENDED = 22;
+	public static final int ACCOUNT_UNKNOWN_LOGIN_ERROR = 23;
+
 	// Connection or back end errors
 	public static final int CONNECTION_TIME_OUT = 40;
 	public static final int CONNECTION_NOT_AVAILABLE = 41;
@@ -45,6 +51,12 @@ public class AccountError
 	public static final String EMAIL_INVALID_CHARACTERS_KEYWORD = "";
 	public static final String EMAIL_INVALID_LENGTH_KEYWORD = "";
 	public static final String EMAIL_NOT_AVAILABLE_KEYWORD = "Email_UNIQUE";
+
+	// Account validation error keywords
+	public static final String ACCOUNT_DOESNT_EXIST_KEYWORD = "That account doesn't exist";
+	public static final String PASSWORD_NOT_CORRECT_KEYWORD = "That password is incorrect";
+	public static final String ACCOUNT_SUSPENDED_KEYWORD = "That account has been suspended";
+	public static final String ACCOUNT_UNKNOWN_LOGIN_ERROR_KEYWORD = "";
 
 	// Connection or back end error keywords
 	public static final String CONNECTION_TIME_OUT_KEYWORD = "";
@@ -65,12 +77,19 @@ public class AccountError
 	public static final int EMAIL_INVALID_LENGTH_MESSAGE = R.string.account_verification_email_invalid_length;
 	public static final int EMAIL_NOT_AVAILABLE_MESSAGE = R.string.account_verification_email_not_available;
 
+	// Account validation error message
+	public static final int ACCOUNT_DOESNT_EXIST_MESSAGE = R.string.account_verification_account_doesnt_exist;
+	public static final int PASSWORD_NOT_CORRECT_MESSAGE = R.string.account_verification_password_not_correct;
+	public static final int ACCOUNT_SUSPENDED_MESSAGE = R.string.account_verification_account_suspended;
+	public static final int ACCOUNT_UNKNOWN_LOGIN_ERROR_MESSAGE = R.string.account_verification_account_unknown_login_error;
+
 	// Connection or back end error message
 	public static final int CONNECTION_TIME_OUT_MESSAGE = R.string.account_verification_connection_time_out;
 	public static final int CONNECTION_NOT_AVAILABLE_MESSAGE = R.string.account_verification_connection_not_available;
 	public static final int CONNECTION_NOT_AVAILABLE_UNKNOWN_MESSAGE = R.string.account_verification_connection_not_available_unknown;
 	// Account limitations
 	public static final String USERNAME_CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890()_-";
+
 	public static final int PASSWORD_LENGTH_MIN = 6;
 	public static final int USERNAME_LENGTH_MIN = 6;
 	public static final int USERNAME_LENGTH_MAX = 20;
@@ -79,17 +98,28 @@ public class AccountError
 	public static final int LASTNAME_LENGTH_MAX = 50;
 	public static final int FIRSTNAME_LENGTH_MIN = 1;
 	public static final int LASTNAME_LENGTH_MIN = 1;
-	public static final int EMAIL_LENGTH_MIN = 3;
+	public static final int EMAIL_LENGTH_MIN = 5;
 	public static final int EMAIL_LENGTH_MAX = 255;
+	public static final String EMAIL_CHARACTERS_LOCAL = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!#$%&'*+-/=?^_`{|}~.";
+	public static final String EMAIL_CHARACTERS_DOMAIN = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-.[]";
 
 	// Object variables
 	private List<Integer> errors = new ArrayList<Integer>();
 	private int state = STATE_ACCEPTABLE;
-	private Context context;
+	private String accessCode = "NO_ACCESS_CODE";
 
-	public AccountError(Context context)
+	public AccountError()
 	{
-		this.context = context;
+	}
+
+	public String getAccessCode()
+	{
+		return accessCode;
+	}
+
+	public void setAccessCode(String accessCode)
+	{
+		this.accessCode = accessCode;
 	}
 
 	private void updateState()
@@ -136,7 +166,7 @@ public class AccountError
 		return errors.contains(errorCode);
 	}
 
-	public List<String> getErrorMessages()
+	public List<String> getErrorMessages(Context context)
 	{
 		List<String> errorMessages = new ArrayList<String>();
 
@@ -215,6 +245,26 @@ public class AccountError
 			errorMessages.add(context.getResources().getString(
 					AccountError.CONNECTION_NOT_AVAILABLE_UNKNOWN_MESSAGE));
 		}
+		if (errors.contains(ACCOUNT_DOESNT_EXIST))
+		{
+			errorMessages.add(context.getResources().getString(
+					AccountError.ACCOUNT_DOESNT_EXIST_MESSAGE));
+		}
+		if (errors.contains(PASSWORD_NOT_CORRECT))
+		{
+			errorMessages.add(context.getResources().getString(
+					AccountError.PASSWORD_NOT_CORRECT_MESSAGE));
+		}
+		if (errors.contains(ACCOUNT_SUSPENDED))
+		{
+			errorMessages.add(context.getResources().getString(
+					AccountError.ACCOUNT_SUSPENDED_MESSAGE));
+		}
+		if (errors.contains(ACCOUNT_UNKNOWN_LOGIN_ERROR_KEYWORD))
+		{
+			errorMessages.add(context.getResources().getString(
+					AccountError.ACCOUNT_UNKNOWN_LOGIN_ERROR_MESSAGE));
+		}
 
 		return errorMessages;
 	}
@@ -282,6 +332,22 @@ public class AccountError
 		if (errors.contains(CONNECTION_NOT_AVAILABLE_UNKNOWN))
 		{
 			stringErrors.add("CONNECTION_NOT_AVAILABLE_UNKNOWN");
+		}
+		if (errors.contains(ACCOUNT_DOESNT_EXIST))
+		{
+			stringErrors.add("ACCOUNT_DOESNT_EXIST");
+		}
+		if (errors.contains(PASSWORD_NOT_CORRECT))
+		{
+			stringErrors.add("PASSWORD_NOT_CORRECT");
+		}
+		if (errors.contains(ACCOUNT_SUSPENDED))
+		{
+			stringErrors.add("ACCOUNT_SUSPENDED");
+		}
+		if (errors.contains(ACCOUNT_UNKNOWN_LOGIN_ERROR))
+		{
+			stringErrors.add("ACCOUNT_UNKNOWN_LOGIN_ERROR");
 		}
 		if (stringErrors.size() == 0)
 		{

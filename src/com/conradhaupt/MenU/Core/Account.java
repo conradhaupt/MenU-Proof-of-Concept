@@ -1,5 +1,7 @@
 package com.conradhaupt.MenU.Core;
 
+import java.util.Scanner;
+
 import android.content.Context;
 
 public class Account
@@ -138,9 +140,9 @@ public class Account
 		this.postalAddress = postalAddress;
 	}
 
-	public static AccountError validate(Account account, Context context)
+	public static AccountError validate(Account account)
 	{
-		AccountError validationError = new AccountError(context);
+		AccountError validationError = new AccountError();
 
 		boolean temp;
 
@@ -212,6 +214,46 @@ public class Account
 		if (!temp)
 		{
 			validationError.addError(AccountError.LASTNAME_INVALID_LENGTH);
+		}
+
+		System.out.println("Checking email");
+		// Check the email
+		temp = true;
+		// Check the specified length
+		if (!(account.getLastName().length() >= AccountError.EMAIL_LENGTH_MIN)
+				|| !(account.getLastName().length() < AccountError.EMAIL_LENGTH_MAX))
+		{
+			temp = false;
+		}
+		// Check the structure of the email
+		Scanner scan = new Scanner(account.getEmail()).useDelimiter("@");
+		try
+		{
+			String local = scan.next();
+			String domain = scan.next();
+			for (int i = 0; i < local.length(); i++)
+			{
+				if (!AccountError.EMAIL_CHARACTERS_LOCAL.contains(local
+						.charAt(i) + ""))
+				{
+					temp = false;
+				}
+			}
+			for (int i = 0; i < domain.length(); i++)
+			{
+				if (!AccountError.EMAIL_CHARACTERS_DOMAIN.contains(domain
+						.charAt(i) + ""))
+				{
+					temp = false;
+				}
+			}
+		} catch (Exception e)
+		{
+			temp = false;
+		}
+		if (!temp)
+		{
+			validationError.addError(AccountError.EMAIL_INVALID_CHARACTERS);
 		}
 
 		return validationError;

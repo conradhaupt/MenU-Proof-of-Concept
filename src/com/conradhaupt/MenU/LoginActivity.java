@@ -1,5 +1,13 @@
 package com.conradhaupt.MenU;
 
+import java.util.List;
+
+import com.conradhaupt.MenU.Core.AccountError;
+
+import de.keyboardsurfer.android.widget.crouton.Configuration;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -13,18 +21,22 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class LoginActivity extends FragmentActivity
+public class LoginActivity extends FragmentActivity implements OnClickListener
 {
 
 	public static int viewPagerPageCount = 2;
-	private ViewPager mPager;
-	private PagerAdapter mAdapter;
+	public ViewPager mPager;
+	public PagerAdapter mAdapter;
 	private Button registerButton;
 	private Button loginButton;
+	private RegisterFragment registerFragment = null;
+	private LoginFragment loginFragment = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -101,10 +113,30 @@ public class LoginActivity extends FragmentActivity
 			@Override
 			public void onPageScrollStateChanged(int arg0)
 			{
-				// TODO Auto-generated method stub
 
 			}
 		});
+
+		// Assign OnClickListeners
+		int[] ids = { R.id.activity_login_register_button,
+				R.id.activity_login_login_button };
+		for (int i = 0; i < ids.length; i++)
+		{
+			this.findViewById(ids[i]).setOnClickListener(this);
+		}
+	}
+
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		int pageVar = mPager.getCurrentItem();
+		loginButton.setLayoutParams(new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
+				7f - (6 * pageVar)));
+		registerButton.setLayoutParams(new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
+				1f + (6 * pageVar)));
 	}
 
 	@Override
@@ -145,7 +177,6 @@ public class LoginActivity extends FragmentActivity
 		public LoginPagerAdapter(FragmentManager fm)
 		{
 			super(fm);
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override
@@ -155,9 +186,23 @@ public class LoginActivity extends FragmentActivity
 			switch (position)
 			{
 			case 0:
-				return new LoginFragment();
+				if (loginFragment != null)
+				{
+					return loginFragment;
+				} else
+				{
+					loginFragment = new LoginFragment();
+					return loginFragment;
+				}
 			case 1:
-				return new RegisterFragment();
+				if (registerFragment != null)
+				{
+					return registerFragment;
+				} else
+				{
+					registerFragment = new RegisterFragment();
+					return registerFragment;
+				}
 			}
 			return null;
 		}
@@ -165,9 +210,85 @@ public class LoginActivity extends FragmentActivity
 		@Override
 		public int getCount()
 		{
-			// TODO Auto-generated method stub
 			return viewPagerPageCount;
 		}
 
+	}
+
+	public void loadError(AccountError error, String successfulMessage,
+			boolean clickableClose)
+	{
+		if (error != null)
+		{
+			if (error.getState() == AccountError.STATE_UNACCEPTABLE)
+			{
+				try
+				{
+					List<String> temp = error.getErrorMessages(this);
+					Object[] messages = temp.toArray();
+					for (int i = 0; i < messages.length; i++)
+					{
+						System.out.println(messages[i].toString());
+						Crouton crouton = Crouton.makeText(this,
+								messages[i].toString(), Style.ALERT);
+						crouton.show();
+					}
+				} catch (Exception e)
+				{
+					System.out.println(e);
+				}
+			} else
+			{
+				System.out.println(successfulMessage);
+				Crouton crouton = Crouton.makeText(this, successfulMessage,
+						Style.CONFIRM);
+				Configuration.Builder configBuild = new Configuration.Builder();
+				configBuild.setDuration(Configuration.DURATION_INFINITE);
+				crouton.setConfiguration(configBuild.build());
+				crouton.setOnClickListener(new OnClickListener()
+				{
+
+					@Override
+					public void onClick(View v)
+					{
+						System.out.println("Crouton clicked");
+						((LoginActivity) v.getContext()).onBackPressed();
+					}
+				});
+				crouton.show();
+			}
+		}
+	}
+
+	@Override
+	public void onClick(View v)
+	{
+		switch (v.getId())
+		{
+		case R.id.activity_login_register_button:
+			if (mPager.getCurrentItem() == 1)
+			{
+				// If the user is on the register fragment then register
+				registerFragment.register();
+			} else
+			{
+				// If the user is not on the register fragment then move to it
+				mPager.setCurrentItem(1);
+			}
+			break;
+		case R.id.activity_login_login_button:
+			if (mPager.getCurrentItem() == 0)
+			{
+				// If the user is on the login fragment then login
+				loginFragment.login();
+			} else
+			{
+				// If the user is not on the login fragment then move to it
+				mPager.setCurrentItem(0);
+			}
+			break;
+		default:
+			break;
+		}
 	}
 }

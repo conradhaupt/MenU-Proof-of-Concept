@@ -61,7 +61,6 @@ public class AccountFragment extends Fragment implements OnClickListener
 	{
 		if (view.getId() == R.id.fragment_account_temp_submit)
 		{
-			final Context context = this.getActivity();
 			System.out.println("Button was clicked");
 			new AsyncTask<Integer, Integer, Integer>()
 			{
@@ -77,7 +76,7 @@ public class AccountFragment extends Fragment implements OnClickListener
 					account.setPassword("misteryork");
 					account.setPostalAddress("8 18th street, parkmore");
 					account.setUsername("Phenominal");
-					MenUServerInteraction.registerAccount(account, context);
+					MenUServerInteraction.registerAccount(account);
 					return null;
 				}
 			}.execute(1);
