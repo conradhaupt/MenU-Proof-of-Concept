@@ -28,11 +28,11 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 	private RelativeLayout mDrawerView;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private CharSequence mDrawerTitle;
-	private CharSequence mTitle;
+	private CharSequence mTitle;	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
-	{
+	{		
 		super.onCreate(savedInstanceState);
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(this);

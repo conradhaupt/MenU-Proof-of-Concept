@@ -1,8 +1,11 @@
 package com.conradhaupt.MenU;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.conradhaupt.MenU.Core.Account;
 import com.conradhaupt.MenU.Core.AccountError;
@@ -28,6 +32,7 @@ public class RegisterFragment extends Fragment
 	private EditText firstnameEditText;
 	private EditText lastnameEditText;
 	private EditText emailEditText;
+	private LinearLayout progressLayout;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,6 +62,27 @@ public class RegisterFragment extends Fragment
 				R.id.fragment_login_register_textview_lastname);
 		emailEditText = (EditText) this.getActivity().findViewById(
 				R.id.fragment_login_register_textview_email);
+		progressLayout = (LinearLayout) this.getActivity().findViewById(
+				R.id.fragment_login_register_linearlayout_progress);
+		progressLayout.setVisibility(View.INVISIBLE);
+		checkAccountLoggedIn();
+	}
+
+	public void checkAccountLoggedIn()
+	{
+		// Check for already logged in account
+		SharedPreferences pref = this.getActivity().getSharedPreferences(
+				"accountdata", 0);
+		if (pref.getBoolean("accountLoggedIn", false))
+		{
+
+			usernameEditText.setEnabled(false);
+			passwordEditText.setEnabled(false);
+			passwordRepeatEditText.setEnabled(false);
+			firstnameEditText.setEnabled(false);
+			lastnameEditText.setEnabled(false);
+			emailEditText.setEnabled(false);
+		}
 	}
 
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
@@ -76,6 +102,9 @@ public class RegisterFragment extends Fragment
 
 	private void loadError(AccountError result)
 	{
+		// Set progresslayout as invisible
+		progressLayout.setVisibility(View.INVISIBLE);
+
 		try
 		{
 			if (result.getState() == AccountError.STATE_UNACCEPTABLE)
@@ -84,6 +113,8 @@ public class RegisterFragment extends Fragment
 			} else
 			{
 				System.out.println("Register fragment recieved no errors");
+
+				// Reset editText values
 				usernameEditText.setText("");
 				passwordEditText.setText("");
 				passwordRepeatEditText.setText("");
@@ -95,18 +126,35 @@ public class RegisterFragment extends Fragment
 			((LoginActivity) this.getActivity()).loadError(
 					result,
 					this.getResources().getString(
-							R.string.account_verification_successful),false);
+							R.string.account_verification_successful), false);
 		} catch (Exception e)
 		{
 			System.out
 					.println("Error calling loadError on LoginActivity, is this fragment in a LoginActivity?");
 		}
+		// Unfreeze editTexts
+		usernameEditText.setEnabled(true);
+		passwordEditText.setEnabled(true);
+		passwordRepeatEditText.setEnabled(true);
+		firstnameEditText.setEnabled(true);
+		lastnameEditText.setEnabled(true);
+		emailEditText.setEnabled(true);
 	};
 
 	public void register()
 	{
 		System.out.println("Register button clicked.");
 		Account account = new Account();
+
+		// Freez editTexts
+		usernameEditText.setEnabled(false);
+		passwordEditText.setEnabled(false);
+		passwordRepeatEditText.setEnabled(false);
+		firstnameEditText.setEnabled(false);
+		lastnameEditText.setEnabled(false);
+		emailEditText.setEnabled(false);
+
+		// Assign values and check if passwords are the same
 		account.setUsername(usernameEditText.getText().toString());
 		if (passwordEditText.getText().toString()
 				.equals(passwordRepeatEditText.getText().toString()))
@@ -125,6 +173,10 @@ public class RegisterFragment extends Fragment
 		account.setLastName(lastnameEditText.getText().toString());
 		account.setEmail(emailEditText.getText().toString());
 
+		// Set progresslayout as visible
+		progressLayout.setVisibility(View.VISIBLE);
+
+		final Context context = this.getActivity();
 		// Launch account connection
 		new AsyncTask<Account, AccountError, AccountError>()
 		{
@@ -137,8 +189,8 @@ public class RegisterFragment extends Fragment
 					if (error.getState() == AccountError.STATE_ACCEPTABLE)
 					{
 						// No errors, submitting account for registration
-						error = MenUServerInteraction
-								.registerAccount(account[0]);
+						error = MenUServerInteraction.registerAccount(
+								account[0], context);
 					} else
 					{
 						// Error retrieved, displaying the errors

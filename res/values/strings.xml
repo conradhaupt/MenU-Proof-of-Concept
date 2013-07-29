@@ -55,5 +55,8 @@
     <string name="account_verification_account_suspended">That account has been suspended, please contact support</string>
     <string name="account_verification_account_unknown_login_error">An unknown login error occurred</string>
     <string name="account_verification_login_successful">You have been logged in successfully</string>
+    <string name="fragment_login_register_textview_progressbar">Registering</string>
+    <string name="fragment_login_login_textview_progressbar">Logging in</string>
+    <string name="activity_login_account_loggedin">You are already logged into an account, please logout first\n</string>
 
 </resources>

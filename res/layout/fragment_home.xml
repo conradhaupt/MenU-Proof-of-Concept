@@ -5,13 +5,14 @@
     android:orientation="vertical"
     tools:context=".HomeFragment" >
 
-    <ScrollView
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
-    </ScrollView>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:text="Home"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

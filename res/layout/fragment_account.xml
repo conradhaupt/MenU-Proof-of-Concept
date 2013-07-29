@@ -4,13 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/fragment_account_temp_submit"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="Submit" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="Account"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

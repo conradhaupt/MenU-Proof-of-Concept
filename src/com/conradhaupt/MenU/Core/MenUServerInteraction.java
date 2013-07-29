@@ -15,10 +15,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.conradhaupt.MenU.R;
+
+import android.content.Context;
+
 public class MenUServerInteraction
 {
 
-	public static AccountError registerAccount(Account account)
+	public static AccountError registerAccount(Account account, Context context)
 	{
 		System.out.println("Registering account");
 		AccountError outputErrors = new AccountError();
@@ -38,8 +42,8 @@ public class MenUServerInteraction
 
 			HttpClient client = new DefaultHttpClient();
 			HttpResponse response;
-			HttpPost post = new HttpPost(
-					"http://conradhaupt.co.za/menuOrderSystem/account_create.php");
+			HttpPost post = new HttpPost(context.getResources().getString(
+					R.string.connection_url_account_create));
 			post.setEntity(new UrlEncodedFormEntity(variables));
 			response = client.execute(post);
 			if (response != null)
@@ -95,7 +99,7 @@ public class MenUServerInteraction
 		return outputErrors;
 	}
 
-	public static AccountError loginAccount(Account account)
+	public static AccountError loginAccount(Account account, Context context)
 	{
 		System.out.println("Logging into account");
 		AccountError outputErrors = new AccountError();
@@ -110,8 +114,8 @@ public class MenUServerInteraction
 					.getPassword()));
 			HttpClient client = new DefaultHttpClient();
 			HttpResponse response;
-			HttpPost post = new HttpPost(
-					"http://conradhaupt.co.za/menuOrderSystem/account_login.php");
+			HttpPost post = new HttpPost(context.getResources().getString(
+					R.string.connection_url_account_login));
 			post.setEntity(new UrlEncodedFormEntity(variables));
 			response = client.execute(post);
 			if (response != null)

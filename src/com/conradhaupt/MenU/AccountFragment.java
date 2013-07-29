@@ -1,7 +1,5 @@
 package com.conradhaupt.MenU;
 
-import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,9 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-
-import com.conradhaupt.MenU.Core.Account;
-import com.conradhaupt.MenU.Core.MenUServerInteraction;
 
 public class AccountFragment extends Fragment implements OnClickListener
 {
@@ -30,8 +25,6 @@ public class AccountFragment extends Fragment implements OnClickListener
 	@Override
 	public void onResume()
 	{
-		this.getActivity().findViewById(R.id.fragment_account_temp_submit)
-				.setOnClickListener(this);
 		super.onResume();
 	}
 
@@ -59,27 +52,5 @@ public class AccountFragment extends Fragment implements OnClickListener
 	@Override
 	public void onClick(View view)
 	{
-		if (view.getId() == R.id.fragment_account_temp_submit)
-		{
-			System.out.println("Button was clicked");
-			new AsyncTask<Integer, Integer, Integer>()
-			{
-
-				@Override
-				protected Integer doInBackground(Integer... params)
-				{
-					System.out.println("doInBackground run");
-					Account account = new Account();
-					account.setEmail("me@conradhaupt.co.za");
-					account.setFirstName("Conrad");
-					account.setLastName("Haupt");
-					account.setPassword("misteryork");
-					account.setPostalAddress("8 18th street, parkmore");
-					account.setUsername("Phenominal");
-					MenUServerInteraction.registerAccount(account);
-					return null;
-				}
-			}.execute(1);
-		}
 	}
 }

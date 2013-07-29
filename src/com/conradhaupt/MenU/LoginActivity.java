@@ -26,6 +26,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class LoginActivity extends FragmentActivity implements OnClickListener
 {
@@ -124,6 +125,8 @@ public class LoginActivity extends FragmentActivity implements OnClickListener
 		{
 			this.findViewById(ids[i]).setOnClickListener(this);
 		}
+
+		checkAccountLoggedIn();
 	}
 
 	@Override
@@ -137,6 +140,38 @@ public class LoginActivity extends FragmentActivity implements OnClickListener
 		registerButton.setLayoutParams(new LinearLayout.LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 				1f + (6 * pageVar)));
+		checkAccountLoggedIn();
+	}
+
+	private void checkAccountLoggedIn()
+	{
+		// Check if an account is already logged in
+		SharedPreferences pref = this.getSharedPreferences("accountdata", 0);
+		System.out.println("Checking if an account is logged in");
+		if (pref.getBoolean("accountLoggedIn", false))
+		{
+			loginButton.setEnabled(false);
+			registerButton.setEnabled(false);
+
+			// Make a crouton notifying the user
+			Crouton crouton = Crouton.makeText(this, this.getResources()
+					.getString(R.string.activity_login_account_loggedin),
+					Style.INFO);
+			Configuration.Builder configBuild = new Configuration.Builder();
+			configBuild.setDuration(Configuration.DURATION_INFINITE);
+			crouton.setConfiguration(configBuild.build());
+			crouton.setOnClickListener(new OnClickListener()
+			{
+
+				@Override
+				public void onClick(View v)
+				{
+					System.out.println("Crouton clicked");
+					((LoginActivity) v.getContext()).onBackPressed();
+				}
+			});
+			crouton.show();
+		}
 	}
 
 	@Override

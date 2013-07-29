@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="account_preferencescreen"
+    android:orderingFromXml="true"
+    android:title="Account Data" >
+    <Preference android:key="accountUsername" android:title="Username" android:defaultValue="DEFAULT_USERNAME"/>
+    <Preference android:key="accountAccessCode" android:title="Access Code" android:defaultValue="DEFAULT_ACCESS_CODE"/>
+    <CheckBoxPreference android:key="accountLoggedIn" android:title="Logged in" android:summary="An account has been logged in" android:defaultValue="false"/>
+
+</PreferenceScreen>
