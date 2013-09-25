@@ -1,7 +1,7 @@
 package com.conradhaupt.MenU;
 
-
-import com.conradhaupt.MenU.R;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -10,17 +10,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.conradhaupt.MenU.Core.MenUServerInteraction;
+import com.conradhaupt.MenU.Core.Restaurant;
+
 public class RestaurantBrowserFragment extends ListFragment implements
-		OnScrollListener
+		OnItemClickListener
 {
 
 	public ListView listView;
 	public ArrayAdapter adapter;
+	private Restaurant[] restaurants = null;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,18 +33,17 @@ public class RestaurantBrowserFragment extends ListFragment implements
 		System.out.println("Restaurant Browser fragment created!");
 		// Inflate the layout for this fragment
 		setHasOptionsMenu(true);
-		// String[] array = { "hello", "My name is", "Conrad" };
-		// adapter = new ArrayAdapter<String>(this,
-		// R.layout.fragment_restaurant,
-		// array);
 		return inflater.inflate(R.layout.fragment_restaurant_browser,
 				container, false);
 	}
 
 	public void onResume()
 	{
-		listView = (ListView) this.getActivity().findViewById(R.id.licenseDialog_listview);
-		listView.setOnScrollListener(this);
+		listView = (ListView) this.getActivity().findViewById(
+				R.id.fragment_restaurant_browser_listview);
+		listView.setOnItemClickListener(this);
+		refreshRestaurants();
+
 		super.onResume();
 	}
 
@@ -54,25 +57,41 @@ public class RestaurantBrowserFragment extends ListFragment implements
 	{
 		switch (item.getItemId())
 		{
+		case R.id.menu_refresh:
+			System.out.println("Refreshing restuarants");
+			break;
 		default:
 		}
 		return true;
 	}
 
-	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem,
-			int visibleItemCount, int totalItemCount)
+	private void refreshRestaurants()
 	{
-		System.out.println("On scroll: " + "firstVisibleItem = "
-				+ firstVisibleItem + "; visibleItemCount = " + visibleItemCount
-				+ "; totalItemCount = " + totalItemCount + ".");
+		new AsyncTask<Context, Integer, Restaurant[]>()
+		{
+
+			@Override
+			protected Restaurant[] doInBackground(Context... params)
+			{
+				Context context = params[0];
+				MenUServerInteraction.RestaurantInteraction
+						.getRestaurants(context);
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(Restaurant[] result)
+			{
+				super.onPostExecute(result);
+			}
+		};
 	}
 
 	@Override
-	public void onScrollStateChanged(AbsListView view, int scrollState)
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id)
 	{
 
-		System.out.println("Scroll state changed: " + scrollState + ".");
 	}
 
 }

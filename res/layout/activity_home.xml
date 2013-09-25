@@ -10,12 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <RelativeLayout
+    <ListView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/activity_home_navigation_drawer"
-        android:layout_width="240dp"
+        android:layout_width="180dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="#111"
-        android:choiceMode="singleChoice" />
+        android:layout_gravity="left"
+        android:background="?attr/slidingmenu_background"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" >
+    </ListView>
 
 </android.support.v4.widget.DrawerLayout>

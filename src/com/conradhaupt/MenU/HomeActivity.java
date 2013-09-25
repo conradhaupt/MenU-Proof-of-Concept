@@ -1,41 +1,50 @@
 package com.conradhaupt.MenU;
 
-import com.conradhaupt.MenU.R;
+import java.util.Arrays;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.RelativeLayout;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
-public class HomeActivity extends FragmentActivity implements OnClickListener
+public class HomeActivity extends FragmentActivity implements
+		OnItemClickListener
 {
 
 	private DrawerLayout mDrawer;
-	private RelativeLayout mDrawerView;
+	private ListView mDrawerView;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private CharSequence mDrawerTitle;
-	private CharSequence mTitle;	
+	private CharSequence mTitle;
+	public static int fragmentNewIntroAnimation = R.anim.fragment_new_enter;
+	public static int fragmentNewOutroAnimation = R.anim.fragment_new_exit;
+	public static int fragmentBackIntroAnimation = R.anim.fragment_back_enter;
+	public static int fragmentBackOutroAnimation = R.anim.fragment_back_exit;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
-	{		
+	{
 		super.onCreate(savedInstanceState);
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(this);
+
 		// This code sets the App theme
 		int themeValue = Integer.parseInt(pref.getString(
 				"theme_listpreference", "-1"));
@@ -51,21 +60,18 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 			System.out.println("Preference value is not assigned to a theme.");
 			break;
 		}
-
 		getActionBar().setDisplayShowTitleEnabled(false);
 		getActionBar().setHomeButtonEnabled(true);
 		setContentView(R.layout.activity_home);
 
 		// This instantiates the drawer variables
-		mDrawerView = (RelativeLayout) this
+		mDrawerView = (ListView) this
 				.findViewById(R.id.activity_home_navigation_drawer);
 		mDrawer = (DrawerLayout) this.findViewById(R.id.activity_home_drawer);
 
 		// This assigns the sliding drawer shadow
 		mDrawer.setDrawerShadow(R.drawable.activity_home_drawer_shadow,
 				Gravity.LEFT);
-		mDrawer.setDrawerShadow(R.drawable.activity_home_drawer_shadow,
-				Gravity.RIGHT);
 
 		// This code assigns the sliding menu parameters
 		if (!pref.getBoolean("smallslidingmenu_checkbox", false))
@@ -74,30 +80,12 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 			param.width = (int) this.getResources().getDimension(
 					R.dimen.activity_home_drawer_width_large);
 			mDrawerView.setLayoutParams(param);
-			View menu = this.getLayoutInflater().inflate(R.layout.sliding_menu,
-					null);
-			mDrawerView.addView(menu);
 		} else
 		{
 			LayoutParams param = (LayoutParams) mDrawerView.getLayoutParams();
 			param.width = (int) this.getResources().getDimension(
 					R.dimen.activity_home_drawer_width_small);
 			mDrawerView.setLayoutParams(param);
-			View menu = this.getLayoutInflater().inflate(
-					R.layout.sliding_menu_small, null);
-			mDrawerView.addView(menu);
-		}
-
-		// This code assigns the onClickListener to all views requiring it
-		int[] viewIDs = { R.id.slidingmenu_home_button,
-				R.id.slidingmenu_about_button,
-				R.id.slidingmenu_featured_button,
-				R.id.slidingmenu_information_panel,
-				R.id.slidingmenu_setting_button,
-				R.id.slidingmenu_account_button };
-		for (int i = 0; i < viewIDs.length; i++)
-		{
-			(findViewById(viewIDs[i])).setOnClickListener(this);
 		}
 
 		// This code changes the actionbar to the drawer specific version
@@ -142,26 +130,37 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		boolean isAncestral = false;
 		isAncestral = pref.getBoolean("homenewinstance_switch", false);
 		this.instantiateFragment(new HomeFragment(), false, isAncestral,
-				"HomeFragment", android.R.anim.fade_in,
-				android.R.anim.fade_out, null);
-		// switch (Integer.parseInt(pref.getString(
-		// "slidingmenuside_listpreference", "-1")))
-		// {
-		// case 0:
-		// System.out.println("Setting slide menu to slide from the left.");
-		// mDrawerView.setGravity(Gravity.LEFT);
-		// break;
-		// case 1:
-		// System.out.println("Setting slide menu to slide from the right.");
-		// mDrawerView.setGravity(Gravity.RIGHT);
-		// break;
-		// default:
-		// System.out
-		// .println("Setting slide menu to slide from the left as no setting has been defined.");
-		// mDrawerView.setGravity(Gravity.LEFT);
-		// break;
-		//
-		// }
+				"HomeFragment", HomeActivity.fragmentNewIntroAnimation,
+				HomeActivity.fragmentNewOutroAnimation,
+				HomeActivity.fragmentNewIntroAnimation,
+				HomeActivity.fragmentBackOutroAnimation, null);
+
+		SharedPreferences pref2 = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		// This code gets the App theme
+		int themeValue = Integer.parseInt(pref.getString(
+				"theme_listpreference", "-1"));
+		// This code gets the menu size
+		boolean menuSmall = pref.getBoolean("smallslidingmenu_checkbox", false);
+
+		// This code retreaves all menu values from the resources
+		String[] titles = this.getResources().getStringArray(
+				R.array.home_activity_slidingmenu);
+		System.out.println("Instantiating menu with titles "
+				+ Arrays.toString(titles));
+
+		// This code propogates the listview
+		mDrawerView
+				.setAdapter(new HomeActivityMenuAdapter(
+						this,
+						menuSmall ? R.layout.list_menu_small
+								: R.layout.list_menu_large,
+						titles,
+						themeValue == 1 ? R.array.home_activity_slidingmenu_drawables_holo_dark
+								: R.array.home_activity_slidingmenu_drawables_holo_light,
+						menuSmall));
+		mDrawerView.setOnItemClickListener(this);
+
 		super.onResume();
 	}
 
@@ -215,8 +214,8 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 
 		switch (item.getItemId())
 		{
-		case R.id.menu_dropdown:
-			mDrawer.openDrawer(Gravity.LEFT);
+		case R.id.menu_search:
+			System.out.println("Search menu pressed");
 			break;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -224,7 +223,7 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		return true;
 	}
 
-	public void onHomeMenuClicked(View v)
+	public void onHomeMenuClicked()
 	{
 		SharedPreferences pref = PreferenceManager
 				.getDefaultSharedPreferences(this);
@@ -240,8 +239,10 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 					.equals("HomeFragment"))
 			{
 				this.instantiateFragment(new HomeFragment(), true, isAncestral,
-						"HomeFragment", R.anim.fragment_change_enter,
-						R.anim.fragment_change_exit, null);
+						"HomeFragment", HomeActivity.fragmentNewIntroAnimation,
+						HomeActivity.fragmentNewOutroAnimation,
+						HomeActivity.fragmentNewIntroAnimation,
+						HomeActivity.fragmentBackOutroAnimation, null);
 			}
 		} else
 		{
@@ -261,14 +262,14 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		System.out.println("Home has been pressed.");
 	}
 
-	public void onFeaturedMenuClicked(View v)
+	public void onFeaturedMenuClicked()
 	{
 		Intent intent = new Intent(this, LoginActivity.class);
 		startActivity(intent);
 		System.out.println("Featured has been pressed.");
 	}
 
-	public void onRestaurantsMenuClicked(View v)
+	public void onRestaurantsMenuClicked()
 	{
 		// this.instantiateFragment(new RestaurantBrowserFragment(), true, true,
 		// "RestaurantFragment", R.anim.fragment_change_enter,
@@ -277,16 +278,18 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		System.out.println("Restaurant has been pressed.");
 	}
 
-	public void onAccountsMenuClicked(View v)
+	public void onAccountsMenuClicked()
 	{
 		this.instantiateFragment(new AccountFragment(), true, true,
-				"AccountFragment", R.anim.fragment_change_enter,
-				R.anim.fragment_change_exit, null);
+				"AccountFragment", HomeActivity.fragmentNewIntroAnimation,
+				HomeActivity.fragmentNewOutroAnimation,
+				HomeActivity.fragmentNewIntroAnimation,
+				HomeActivity.fragmentBackOutroAnimation, null);
 		mDrawer.closeDrawer(Gravity.LEFT);
 		System.out.println("Account has been pressed.");
 	}
 
-	public void onSettingsMenuClicked(View v)
+	public void onSettingsMenuClicked()
 	{
 		System.out.println("Settings has been pressed");
 		mDrawer.closeDrawer(Gravity.LEFT);
@@ -294,16 +297,18 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		startActivity(intent);
 	}
 
-	public void onAboutMenuClicked(View v)
+	public void onAboutMenuClicked()
 	{
 		this.instantiateFragment(new AboutFragment(), true, true,
-				"AboutFragment", R.anim.fragment_change_enter,
-				R.anim.fragment_change_exit, null);
+				"AboutFragment", HomeActivity.fragmentNewIntroAnimation,
+				HomeActivity.fragmentNewOutroAnimation,
+				HomeActivity.fragmentNewIntroAnimation,
+				HomeActivity.fragmentBackOutroAnimation, null);
 		mDrawer.closeDrawer(Gravity.LEFT);
 		System.out.println("About has been pressed.");
 	}
 
-	public void onInformationClicked(View view)
+	public void onInformationClicked()
 	{
 		System.out.println("Information panel has been pressed");
 		mDrawer.closeDrawer(Gravity.LEFT);
@@ -312,41 +317,10 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 				"AboutDialog");
 	}
 
-	@Override
-	public void onClick(View v)
-	{
-		System.out.println("onClick run for view with id " + v.getId() + "!");
-		switch (v.getId())
-		{
-		case R.id.slidingmenu_home_button:
-			this.onHomeMenuClicked(v);
-			break;
-		case R.id.slidingmenu_featured_button:
-			this.onFeaturedMenuClicked(v);
-			break;
-		case R.id.slidingmenu_restaurant_button:
-			this.onRestaurantsMenuClicked(v);
-			break;
-		case R.id.slidingmenu_account_button:
-			this.onAccountsMenuClicked(v);
-			break;
-		case R.id.slidingmenu_setting_button:
-			this.onSettingsMenuClicked(v);
-			break;
-		case R.id.slidingmenu_about_button:
-			this.onAboutMenuClicked(v);
-			break;
-		case R.id.slidingmenu_information_panel:
-			this.onInformationClicked(v);
-			break;
-		default:
-			return;
-		}
-	}
-
 	public void instantiateFragment(Fragment newFragment,
 			boolean addToBackStack, boolean isAncestral, String tag,
-			int introAnimation, int outroAnimation, Bundle arguments)
+			int introAnimation, int outroAnimation, int backIntroAnimation,
+			int backOutroAnimation, Bundle arguments)
 	{
 		System.out.println("Instantiate Fragment Run!");
 		boolean isCurrentFragment = false;
@@ -414,8 +388,8 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 		// Since the fragment does not exist in the backstack or
 		// as the current fragment then instantiate it
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.setCustomAnimations(introAnimation, outroAnimation, introAnimation,
-				outroAnimation);
+		ft.setCustomAnimations(introAnimation, outroAnimation,
+				backIntroAnimation, backOutroAnimation);
 		newFragment.setArguments(arguments);
 		ft.replace(R.id.activity_home_fragment_frame, newFragment);
 		if (addToBackStack)
@@ -423,5 +397,83 @@ public class HomeActivity extends FragmentActivity implements OnClickListener
 			ft.addToBackStack(tag);
 		}
 		ft.commit();
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id)
+	{
+		String[] titles = this.getResources().getStringArray(
+				R.array.home_activity_slidingmenu);
+		System.out.println("Navigating with name " + titles[position]);
+		try
+		{
+
+			if (titles[position].equals(this.getResources().getString(
+					R.string.slidingmenu_home)))
+			{
+				// Go to home
+				this.onHomeMenuClicked();
+			} else
+			{
+				if (titles[position].equals(this.getResources().getString(
+						R.string.slidingmenu_featured)))
+				{
+					// Go to featured
+					this.onFeaturedMenuClicked();
+				} else
+				{
+					if (titles[position].equals(this.getResources().getString(
+							R.string.slidingmenu_restaurants)))
+					{
+						// Go to restaurants
+						this.onRestaurantsMenuClicked();
+					} else
+					{
+						if (titles[position].equals(this.getResources()
+								.getString(R.string.slidingmenu_accounts)))
+						{
+							// Go to accounts
+							this.onAccountsMenuClicked();
+						} else
+						{
+							if (titles[position].equals(this.getResources()
+									.getString(R.string.slidingmenu_settings)))
+							{
+								// Go to settings
+								this.onSettingsMenuClicked();
+							} else
+							{
+								if (titles[position].equals(this.getResources()
+										.getString(R.string.slidingmenu_about)))
+								{
+									// Go to about
+									this.onAboutMenuClicked();
+								} else
+								{
+									if (titles[position]
+											.equals(this
+													.getResources()
+													.getString(
+															R.string.slidingmenu_legal)))
+									{
+										// Go to legal
+										this.onInformationClicked();
+									} else
+									{
+
+									}
+
+								}
+							}
+						}
+					}
+				}
+
+			}
+		} catch (Exception e)
+		{
+
+		}
 	}
 }

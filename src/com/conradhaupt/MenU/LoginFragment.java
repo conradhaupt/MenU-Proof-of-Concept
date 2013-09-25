@@ -171,7 +171,7 @@ public class LoginFragment extends Fragment
 				try
 				{
 					AccountError error;
-					error = MenUServerInteraction.loginAccount(account[0],
+					error = MenUServerInteraction.AccountInteraction.loginAccount(account[0],
 							context);
 					return error;
 				} catch (Exception e)

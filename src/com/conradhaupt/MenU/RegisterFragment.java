@@ -2,10 +2,8 @@ package com.conradhaupt.MenU;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -189,7 +187,7 @@ public class RegisterFragment extends Fragment
 					if (error.getState() == AccountError.STATE_ACCEPTABLE)
 					{
 						// No errors, submitting account for registration
-						error = MenUServerInteraction.registerAccount(
+						error = MenUServerInteraction.AccountInteraction.registerAccount(
 								account[0], context);
 					} else
 					{

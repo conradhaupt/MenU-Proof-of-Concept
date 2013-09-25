@@ -15,193 +15,382 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.conradhaupt.MenU.R;
-
 import android.content.Context;
+
+import com.conradhaupt.MenU.R;
 
 public class MenUServerInteraction
 {
-
-	public static AccountError registerAccount(Account account, Context context)
+	public static class AccountInteraction
 	{
-		System.out.println("Registering account");
-		AccountError outputErrors = new AccountError();
-		String output = null;
-		try
+		public static AccountError registerAccount(Account account,
+				Context context)
 		{
-			List<NameValuePair> variables = new ArrayList<NameValuePair>();
-			variables.add(new BasicNameValuePair("username", account
-					.getUsername()));
-			variables.add(new BasicNameValuePair("password", account
-					.getPassword()));
-			variables.add(new BasicNameValuePair("email", account.getEmail()));
-			variables.add(new BasicNameValuePair("firstname", account
-					.getFirstName()));
-			variables.add(new BasicNameValuePair("lastname", account
-					.getLastName()));
-
-			HttpClient client = new DefaultHttpClient();
-			HttpResponse response;
-			HttpPost post = new HttpPost(context.getResources().getString(
-					R.string.connection_url_account_create));
-			post.setEntity(new UrlEncodedFormEntity(variables));
-			response = client.execute(post);
-			if (response != null)
+			System.out.println("Registering account");
+			AccountError outputErrors = new AccountError();
+			String output = null;
+			try
 			{
-				InputStream in = response.getEntity().getContent();
+				List<NameValuePair> variables = new ArrayList<NameValuePair>();
+				variables.add(new BasicNameValuePair("username", account
+						.getUsername()));
+				variables.add(new BasicNameValuePair("password", account
+						.getPassword()));
+				variables.add(new BasicNameValuePair("email", account
+						.getEmail()));
+				variables.add(new BasicNameValuePair("firstname", account
+						.getFirstName()));
+				variables.add(new BasicNameValuePair("lastname", account
+						.getLastName()));
 
-				if (in != null)
+				HttpClient client = new DefaultHttpClient();
+				HttpResponse response;
+				HttpPost post = new HttpPost(context.getResources().getString(
+						R.string.connection_url_account_create));
+				post.setEntity(new UrlEncodedFormEntity(variables));
+				response = client.execute(post);
+				if (response != null)
 				{
-					StringBuilder sb = new StringBuilder();
-					String line;
-					try
+					InputStream in = response.getEntity().getContent();
+
+					if (in != null)
 					{
-						BufferedReader reader = new BufferedReader(
-								new InputStreamReader(in, "UTF-8"));
-						while ((line = reader.readLine()) != null)
+						StringBuilder sb = new StringBuilder();
+						String line;
+						try
 						{
-							sb.append(line).append("\n");
-						}
-					} finally
-					{
-						in.close();
-					}
-					output = sb.toString();
-				} else
-				{
-					output = "";
-				}
-			}
-		} catch (Exception t)
-		{
-			output = t.toString();
-		}
-
-		System.out
-				.println("Connected to server with output or returned message of:\n"
-						+ output);
-		// Add all errors if found
-		if (output.contains(AccountError.CONNECTION_NOT_AVAILABLE_KEYWORD))
-		{
-			outputErrors.addError(AccountError.CONNECTION_NOT_AVAILABLE);
-		}
-		if (output.contains(AccountError.USERNAME_NOT_AVAILABLE_KEYWORD))
-		{
-			outputErrors.addError(AccountError.USERNAME_NOT_AVAILABLE);
-		}
-		if (output.contains(AccountError.EMAIL_NOT_AVAILABLE_KEYWORD))
-		{
-			outputErrors.addError(AccountError.EMAIL_NOT_AVAILABLE);
-		}
-		System.out
-				.println("The RegistrationError object recorded the following errors:\n"
-						+ outputErrors.getStringErrors());
-		return outputErrors;
-	}
-
-	public static AccountError loginAccount(Account account, Context context)
-	{
-		System.out.println("Logging into account");
-		AccountError outputErrors = new AccountError();
-		String output = null;
-		String accessCode = null;
-		try
-		{
-			List<NameValuePair> variables = new ArrayList<NameValuePair>();
-			variables.add(new BasicNameValuePair("username", account
-					.getUsername()));
-			variables.add(new BasicNameValuePair("password", account
-					.getPassword()));
-			HttpClient client = new DefaultHttpClient();
-			HttpResponse response;
-			HttpPost post = new HttpPost(context.getResources().getString(
-					R.string.connection_url_account_login));
-			post.setEntity(new UrlEncodedFormEntity(variables));
-			response = client.execute(post);
-			if (response != null)
-			{
-				InputStream in = response.getEntity().getContent();
-				if (in != null)
-				{
-					StringBuilder sb = new StringBuilder();
-					String line;
-					try
-					{
-						BufferedReader reader = new BufferedReader(
-								new InputStreamReader(in, "UTF-8"));
-						int position = 0;
-						while ((line = reader.readLine()) != null)
-						{
-							sb.append(line).append("\n");
-							System.out
-									.println("Line " + position + ": " + line);
-							Scanner scan = new Scanner(line)
-									.useDelimiter("\".\"");
-							System.out.println("Scan output for line "
-									+ position);
-							boolean nextIsAccessCode = false;
-							while (scan.hasNext())
+							BufferedReader reader = new BufferedReader(
+									new InputStreamReader(in, "UTF-8"));
+							while ((line = reader.readLine()) != null)
 							{
-								if (!nextIsAccessCode)
+								sb.append(line).append("\n");
+							}
+						} finally
+						{
+							in.close();
+						}
+						output = sb.toString();
+					} else
+					{
+						output = "";
+					}
+				}
+			} catch (Exception t)
+			{
+				output = t.toString();
+			}
+
+			System.out
+					.println("Connected to server with output or returned message of:\n"
+							+ output);
+			// Add all errors if found
+			if (output.contains(AccountError.CONNECTION_NOT_AVAILABLE_KEYWORD))
+			{
+				outputErrors.addError(AccountError.CONNECTION_NOT_AVAILABLE);
+			}
+			if (output.contains(AccountError.USERNAME_NOT_AVAILABLE_KEYWORD))
+			{
+				outputErrors.addError(AccountError.USERNAME_NOT_AVAILABLE);
+			}
+			if (output.contains(AccountError.EMAIL_NOT_AVAILABLE_KEYWORD))
+			{
+				outputErrors.addError(AccountError.EMAIL_NOT_AVAILABLE);
+			}
+			System.out
+					.println("The RegistrationError object recorded the following errors:\n"
+							+ outputErrors.getStringErrors());
+			return outputErrors;
+		}
+
+		public static AccountError loginAccount(Account account, Context context)
+		{
+			System.out.println("Logging into account");
+			AccountError outputErrors = new AccountError();
+			String output = null;
+			String accessCode = null;
+			try
+			{
+				List<NameValuePair> variables = new ArrayList<NameValuePair>();
+				variables.add(new BasicNameValuePair("username", account
+						.getUsername()));
+				variables.add(new BasicNameValuePair("password", account
+						.getPassword()));
+				HttpClient client = new DefaultHttpClient();
+				HttpResponse response;
+				HttpPost post = new HttpPost(context.getResources().getString(
+						R.string.connection_url_account_login));
+				post.setEntity(new UrlEncodedFormEntity(variables));
+				response = client.execute(post);
+				if (response != null)
+				{
+					InputStream in = response.getEntity().getContent();
+					if (in != null)
+					{
+						StringBuilder sb = new StringBuilder();
+						String line;
+						try
+						{
+							BufferedReader reader = new BufferedReader(
+									new InputStreamReader(in, "UTF-8"));
+							int position = 0;
+							while ((line = reader.readLine()) != null)
+							{
+								sb.append(line).append("\n");
+								System.out.println("Line " + position + ": "
+										+ line);
+								Scanner scan = new Scanner(line)
+										.useDelimiter("\".\"");
+								System.out.println("Scan output for line "
+										+ position);
+								boolean nextIsAccessCode = false;
+								while (scan.hasNext())
 								{
-									// The next scan output is not the access
-									// code
-									String temp = scan.next();
-									if (temp.equals("accessCode"))
+									if (!nextIsAccessCode)
 									{
-										// If the current line reads accessCode
-										// then the next line is the accessCode
-										nextIsAccessCode = true;
+										// The next scan output is not the
+										// access
+										// code
+										String temp = scan.next();
+										if (temp.equals("accessCode"))
+										{
+											// If the current line reads
+											// accessCode
+											// then the next line is the
+											// accessCode
+											nextIsAccessCode = true;
+										}
+										System.out.println(temp);
+									} else
+									{
+										// The next scan output is the access
+										// code
+										accessCode = scan.next();
+										// Remove the last 3 characters that do
+										// not
+										// apply
+										accessCode = accessCode.replace("\"}",
+												"");
 									}
-									System.out.println(temp);
-								} else
-								{
-									// The next scan output is the access code
-									accessCode = scan.next();
-									// Remove the last 3 characters that do not
-									// apply
-									accessCode = accessCode.replace("\"}", "");
 								}
 							}
+						} finally
+						{
+							in.close();
 						}
-					} finally
+						output = sb.toString();
+					} else
 					{
-						in.close();
+						output = "";
 					}
-					output = sb.toString();
-				} else
-				{
-					output = "";
 				}
+			} catch (Exception t)
+			{
+				output = t.toString();
 			}
-		} catch (Exception t)
-		{
-			output = t.toString();
+
+			System.out
+					.println("Connected to server with output or returned message of:\n"
+							+ output);
+			// Add all errors if found
+			if (output.contains(AccountError.ACCOUNT_DOESNT_EXIST_KEYWORD))
+			{
+				outputErrors.addError(AccountError.ACCOUNT_DOESNT_EXIST);
+			}
+			if (output.contains(AccountError.PASSWORD_NOT_CORRECT_KEYWORD))
+			{
+				outputErrors.addError(AccountError.PASSWORD_NOT_CORRECT);
+			}
+			if (output.contains(AccountError.ACCOUNT_SUSPENDED_KEYWORD))
+			{
+				outputErrors.addError(AccountError.ACCOUNT_SUSPENDED);
+			}
+			if (accessCode != null)
+			{
+				outputErrors.setAccessCode(accessCode);
+			}
+			System.out
+					.println("The RegistrationError object recorded the following errors:\n"
+							+ outputErrors.getStringErrors());
+			return outputErrors;
 		}
 
-		System.out
-				.println("Connected to server with output or returned message of:\n"
-						+ output);
-		// Add all errors if found
-		if (output.contains(AccountError.ACCOUNT_DOESNT_EXIST_KEYWORD))
+	}
+
+	public static class RestaurantInteraction
+	{
+		public static RestaurantError getRestaurantMenu(int restaurantID,
+				Context context)
 		{
-			outputErrors.addError(AccountError.ACCOUNT_DOESNT_EXIST);
+			System.out.println("Logging into account");
+			RestaurantError outputErrors = new RestaurantError();
+			String output = null;
+			try
+			{
+				List<NameValuePair> variables = new ArrayList<NameValuePair>();
+				variables.add(new BasicNameValuePair("restaurantID",
+						restaurantID + ""));
+				HttpClient client = new DefaultHttpClient();
+				HttpResponse response;
+				HttpPost post = new HttpPost(context.getResources().getString(
+						R.string.connection_url_account_login));
+				post.setEntity(new UrlEncodedFormEntity(variables));
+				response = client.execute(post);
+				if (response != null)
+				{
+					InputStream in = response.getEntity().getContent();
+					if (in != null)
+					{
+						StringBuilder sb = new StringBuilder();
+						String line;
+						try
+						{
+							BufferedReader reader = new BufferedReader(
+									new InputStreamReader(in, "UTF-8"));
+							int position = 0;
+							while ((line = reader.readLine()) != null)
+							{
+								sb.append(line).append("\n");
+								System.out.println("Line " + position + ": "
+										+ line);
+								Scanner scan = new Scanner(line)
+										.useDelimiter("\".\"");
+								System.out.println("Scan output for line "
+										+ position);
+								boolean nextIsAccessCode = false;
+								while (scan.hasNext())
+								{
+									if (!nextIsAccessCode)
+									{
+										// The next scan output is not the
+										// access
+										// code
+										String temp = scan.next();
+										if (temp.equals("accessCode"))
+										{
+											// If the current line reads
+											// accessCode
+											// then the next line is the
+											// accessCode
+											nextIsAccessCode = true;
+										}
+										System.out.println(temp);
+									} else
+									{
+									}
+								}
+							}
+						} finally
+						{
+							in.close();
+						}
+						output = sb.toString();
+					} else
+					{
+						output = "";
+					}
+				}
+			} catch (Exception t)
+			{
+				output = t.toString();
+			}
+
+			System.out
+					.println("Connected to server with output or returned message of:\n"
+							+ output);
+			// Add all errors if found
+			if (output.contains(AccountError.ACCOUNT_DOESNT_EXIST_KEYWORD))
+			{
+				outputErrors.addError(AccountError.ACCOUNT_DOESNT_EXIST);
+			}
+			System.out
+					.println("The RestaurantError object recorded the following errors:\n"
+							+ outputErrors.getStringErrors());
+			return outputErrors;
 		}
-		if (output.contains(AccountError.PASSWORD_NOT_CORRECT_KEYWORD))
+
+		public static RestaurantError getRestaurants(Context context)
 		{
-			outputErrors.addError(AccountError.PASSWORD_NOT_CORRECT);
+			System.out.println("Logging into account");
+			RestaurantError outputErrors = new RestaurantError();
+			String output = null;
+			try
+			{
+				HttpClient client = new DefaultHttpClient();
+				HttpResponse response;
+				HttpPost post = new HttpPost(context.getResources().getString(
+						R.string.connection_url_account_login));
+				response = client.execute(post);
+				if (response != null)
+				{
+					InputStream in = response.getEntity().getContent();
+					if (in != null)
+					{
+						StringBuilder sb = new StringBuilder();
+						String line;
+						try
+						{
+							BufferedReader reader = new BufferedReader(
+									new InputStreamReader(in, "UTF-8"));
+							int position = 0;
+							while ((line = reader.readLine()) != null)
+							{
+								sb.append(line).append("\n");
+								System.out.println("Line " + position + ": "
+										+ line);
+								Scanner scan = new Scanner(line)
+										.useDelimiter("\".\"");
+								System.out.println("Scan output for line "
+										+ position);
+								boolean nextIsAccessCode = false;
+								while (scan.hasNext())
+								{
+									if (!nextIsAccessCode)
+									{
+										// The next scan output is not the
+										// access
+										// code
+										String temp = scan.next();
+										if (temp.equals("accessCode"))
+										{
+											// If the current line reads
+											// accessCode
+											// then the next line is the
+											// accessCode
+											nextIsAccessCode = true;
+										}
+										System.out.println(temp);
+									} else
+									{
+									}
+								}
+							}
+						} finally
+						{
+							in.close();
+						}
+						output = sb.toString();
+					} else
+					{
+						output = "";
+					}
+				}
+			} catch (Exception t)
+			{
+				output = t.toString();
+			}
+
+			System.out
+					.println("Connected to server with output or returned message of:\n"
+							+ output);
+			// Add all errors if found
+			if (output.contains(AccountError.ACCOUNT_DOESNT_EXIST_KEYWORD))
+			{
+				outputErrors.addError(AccountError.ACCOUNT_DOESNT_EXIST);
+			}
+			System.out
+					.println("The RestaurantError object recorded the following errors:\n"
+							+ outputErrors.getStringErrors());
+			return outputErrors;
 		}
-		if (output.contains(AccountError.ACCOUNT_SUSPENDED_KEYWORD))
-		{
-			outputErrors.addError(AccountError.ACCOUNT_SUSPENDED);
-		}
-		if (accessCode != null)
-		{
-			outputErrors.setAccessCode(accessCode);
-		}
-		System.out
-				.println("The RegistrationError object recorded the following errors:\n"
-						+ outputErrors.getStringErrors());
-		return outputErrors;
 	}
 }

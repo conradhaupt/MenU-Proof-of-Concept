@@ -8,13 +8,5 @@
         android:showAsAction="ifRoom"
         android:title="@string/menu_search">
     </item>
-    <item
-        android:id="@+id/menu_dropdown"
-        android:icon="?attr/ic_menu_moreoverflow"
-        android:menuCategory="system"
-        android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/menu_settings">
-    </item>
 
 </menu>

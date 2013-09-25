@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment implements OnClickListener
 	{
 		switch (item.getItemId())
 		{
-		case R.id.fragment_home_refresh:
+		case R.id.menu_refresh:
 			System.out
 					.println("Refreshing home fragment, starting up a new HomeFragmentLoader");
 			refresh();
