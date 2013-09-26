@@ -271,9 +271,12 @@ public class HomeActivity extends FragmentActivity implements
 
 	public void onRestaurantsMenuClicked()
 	{
-		// this.instantiateFragment(new RestaurantBrowserFragment(), true, true,
-		// "RestaurantFragment", R.anim.fragment_change_enter,
-		// R.anim.fragment_change_exit, null);
+		this.instantiateFragment(new RestaurantBrowserFragment(), true, true,
+				"RestaurantBrowserFragment",
+				HomeActivity.fragmentNewIntroAnimation,
+				HomeActivity.fragmentNewOutroAnimation,
+				HomeActivity.fragmentNewIntroAnimation,
+				HomeActivity.fragmentBackOutroAnimation, null);
 		mDrawer.closeDrawer(Gravity.LEFT);
 		System.out.println("Restaurant has been pressed.");
 	}

@@ -21,6 +21,7 @@ import com.conradhaupt.MenU.R;
 
 public class MenUServerInteraction
 {
+
 	public static class AccountInteraction
 	{
 		public static AccountError registerAccount(Account account,
@@ -308,17 +309,17 @@ public class MenUServerInteraction
 			return outputErrors;
 		}
 
-		public static RestaurantError getRestaurants(Context context)
+		public static ArrayList<Restaurant> getRestaurants(Context context)
 		{
 			System.out.println("Logging into account");
-			RestaurantError outputErrors = new RestaurantError();
+			ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 			String output = null;
 			try
 			{
 				HttpClient client = new DefaultHttpClient();
 				HttpResponse response;
 				HttpPost post = new HttpPost(context.getResources().getString(
-						R.string.connection_url_account_login));
+						R.string.connection_url_restaurant_retrieve_list));
 				response = client.execute(post);
 				if (response != null)
 				{
@@ -338,29 +339,73 @@ public class MenUServerInteraction
 								System.out.println("Line " + position + ": "
 										+ line);
 								Scanner scan = new Scanner(line)
-										.useDelimiter("\".\"");
+										.useDelimiter("\".\"|\"...\"");
 								System.out.println("Scan output for line "
 										+ position);
 								boolean nextIsAccessCode = false;
+								int elementPosition = 0;
+								int totalCount = 5;
+
+								// Temp values
+								String restaurantName;
+								int restaurantID;
+								int addressID;
+								int categoryID;
+								int franchiseID;
+
 								while (scan.hasNext())
 								{
-									if (!nextIsAccessCode)
+									String element = scan.next();
+									// Replace elements not needed
+									element.replace("[{\"", "");
+									element.replace("\"},{\"", "");
+									element.replace("\"}]", "");
+
+									// Check if the element isn't a title
+									if (!element.contains("RestaurantID")
+											&& !element
+													.contains("RestaurantName")
+											&& !element.contains("AddressID")
+											&& !element.contains("CategoryID")
+											&& !element.contains("FranchiseID"))
 									{
-										// The next scan output is not the
-										// access
-										// code
-										String temp = scan.next();
-										if (temp.equals("accessCode"))
+										// Element is not a title
+										System.out.println(element
+												+ " with element count "
+												+ elementPosition);
+										switch (elementPosition)
 										{
-											// If the current line reads
-											// accessCode
-											// then the next line is the
-											// accessCode
-											nextIsAccessCode = true;
+										case 0:
+											restaurantID = Integer
+													.parseInt(element);
+											break;
+										case 1:
+											restaurantName = element;
+											break;
+										case 2:
+											addressID = Integer
+													.parseInt(element);
+											break;
+										case 3:
+											categoryID = Integer
+													.parseInt(element);
+											break;
+										case 4:
+											franchiseID = Integer
+													.parseInt(element);
+											break;
+										default:
+											System.out
+													.println("It's dead JIM!!!");
+											break;
 										}
-										System.out.println(temp);
-									} else
-									{
+										elementPosition++;
+										if (elementPosition >= totalCount)
+										{
+											restaurants.add(new Restaurant());
+											elementPosition = 0;
+
+										}
 									}
 								}
 							}
@@ -378,19 +423,7 @@ public class MenUServerInteraction
 			{
 				output = t.toString();
 			}
-
-			System.out
-					.println("Connected to server with output or returned message of:\n"
-							+ output);
-			// Add all errors if found
-			if (output.contains(AccountError.ACCOUNT_DOESNT_EXIST_KEYWORD))
-			{
-				outputErrors.addError(AccountError.ACCOUNT_DOESNT_EXIST);
-			}
-			System.out
-					.println("The RestaurantError object recorded the following errors:\n"
-							+ outputErrors.getStringErrors());
-			return outputErrors;
+			return restaurants;
 		}
 	}
 }

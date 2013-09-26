@@ -1,9 +1,11 @@
 package com.conradhaupt.MenU;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +20,7 @@ import android.widget.ListView;
 import com.conradhaupt.MenU.Core.MenUServerInteraction;
 import com.conradhaupt.MenU.Core.Restaurant;
 
-public class RestaurantBrowserFragment extends ListFragment implements
+public class RestaurantBrowserFragment extends Fragment implements
 		OnItemClickListener
 {
 
@@ -67,24 +69,40 @@ public class RestaurantBrowserFragment extends ListFragment implements
 
 	private void refreshRestaurants()
 	{
-		new AsyncTask<Context, Integer, Restaurant[]>()
+		System.out.println("Refreshing restaurants");
+		new AsyncTask<Context, Integer, ArrayList<Restaurant>>()
 		{
 
 			@Override
-			protected Restaurant[] doInBackground(Context... params)
+			protected ArrayList<Restaurant> doInBackground(Context... params)
 			{
 				Context context = params[0];
-				MenUServerInteraction.RestaurantInteraction
+				return MenUServerInteraction.RestaurantInteraction
 						.getRestaurants(context);
-				return null;
 			}
 
 			@Override
-			protected void onPostExecute(Restaurant[] result)
+			protected void onPostExecute(ArrayList<Restaurant> result)
 			{
 				super.onPostExecute(result);
+
+				try
+				{
+					// Retrieve all restaurants
+					Object[] restaurants = result.toArray();
+					System.out.println("Names of all restaurants");
+					System.out.println(restaurants.length);
+					for (int i = 0; i < restaurants.length; i++)
+					{
+						System.out.println(((Restaurant) restaurants[i])
+								.getRestaurantName());
+					}
+				} catch (Exception e)
+				{
+					System.out.println(e);
+				}
 			}
-		};
+		}.execute(this.getActivity());
 	}
 
 	@Override
