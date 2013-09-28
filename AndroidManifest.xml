@@ -40,6 +40,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.conradhaupt.MenU.RestaurantActivity"
+            android:label="@string/title_activity_restaurant"
+            android:parentActivityName="com.conradhaupt.MenU.HomeActivity"
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.conradhaupt.MenU.HomeActivity" />
+        </activity>
+        <activity
             android:name="com.conradhaupt.MenU.LoginActivity"
             android:label="@string/title_activity_login"
             android:parentActivityName="com.conradhaupt.MenU.HomeActivity"
@@ -56,7 +65,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.conradhaupt.MenU.HomeActivity" />
         </activity>
-        <service android:name=".Core.MenUService"></service>
+
+        <service android:name=".Core.MenUService" >
+        </service>
     </application>
 
 </manifest>

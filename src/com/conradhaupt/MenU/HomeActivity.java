@@ -2,6 +2,8 @@ package com.conradhaupt.MenU;
 
 import java.util.Arrays;
 
+import com.conradhaupt.MenU.Core.HomeActivityMenuAdapter;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -214,13 +216,10 @@ public class HomeActivity extends FragmentActivity implements
 
 		switch (item.getItemId())
 		{
-		case R.id.menu_search:
-			System.out.println("Search menu pressed");
-			break;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-		return true;
+		// return true;
 	}
 
 	public void onHomeMenuClicked()

@@ -30,5 +30,8 @@
     <attr name="fragment_account_header_textColor" format="reference" />
     <attr name="ic_action_settings" format="reference" />
     <attr name="slidingmenu_menu_item_background" format="reference" />
+    <attr name="fragment_restaurant_browser_list_restaurant_background" format="reference" />
+    <attr name="fragment_restaurant_browser_list_restaurant_text_colour" format="reference" />
+    <attr name="fragment_restaurant_browser_list_restaurant_image" format="reference" />    
 
 </resources>

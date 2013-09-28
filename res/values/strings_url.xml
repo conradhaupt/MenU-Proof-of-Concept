@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="connection_url_account_create">http://www.menu.conradhaupt.co.za/api/account_create.php</string>
+    <string name="connection_url_account_login">http://www.menu.conradhaupt.co.za/api/account_login.php</string>
+    <string name="connection_url_account_update">http://www.menu.conradhaupt.co.za/api/account_update.php</string>
+    <string name="connection_url_restaurant_retrieve_list">http://www.menu.conradhaupt.co.za/api/restaurant_list_retrieve.php</string>
+    <string name="connection_url_restaurant_menu_list">http://www.menu.conradhaupt.co.za/api/restaurant_menu_retrieve.php</string>
+
+</resources>

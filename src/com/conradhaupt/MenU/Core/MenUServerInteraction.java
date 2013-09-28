@@ -219,22 +219,18 @@ public class MenUServerInteraction
 
 	public static class RestaurantInteraction
 	{
-		public static RestaurantError getRestaurantMenu(int restaurantID,
-				Context context)
+		public static ArrayList<Restaurant.MenuItem> getRestaurantMenu(
+				int restaurantID, Context context)
 		{
-			System.out.println("Logging into account");
-			RestaurantError outputErrors = new RestaurantError();
+			System.out.println("Loading restaurants");
+			ArrayList<Restaurant.MenuItem> restaurants = new ArrayList<Restaurant.MenuItem>();
 			String output = null;
 			try
 			{
-				List<NameValuePair> variables = new ArrayList<NameValuePair>();
-				variables.add(new BasicNameValuePair("restaurantID",
-						restaurantID + ""));
 				HttpClient client = new DefaultHttpClient();
 				HttpResponse response;
 				HttpPost post = new HttpPost(context.getResources().getString(
-						R.string.connection_url_account_login));
-				post.setEntity(new UrlEncodedFormEntity(variables));
+						R.string.connection_url_restaurant_retrieve_list));
 				response = client.execute(post);
 				if (response != null)
 				{
@@ -254,29 +250,46 @@ public class MenUServerInteraction
 								System.out.println("Line " + position + ": "
 										+ line);
 								Scanner scan = new Scanner(line)
-										.useDelimiter("\".\"");
+										.useDelimiter("\".\"|\"...\"");
 								System.out.println("Scan output for line "
 										+ position);
-								boolean nextIsAccessCode = false;
+								int elementPosition = 0;
+								int totalCount = 5;
+
 								while (scan.hasNext())
 								{
-									if (!nextIsAccessCode)
+									String element = scan.next();
+									// Replace elements not needed
+									element = element.replace("[{\"", "");
+									element = element.replace("\"},{\"", "");
+									element = element.replace("\"}]", "");
+
+									// Check if the element isn't a title
+									if (!element.contains("RestaurantID")
+											&& !element
+													.contains("RestaurantName")
+											&& !element.contains("AddressID")
+											&& !element.contains("CategoryID")
+											&& !element.contains("FranchiseID"))
 									{
-										// The next scan output is not the
-										// access
-										// code
-										String temp = scan.next();
-										if (temp.equals("accessCode"))
+										// Element is not a title
+										System.out.println(element
+												+ " with element count "
+												+ elementPosition);
+										switch (elementPosition)
 										{
-											// If the current line reads
-											// accessCode
-											// then the next line is the
-											// accessCode
-											nextIsAccessCode = true;
+										default:
+											System.out
+													.println("It's dead JIM!!!");
+											break;
 										}
-										System.out.println(temp);
-									} else
-									{
+										elementPosition++;
+										if (elementPosition >= totalCount)
+										{
+											System.out
+													.println("Adding restaurant number ");
+
+										}
 									}
 								}
 							}
@@ -294,24 +307,12 @@ public class MenUServerInteraction
 			{
 				output = t.toString();
 			}
-
-			System.out
-					.println("Connected to server with output or returned message of:\n"
-							+ output);
-			// Add all errors if found
-			if (output.contains(AccountError.ACCOUNT_DOESNT_EXIST_KEYWORD))
-			{
-				outputErrors.addError(AccountError.ACCOUNT_DOESNT_EXIST);
-			}
-			System.out
-					.println("The RestaurantError object recorded the following errors:\n"
-							+ outputErrors.getStringErrors());
-			return outputErrors;
+			return restaurants;
 		}
 
 		public static ArrayList<Restaurant> getRestaurants(Context context)
 		{
-			System.out.println("Logging into account");
+			System.out.println("Loading restaurants");
 			ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
 			String output = null;
 			try
@@ -342,24 +343,24 @@ public class MenUServerInteraction
 										.useDelimiter("\".\"|\"...\"");
 								System.out.println("Scan output for line "
 										+ position);
-								boolean nextIsAccessCode = false;
 								int elementPosition = 0;
 								int totalCount = 5;
 
 								// Temp values
-								String restaurantName;
-								int restaurantID;
-								int addressID;
-								int categoryID;
-								int franchiseID;
+								String restaurantName = null;
+								int restaurantID = 0;
+								int addressID = 0;
+								int categoryID = 0;
+								int franchiseID = 0;
+								int restCount = 1;
 
 								while (scan.hasNext())
 								{
 									String element = scan.next();
 									// Replace elements not needed
-									element.replace("[{\"", "");
-									element.replace("\"},{\"", "");
-									element.replace("\"}]", "");
+									element = element.replace("[{\"", "");
+									element = element.replace("\"},{\"", "");
+									element = element.replace("\"}]", "");
 
 									// Check if the element isn't a title
 									if (!element.contains("RestaurantID")
@@ -376,21 +377,27 @@ public class MenUServerInteraction
 										switch (elementPosition)
 										{
 										case 0:
+											// System.out.println("RestaurantID");
 											restaurantID = Integer
 													.parseInt(element);
 											break;
 										case 1:
+											// System.out
+											// .println("RestaurantName");
 											restaurantName = element;
 											break;
 										case 2:
+											// System.out.println("AddressID");
 											addressID = Integer
 													.parseInt(element);
 											break;
 										case 3:
+											// System.out.println("CategoryID");
 											categoryID = Integer
 													.parseInt(element);
 											break;
 										case 4:
+											// System.out.println("FranchiseID");
 											franchiseID = Integer
 													.parseInt(element);
 											break;
@@ -402,8 +409,15 @@ public class MenUServerInteraction
 										elementPosition++;
 										if (elementPosition >= totalCount)
 										{
-											restaurants.add(new Restaurant());
+											System.out
+													.println("Adding restaurant number "
+															+ restCount);
+											restaurants.add(new Restaurant(
+													restaurantID,
+													restaurantName, addressID,
+													categoryID, franchiseID));
 											elementPosition = 0;
+											restCount++;
 
 										}
 									}

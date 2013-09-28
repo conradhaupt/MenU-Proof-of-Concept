@@ -39,6 +39,9 @@
         <item name="fragment_account_header_bar_background">@drawable/fragment_account_header_bar_background_holo_light_darkactionbar</item>
         <item name="fragment_account_header_textColor">@color/fragment_account_header_textColor_holo_light_darkactionbar</item>
         <item name="ic_action_settings">@drawable/ic_action_settings_holo_dark</item>
+        <item name="fragment_restaurant_browser_list_restaurant_background">@drawable/card_background_black</item>
+        <item name="fragment_restaurant_browser_list_restaurant_text_colour">@color/fragment_restaurant_browser_list_restaurant_text_colour_holo_light_darkactionbar</item>
+        <item name="fragment_restaurant_browser_list_restaurant_image">@drawable/ic_place_location_holo_light_darkactionbar</item>
     </style>
 
     <style name="holo_light" parent="@android:style/Theme.Holo.Light">
@@ -71,6 +74,9 @@
         <item name="fragment_account_header_bar_background">@drawable/fragment_account_header_bar_background_holo_light</item>
         <item name="fragment_account_header_textColor">@color/fragment_account_header_textColor_holo_light</item>
         <item name="ic_action_settings">@drawable/ic_action_settings_holo_light</item>
+        <item name="fragment_restaurant_browser_list_restaurant_background">@drawable/card_background_white</item>
+        <item name="fragment_restaurant_browser_list_restaurant_text_colour">@color/fragment_restaurant_browser_list_restaurant_text_colour_holo_light</item>
+        <item name="fragment_restaurant_browser_list_restaurant_image">@drawable/ic_place_location_holo_light</item>
     </style>
 
 </resources>

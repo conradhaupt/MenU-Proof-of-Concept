@@ -1,6 +1,6 @@
 package com.conradhaupt.MenU.Core;
 
-public class Restaurant
+public class Restaurant implements Comparable<Restaurant>
 {
 
 	private String restaurantName;
@@ -444,5 +444,11 @@ public class Restaurant
 	public void setFranchiseID(int franchiseID)
 	{
 		this.franchiseID = franchiseID;
+	}
+
+	@Override
+	public int compareTo(Restaurant another)
+	{
+		return this.getRestaurantName().compareTo(another.getRestaurantName());
 	}
 }

@@ -1,12 +1,3 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item
-        android:id="@+id/menu_search"
-        android:icon="?attr/ic_menu_search_holo"
-        android:menuCategory="alternative"
-        android:orderInCategory="50"
-        android:showAsAction="ifRoom"
-        android:title="@string/menu_search">
-    </item>
-
 </menu>

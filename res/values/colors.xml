@@ -26,10 +26,12 @@
     <color name="aboutMenU_dialog_background_holo_light_darkactionbar">#222222</color>
     <color name="activity_background">#e5e5e5</color>
     <color name="fragment_account_header_background_holo_light">#e5e5e5</color>
-    <color name="fragment_account_header_background_holo_light_darkactionbar">#888888</color>    
+    <color name="fragment_account_header_background_holo_light_darkactionbar">#888888</color>
     <color name="fragment_account_header_textColor_holo_light">#000000</color>
     <color name="fragment_account_header_textColor_holo_light_darkactionbar">#ffffff</color>
     <color name="slidingmenu_background_holo_light">#f0f0f0</color>
-    <color name="slidingmenu_background_holo_light_darkactionbar">#f0f0f0</color>    
+    <color name="slidingmenu_background_holo_light_darkactionbar">#f0f0f0</color>
+    <color name="fragment_restaurant_browser_list_restaurant_text_colour_holo_light_darkactionbar">#ffffff</color>
+    <color name="fragment_restaurant_browser_list_restaurant_text_colour_holo_light">#000000</color>
 
 </resources>

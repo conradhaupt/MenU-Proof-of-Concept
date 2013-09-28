@@ -32,7 +32,7 @@
     <string name="fragment_login_register_lastname_hint">Last name</string>
     <string name="fragment_login_register_email_hint">Email</string>
     <string name="fragment_login_login">Login</string>
-    <string name="fragment_login_register">Register</string>    
+    <string name="fragment_login_register">Register</string>
     <string name="account_verification_username_not_available">An account already exists with that username</string>
     <string name="account_verification_username_invalid_characters">Your username contains invalid characters</string>
     <string name="account_verification_username_invalid_length">Your username is not of a suitable length, between 6 and 20 characters</string>
@@ -59,5 +59,6 @@
     <string name="fragment_login_register_textview_progressbar">Registering</string>
     <string name="fragment_login_login_textview_progressbar">Logging in</string>
     <string name="activity_login_account_loggedin">You are already logged into an account, please logout first\n</string>
+    <string name="title_activity_restaurant">Restaurant</string>
 
 </resources>

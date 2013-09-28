@@ -1,4 +1,7 @@
-package com.conradhaupt.MenU;
+package com.conradhaupt.MenU.Core;
+
+import com.conradhaupt.MenU.R;
+import com.conradhaupt.MenU.R.id;
 
 import android.content.Context;
 import android.view.LayoutInflater;
