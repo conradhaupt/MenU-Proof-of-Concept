@@ -219,18 +219,22 @@ public class MenUServerInteraction
 
 	public static class RestaurantInteraction
 	{
-		public static ArrayList<Restaurant.MenuItem> getRestaurantMenu(
-				int restaurantID, Context context)
+		public static ArrayList<ResMenuItem> getRestaurantMenu(
+				Restaurant restaurant, Context context)
 		{
 			System.out.println("Loading restaurants");
-			ArrayList<Restaurant.MenuItem> restaurants = new ArrayList<Restaurant.MenuItem>();
+			ArrayList<ResMenuItem> restaurantItems = new ArrayList<ResMenuItem>();
 			String output = null;
 			try
 			{
+				List<NameValuePair> variables = new ArrayList<NameValuePair>();
+				variables.add(new BasicNameValuePair("restaurantID", restaurant
+						.getRestaurantID() + ""));
 				HttpClient client = new DefaultHttpClient();
 				HttpResponse response;
 				HttpPost post = new HttpPost(context.getResources().getString(
-						R.string.connection_url_restaurant_retrieve_list));
+						R.string.connection_url_restaurant_menu_list));
+				post.setEntity(new UrlEncodedFormEntity(variables));
 				response = client.execute(post);
 				if (response != null)
 				{
@@ -254,7 +258,24 @@ public class MenUServerInteraction
 								System.out.println("Scan output for line "
 										+ position);
 								int elementPosition = 0;
-								int totalCount = 5;
+								int totalCount = 15;
+
+								// Temp values
+								int tRestaurantID = 0;
+								int tProductID = 0;
+								String tProductName = null;
+								String tDesc = null;
+								String tIng = null;
+								int tCurrencyID = 0;
+								double tPrice = 0;
+								int tCategoryID = 0;
+								int tKosher = 0;
+								int tHallal = 0;
+								int tVegeterian = 0;
+								int tVegan = 0;
+								int tContainNuts = 0;
+								int tContainDairy = 0;
+								int tContainWheat = 0;
 
 								while (scan.hasNext())
 								{
@@ -264,13 +285,24 @@ public class MenUServerInteraction
 									element = element.replace("\"},{\"", "");
 									element = element.replace("\"}]", "");
 
+									String[] contains = { "RestaurantID",
+											"ProductID", "ProductName",
+											"Description", "Ingredients",
+											"CurrencyID", "Price",
+											"CategoryID", "Kosher", "Hallal",
+											"Vegeterian", "Vegan",
+											"ContainsNuts", "ContainsDairy",
+											"ContainsWheat" };
+									boolean containsStuff = false;
+									for (int i = 0; i < contains.length; i++)
+									{
+										if (element.contains(contains[i]))
+										{
+											containsStuff = true;
+										}
+									}
 									// Check if the element isn't a title
-									if (!element.contains("RestaurantID")
-											&& !element
-													.contains("RestaurantName")
-											&& !element.contains("AddressID")
-											&& !element.contains("CategoryID")
-											&& !element.contains("FranchiseID"))
+									if (!containsStuff)
 									{
 										// Element is not a title
 										System.out.println(element
@@ -278,6 +310,60 @@ public class MenUServerInteraction
 												+ elementPosition);
 										switch (elementPosition)
 										{
+										case 0:
+											tRestaurantID = Integer
+													.parseInt(element);
+											break;
+										case 1:
+											tProductID = Integer
+													.parseInt(element);
+											break;
+										case 2:
+											tProductName = element;
+											break;
+										case 3:
+											tDesc = element;
+											break;
+										case 4:
+											tIng = element;
+											break;
+										case 5:
+											tCurrencyID = Integer
+													.parseInt(element);
+											break;
+										case 6:
+											tPrice = Double
+													.parseDouble(element);
+											break;
+										case 7:
+											tCategoryID = Integer
+													.parseInt(element);
+											break;
+										case 8:
+											tKosher = Integer.parseInt(element);
+											break;
+										case 9:
+											tHallal = Integer.parseInt(element);
+											break;
+										case 10:
+											tVegeterian = Integer
+													.parseInt(element);
+											break;
+										case 11:
+											tVegan = Integer.parseInt(element);
+											break;
+										case 12:
+											tContainNuts = Integer
+													.parseInt(element);
+											break;
+										case 13:
+											tContainDairy = Integer
+													.parseInt(element);
+											break;
+										case 14:
+											tContainWheat = Integer
+													.parseInt(element);
+											break;
 										default:
 											System.out
 													.println("It's dead JIM!!!");
@@ -287,7 +373,34 @@ public class MenUServerInteraction
 										if (elementPosition >= totalCount)
 										{
 											System.out
-													.println("Adding restaurant number ");
+													.println("Adding restaurant item");
+											ResMenuItem temp = new ResMenuItem(
+													tProductID,
+													tRestaurantID,
+													tProductName,
+													tDesc,
+													tIng,
+													tCurrencyID,
+													tPrice,
+													tCategoryID,
+													tKosher == 1 ? true : false,
+													tHallal == 1 ? true : false,
+													tVegeterian == 1 ? true
+															: false,
+													tVegan == 1 ? true : false,
+													tContainNuts == 1 ? true
+															: false,
+													tContainDairy == 1 ? true
+															: false,
+													tContainWheat == 1 ? true
+															: false);
+											restaurantItems.add(temp);
+											System.out
+													.println("Just added an objetc with the values"
+															+ temp.getProductName()
+															+ " "
+															+ tProductName);
+											elementPosition = 0;
 
 										}
 									}
@@ -305,9 +418,11 @@ public class MenUServerInteraction
 				}
 			} catch (Exception t)
 			{
+				System.out.println("Server error:");
+				System.out.println(t);
 				output = t.toString();
 			}
-			return restaurants;
+			return restaurantItems;
 		}
 
 		public static ArrayList<Restaurant> getRestaurants(Context context)

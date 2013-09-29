@@ -60,5 +60,6 @@
     <string name="fragment_login_login_textview_progressbar">Logging in</string>
     <string name="activity_login_account_loggedin">You are already logged into an account, please logout first\n</string>
     <string name="title_activity_restaurant">Restaurant</string>
+    <string name="about_student">Developed by: Conrad Haupt\n\nSchool: Redhill High-school\n\n131114020339</string>
 
 </resources>

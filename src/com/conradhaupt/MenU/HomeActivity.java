@@ -25,6 +25,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class HomeActivity extends FragmentActivity implements
 		OnItemClickListener
@@ -263,8 +264,9 @@ public class HomeActivity extends FragmentActivity implements
 
 	public void onFeaturedMenuClicked()
 	{
-		Intent intent = new Intent(this, LoginActivity.class);
-		startActivity(intent);
+		Toast toast = Toast.makeText(this, "That doesn't work right now",
+				Toast.LENGTH_LONG);
+		toast.show();
 		System.out.println("Featured has been pressed.");
 	}
 
@@ -282,12 +284,9 @@ public class HomeActivity extends FragmentActivity implements
 
 	public void onAccountsMenuClicked()
 	{
-		this.instantiateFragment(new AccountFragment(), true, true,
-				"AccountFragment", HomeActivity.fragmentNewIntroAnimation,
-				HomeActivity.fragmentNewOutroAnimation,
-				HomeActivity.fragmentNewIntroAnimation,
-				HomeActivity.fragmentBackOutroAnimation, null);
-		mDrawer.closeDrawer(Gravity.LEFT);
+
+		Intent intent = new Intent(this, LoginActivity.class);
+		startActivity(intent);
 		System.out.println("Account has been pressed.");
 	}
 
