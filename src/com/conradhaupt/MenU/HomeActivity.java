@@ -2,20 +2,18 @@ package com.conradhaupt.MenU;
 
 import java.util.Arrays;
 
-import com.conradhaupt.MenU.Core.HomeActivityMenuAdapter;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.DrawerLayout.DrawerListener;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -27,8 +25,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.conradhaupt.MenU.Core.HomeActivityMenuAdapter;
+import com.github.espiandev.showcaseview.ShowcaseView;
+
 public class HomeActivity extends FragmentActivity implements
-		OnItemClickListener
+		OnItemClickListener, DrawerListener
 {
 
 	private DrawerLayout mDrawer;
@@ -75,6 +76,9 @@ public class HomeActivity extends FragmentActivity implements
 		// This assigns the sliding drawer shadow
 		mDrawer.setDrawerShadow(R.drawable.activity_home_drawer_shadow,
 				Gravity.LEFT);
+
+		// This assigns the sliding drawer listener
+		mDrawer.setDrawerListener(this);
 
 		// This code assigns the sliding menu parameters
 		if (!pref.getBoolean("smallslidingmenu_checkbox", false))
@@ -164,6 +168,8 @@ public class HomeActivity extends FragmentActivity implements
 						menuSmall));
 		mDrawerView.setOnItemClickListener(this);
 
+		// Process userguides
+		this.userGuide();
 		super.onResume();
 	}
 
@@ -248,11 +254,11 @@ public class HomeActivity extends FragmentActivity implements
 		{
 			try
 			{
-				this.getSupportFragmentManager()
-						.popBackStack(
-								this.getSupportFragmentManager()
-										.getBackStackEntryAt(0).getId(),
-								this.getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
+				this.getSupportFragmentManager();
+				this.getSupportFragmentManager().popBackStack(
+						this.getSupportFragmentManager().getBackStackEntryAt(0)
+								.getId(),
+						FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			} catch (NullPointerException e)
 			{
 
@@ -476,5 +482,67 @@ public class HomeActivity extends FragmentActivity implements
 		{
 
 		}
+	}
+
+	public void userGuide()
+	{
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
+		co.hideOnClickOutside = true;
+		if (pref.getBoolean("userguide_drawer", false))
+		{
+			// the userguide must be shown
+			ShowcaseView sv = ShowcaseView
+					.insertShowcaseView(
+							android.R.id.home,
+							this,
+							"Navigation Drawer",
+							"Press this to open the navigation drawer. You can access everypart of the application from this drawer.",
+							co);
+			sv.show();
+		}
+	}
+
+	@Override
+	public void onDrawerClosed(View arg0)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onDrawerOpened(View arg0)
+	{
+		SharedPreferences pref = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
+		co.hideOnClickOutside = true;
+		if (pref.getBoolean("userguide_account", false))
+		{
+			// the userguide must be shown
+			ShowcaseView sv = ShowcaseView
+					.insertShowcaseView(
+							android.R.id.home,
+							this,
+							"Navigation Drawer",
+							"Press this to open the navigation drawer. You can access everypart of the application from this drawer.",
+							co);
+			sv.show();
+		}
+	}
+
+	@Override
+	public void onDrawerSlide(View arg0, float arg1)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onDrawerStateChanged(int arg0)
+	{
+		// TODO Auto-generated method stub
+
 	}
 }

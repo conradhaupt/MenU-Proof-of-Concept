@@ -62,11 +62,13 @@
         <item>Website</item>
         <item>Terms and Conditions</item>
         <item>Crouton Library</item>
+        <item>ShowcaseView Library</item>
     </string-array>
     <string-array name="licenseDialog_license_copyrights">
         <item>© 2013 Conrad Haupt</item>
         <item>© 2013 Conrad Haupt</item>
-        <item>© 2012 Benjamin Weiss</item>
+        <item>© 2013 Benjamin Weiss</item>
+        <item>© 2012 Jake Wharton</item>
     </string-array>
     <string-array name="licenseDialog_license">
         <item>It\'s funny because this line will never be used :P</item>
@@ -84,17 +86,32 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.</item>
+        <item>   Copyright 2012 Jake Wharton
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.</item>
     </string-array>
     <string-array name="licenseDialog_license_website">
         <item>http://www.conradhaupt.co.za</item>
         <item>http://www.conradhaupt.co.za</item>
         <item>https://github.com/keyboardsurfer/Crouton</item>
+        <item>https://github.com/JakeWharton/NineOldAndroids</item>
     </string-array>
 
     <integer-array name="licenseDialog_license_header_drawable">
         <item>@drawable/licensedialog_header_background_blue</item>
         <item>@drawable/licensedialog_header_background_green</item>
         <item>@drawable/licensedialog_header_background_turquoise</item>
+        <item>@drawable/licensedialog_header_background_red</item>
     </integer-array>
 
 </resources>
