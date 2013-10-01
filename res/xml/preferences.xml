@@ -80,7 +80,6 @@
     </PreferenceScreen>
     <PreferenceScreen android:key="UserGuide_preferenceuserguide_preferencescreen" android:title="Userguides">
         <CheckBoxPreference android:title="Drawer Guide" android:key="userguide_drawer" android:defaultValue="true" android:summaryOff="Will not show the drawer guide next time" android:summaryOn="Will show the drawer guide next time"/>
-        <CheckBoxPreference android:key="userguide_account" android:title="Account Drawer" android:defaultValue="true"/>
     </PreferenceScreen>
 
 </PreferenceScreen>

@@ -29,7 +29,7 @@ import com.conradhaupt.MenU.Core.HomeActivityMenuAdapter;
 import com.github.espiandev.showcaseview.ShowcaseView;
 
 public class HomeActivity extends FragmentActivity implements
-		OnItemClickListener, DrawerListener
+		OnItemClickListener
 {
 
 	private DrawerLayout mDrawer;
@@ -76,9 +76,6 @@ public class HomeActivity extends FragmentActivity implements
 		// This assigns the sliding drawer shadow
 		mDrawer.setDrawerShadow(R.drawable.activity_home_drawer_shadow,
 				Gravity.LEFT);
-
-		// This assigns the sliding drawer listener
-		mDrawer.setDrawerListener(this);
 
 		// This code assigns the sliding menu parameters
 		if (!pref.getBoolean("smallslidingmenu_checkbox", false))
@@ -502,47 +499,8 @@ public class HomeActivity extends FragmentActivity implements
 							co);
 			sv.show();
 		}
-	}
-
-	@Override
-	public void onDrawerClosed(View arg0)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onDrawerOpened(View arg0)
-	{
-		SharedPreferences pref = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		ShowcaseView.ConfigOptions co = new ShowcaseView.ConfigOptions();
-		co.hideOnClickOutside = true;
-		if (pref.getBoolean("userguide_account", false))
-		{
-			// the userguide must be shown
-			ShowcaseView sv = ShowcaseView
-					.insertShowcaseView(
-							android.R.id.home,
-							this,
-							"Navigation Drawer",
-							"Press this to open the navigation drawer. You can access everypart of the application from this drawer.",
-							co);
-			sv.show();
-		}
-	}
-
-	@Override
-	public void onDrawerSlide(View arg0, float arg1)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onDrawerStateChanged(int arg0)
-	{
-		// TODO Auto-generated method stub
-
+		SharedPreferences.Editor prefEdit = pref.edit();
+		prefEdit.putBoolean("userguide_drawer", false);
+		prefEdit.commit();
 	}
 }

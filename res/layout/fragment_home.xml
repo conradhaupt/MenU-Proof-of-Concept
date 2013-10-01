@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="17dp"
-        android:text="Home"
+        android:text="This program is not fully functional BUT shows the concept as a feasible one.\n\nNavigate to the account section to test the account login and register features.\n\nNavigate to the restaurant secton to browse the restaurants and their respective menus."
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
