@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <integer name="fragment_home_card_appear_anim_duration">500</integer>
-    <integer name="fragment_home_card_appear_anim_duration_addition">100</integer>
-    <integer name="fragment_home_card_appear_anim_delay">200</integer>
-
-</resources>

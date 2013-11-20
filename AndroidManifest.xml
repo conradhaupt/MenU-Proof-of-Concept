@@ -6,16 +6,17 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:logo="@drawable/ic_logo"
-        android:theme="@style/holo_light" >
+        android:theme="@style/MenUTheme_Base" >
         <activity
             android:name="com.conradhaupt.MenU.HomeActivity"
             android:label="@string/app_name"
@@ -26,48 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.conradhaupt.MenU.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName="com.conradhaupt.MenU.HomeActivity"
-            android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.conradhaupt.MenU.HomeActivity" />
-
-            <intent-filter>
-                <category android:name="android.intent.category.PREFERENCE" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="com.conradhaupt.MenU.RestaurantActivity"
-            android:label="@string/title_activity_restaurant"
-            android:parentActivityName="com.conradhaupt.MenU.HomeActivity"
-            android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.conradhaupt.MenU.HomeActivity" />
-        </activity>
-        <activity
-            android:name="com.conradhaupt.MenU.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:parentActivityName="com.conradhaupt.MenU.HomeActivity"
-            android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.conradhaupt.MenU.HomeActivity" />
-        </activity>
-        <activity
-            android:name="com.conradhaupt.MenU.AccountSettingsActivity"
-            android:label="@string/title_activity_account_settings"
-            android:parentActivityName="com.conradhaupt.MenU.HomeActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.conradhaupt.MenU.HomeActivity" />
-        </activity>
-
-        <service android:name=".Core.MenUService" >
-        </service>
     </application>
 
 </manifest>

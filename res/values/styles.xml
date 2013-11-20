@@ -1,82 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources>
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-
-
-    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
-
-    <style name="holo_light_darkactionbar" parent="@android:style/Theme.Holo.Light.DarkActionBar">
-        <item name="ic_menu_moreoverflow">@drawable/ic_menu_moreoverflow_normal_holo_dark</item>
-        <item name="ic_menu_search_holo">@drawable/ic_menu_search_holo_dark</item>
-        <item name="slidingmenu_background">@color/slidingmenu_background_holo_light_darkactionbar</item>
-        <item name="slidingmenu_textColor">@color/slidingmenu_textColor_holo_light_darkactionbar</item>
-        <item name="slidingmenu_actionbarBackground">@color/slidingmenu_actionbarBackground_holo_light_darkactionbar</item>
-        <item name="slidingmenu_menu_item_background">@drawable/slidingmenu_menu_item_background_holo_dark</item>
-        <item name="slidingmenu_ic_action_about">@drawable/ic_action_about_holo_dark</item>
-        <item name="slidingmenu_ic_action_settings">@drawable/ic_action_settings_holo_dark</item>
-        <item name="slidingmenu_ic_collection_labels">@drawable/ic_collection_labels_holo_dark</item>
-        <item name="slidingmenu_ic_collection_sort_by_size">@drawable/ic_collection_sort_by_size_holo_dark</item>
-        <item name="slidingmenu_ic_collection_view_as_grid">@drawable/ic_collection_view_as_grid_holo_dark</item>
-        <item name="slidingmenu_ic_social_person">@drawable/ic_social_person_holo_dark</item>
-        <item name="slidingmenu_textColor_secondary">@color/slidingmenu_textColor_secondary_holo_light_darkactionbar</item>
-        <item name="aboutMenU_dialog_header_background">@drawable/licensedialog_header_background_red</item>
-        <item name="aboutMenU_dialog_header_drawable">@drawable/ic_logo_monochrome_light</item>
-        <item name="aboutMenU_dialog_background">@color/aboutMenU_dialog_background_holo_light_darkactionbar</item>
-        <item name="aboutMenU_dialog_textColor">@color/aboutMenU_dialog_textColor_holo_light_darkactionbar</item>
-        <item name="slidingmenu_ic_action_copyright">@drawable/ic_action_copyright_holo_dark</item>
-        <item name="android:windowBackground">@color/activity_background</item>
-        <item name="android:colorBackground">@color/activity_background</item>
-        <item name="ic_drawer">@drawable/ic_drawer_holo_light_darkactionbar</item>
-        <item name="ic_action_refresh">@drawable/ic_action_refresh_holo_light_darkactionbar</item>
-        <item name="ic_navigation_cancel">@drawable/ic_navigation_cancel_holo_dark</item>
-        <item name="ic_navigation_accept">@drawable/ic_navigation_accept_holo_dark</item>
-        <item name="menU_base_card">@drawable/card_background_black</item>
-        <item name="fragment_account_header_background">@color/fragment_account_header_background_holo_light_darkactionbar</item>
-        <item name="fragment_account_header_bar_background">@drawable/fragment_account_header_bar_background_holo_light_darkactionbar</item>
-        <item name="fragment_account_header_textColor">@color/fragment_account_header_textColor_holo_light_darkactionbar</item>
-        <item name="ic_action_settings">@drawable/ic_action_settings_holo_dark</item>
-        <item name="fragment_restaurant_browser_list_restaurant_background">@drawable/card_background_black</item>
-        <item name="fragment_restaurant_browser_list_restaurant_text_colour">@color/fragment_restaurant_browser_list_restaurant_text_colour_holo_light_darkactionbar</item>
-        <item name="fragment_restaurant_browser_list_restaurant_image">@drawable/ic_place_location_holo_light_darkactionbar</item>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
     </style>
 
-    <style name="holo_light" parent="@android:style/Theme.Holo.Light">
-        <item name="ic_menu_moreoverflow">@drawable/ic_menu_moreoverflow_normal_holo_light</item>
-        <item name="ic_menu_search_holo">@drawable/ic_menu_search_holo_light</item>
-        <item name="slidingmenu_background">@color/slidingmenu_background_holo_light</item>
-        <item name="slidingmenu_textColor">@color/slidingmenu_textColor_holo_light</item>
-        <item name="slidingmenu_actionbarBackground">@color/slidingmenu_actionbarBackground_holo_light</item>
-        <item name="slidingmenu_menu_item_background">@drawable/slidingmenu_menu_item_background_holo_light</item>
-        <item name="slidingmenu_ic_action_about">@drawable/ic_action_about_holo_light</item>
-        <item name="slidingmenu_ic_action_settings">@drawable/ic_action_settings_holo_light</item>
-        <item name="slidingmenu_ic_collection_labels">@drawable/ic_collection_labels_holo_light</item>
-        <item name="slidingmenu_ic_collection_sort_by_size">@drawable/ic_collection_sort_by_size_holo_light</item>
-        <item name="slidingmenu_ic_collection_view_as_grid">@drawable/ic_collection_view_as_grid_holo_light</item>
-        <item name="slidingmenu_ic_social_person">@drawable/ic_social_person_holo_light</item>
-        <item name="slidingmenu_textColor_secondary">@color/slidingmenu_textColor_secondary_holo_light</item>
-        <item name="aboutMenU_dialog_header_background">@drawable/licensedialog_header_background_red</item>
-        <item name="aboutMenU_dialog_header_drawable">@drawable/ic_logo_monochrome_dark</item>
-        <item name="aboutMenU_dialog_background">@color/aboutMenU_dialog_background_holo_light</item>
-        <item name="aboutMenU_dialog_textColor">@color/aboutMenU_dialog_textColor_holo_light</item>
-        <item name="slidingmenu_ic_action_copyright">@drawable/ic_action_copyright_holo_light</item>
-        <item name="android:windowBackground">@color/activity_background</item>
-        <item name="android:colorBackground">@color/activity_background</item>
-        <item name="ic_drawer">@drawable/ic_drawer_holo_light</item>
-        <item name="ic_action_refresh">@drawable/ic_action_refresh_holo_light</item>
-        <item name="ic_navigation_cancel">@drawable/ic_navigation_cancel_holo_light</item>
-        <item name="ic_navigation_accept">@drawable/ic_navigation_accept_holo_light</item>
-        <item name="menU_base_card">@drawable/card_background_white</item>
-        <item name="fragment_account_header_background">@color/fragment_account_header_background_holo_light</item>
-        <item name="fragment_account_header_bar_background">@drawable/fragment_account_header_bar_background_holo_light</item>
-        <item name="fragment_account_header_textColor">@color/fragment_account_header_textColor_holo_light</item>
-        <item name="ic_action_settings">@drawable/ic_action_settings_holo_light</item>
-        <item name="fragment_restaurant_browser_list_restaurant_background">@drawable/card_background_white</item>
-        <item name="fragment_restaurant_browser_list_restaurant_text_colour">@color/fragment_restaurant_browser_list_restaurant_text_colour_holo_light</item>
-        <item name="fragment_restaurant_browser_list_restaurant_image">@drawable/ic_place_location_holo_light</item>
+    <!-- Application theme. -->
+    <style name="MenUTheme_Base" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
 </resources>
